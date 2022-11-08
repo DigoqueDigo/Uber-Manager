@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic-errors -O2
 LIBS = -lm
-OBJS = main.o checker.o parser.o rides.o users.o drivers.o fixtures.o queries/queries.o queries/querie1.o queries/querie3.o queries/querie8.o
-TARGET = main
+OBJS = main.o parsing/checker.o parsing/parser.o catalogs/rides.o catalogs/users.o catalogs/drivers.o fixtures.o queries/queries.o queries/querie1.o queries/querie3.o queries/querie8.o
+TARGET = programa-principal
 
 
 $(TARGET): $(OBJS)
@@ -10,7 +10,7 @@ $(TARGET): $(OBJS)
 
 
 teste1:
-	./main csv/ input.txt
+	./$(TARGET) csv/ inputs/input.txt
 	diff command1_output.txt exemplos_de_queries/tests_1/command1_output.txt
 	diff command2_output.txt exemplos_de_queries/tests_1/command2_output.txt
 	diff command3_output.txt exemplos_de_queries/tests_1/command3_output.txt
@@ -23,7 +23,7 @@ teste1:
 
 
 teste2:
-	./main csv/ input2.txt
+	./$(TARGET) csv/ inputs/input2.txt
 	diff command1_output.txt exemplos_de_queries/tests_2/command1_output.txt
 	diff command2_output.txt exemplos_de_queries/tests_2/command2_output.txt
 	diff command3_output.txt exemplos_de_queries/tests_2/command3_output.txt
@@ -98,3 +98,5 @@ clean_teste2:
 clean:
 	rm *.o
 	rm queries/*.o
+	rm parsing/*.o
+	rm catalogs/*.o

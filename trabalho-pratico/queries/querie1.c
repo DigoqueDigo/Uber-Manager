@@ -2,9 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include"querie1.h"
-#include"queries.h"
-#include"../checker.h"
-#include"../fixtures.h"
+
 
 /*
     USER

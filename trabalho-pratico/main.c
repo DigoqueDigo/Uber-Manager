@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include"checker.h"
-#include"parser.h"
+#include"parsing/checker.h"
+#include"parsing/parser.h"
 #include"queries/queries.h"
 
 #define CAP_DRIVERS 5000
@@ -17,7 +17,7 @@ int main(int argc, char** argv){
     RIDES rides_list = init_ride_list();
     USERS users_list = init_users();
     DRIVERS drivers_list = init_drivers();
-    char aux_path[100];
+    char aux_path[1000];
     char string[1000];
     int N_RIDES = 0, N_DRIVERS = 0; 
     int SIZE_DRIVERS = CAP_DRIVERS, SIZE_RIDES = CAP_RIDES; 
