@@ -1,7 +1,7 @@
-#include<string.h>
-#include<ctype.h>
-#include<stdio.h>
-#include"checker.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <parsing/checker.h>
 
 
 int check_id(char *string){

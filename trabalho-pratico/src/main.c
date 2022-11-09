@@ -1,9 +1,9 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include"parsing/checker.h"
-#include"parsing/parser.h"
-#include"queries/queries.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <parsing/checker.h>
+#include <parsing/parser.h>
+#include <queries/queries.h>
 
 #define CAP_DRIVERS 5000
 #define CAP_RIDES 100000

@@ -1,10 +1,10 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include"checker.h"
-#include"../catalogs/users.h"
-#include"../catalogs/rides.h"
-#include"../catalogs/drivers.h"
+#include <parsing/checker.h>
+#include <catalogs/users.h>
+#include <catalogs/rides.h>
+#include <catalogs/drivers.h>
 
 
 typedef struct line *LINE;

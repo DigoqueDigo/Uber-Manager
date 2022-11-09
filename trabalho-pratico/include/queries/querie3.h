@@ -1,7 +1,7 @@
 #ifndef QUERIE_3
 #define QUERIE_3
 
-#include"../fixtures.h"
+#include <fixtures.h>
 
 
 typedef struct sort_distance *SORT_DISTANCE;

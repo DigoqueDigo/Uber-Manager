@@ -1,7 +1,7 @@
 #ifndef QUERIES_H
 #define QUERIES_H
 
-#include"../fixtures.h"
+#include <fixtures.h>
 
 
 int resolve_queries(

@@ -1,7 +1,7 @@
 #ifndef QUERIE8_H
 #define QUERIE8_H
 
-#include"../fixtures.h"
+#include <fixtures.h>
 
 typedef struct sort_gender *SORT_GENDER;
 

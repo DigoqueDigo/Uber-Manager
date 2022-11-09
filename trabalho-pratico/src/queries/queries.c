@@ -1,10 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include"queries.h"
-#include"querie1.h"
-#include"querie3.h"
-#include"querie8.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <queries/queries.h>
+#include <queries/querie1.h>
+#include <queries/querie3.h>
+#include <queries/querie8.h>
 
 
 int resolve_queries(char *path, USERS users_list, DRIVERS drivers_list, RIDES rides_list, int N_DRIVERS, int N_RIDES){

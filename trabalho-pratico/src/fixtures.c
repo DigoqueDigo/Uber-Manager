@@ -1,8 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<math.h>
-#include"fixtures.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <fixtures.h>
 
 
 int calculate_idade(char *birth_date){
@@ -51,7 +51,7 @@ int convert_date_to_int(char *string){
 void set_command_name(char *command, int N){
     char index_command[20];
     sprintf(index_command, "%d", N);
-    strcat(command,"command");
+    strcat(command,"Resultados/command");
     strcat(command,index_command);
     strcat(command,"_output.txt");
 }

@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include"querie8.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <queries/querie8.h>
 
 
 
@@ -160,7 +160,7 @@ void resolve_querie8(char *command, int ncommand, USERS users_list, DRIVERS driv
     
     FILE *ficheiro;
 
-    char output_file[30] = "", *token;
+    char output_file[500] = "", *token;
     int age, N = 0;
 
 

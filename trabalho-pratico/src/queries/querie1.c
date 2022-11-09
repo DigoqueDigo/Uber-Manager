@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include"querie1.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <queries/querie1.h>
 
 
 /*
@@ -53,7 +53,7 @@ void resolve_querie1(char *commands, int ncommand, USERS lista, DRIVERS drivers_
 
     char output_name[40], output_genero[3], birth_date[12], *token = strtok(commands, " " "\n");
 
-    char output_file[50] = "";
+    char output_file[500] = "";
 
     set_command_name(output_file,ncommand);
 

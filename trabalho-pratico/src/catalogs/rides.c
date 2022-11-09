@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include"rides.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <catalogs/rides.h>
 
 
 //#id; date; driver; user; city; distance; score_user; score_driver; tip

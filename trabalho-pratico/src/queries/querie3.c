@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include"querie3.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <queries/querie3.h>
 
 
 struct sort_distance{
@@ -142,7 +142,7 @@ void resolve_querie3(char *command, int ncommand, USERS users_list, RIDES rides_
     int N = 0; // tamanho util da sort distance
     int top;
 
-    char output_file[50] = "", *token;
+    char output_file[500] = "", *token;
 
     set_command_name(output_file,ncommand);
 

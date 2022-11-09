@@ -1,8 +1,8 @@
 #ifndef QUERIE1_H
 #define QUERIE1_H
 
-#include"../fixtures.h"
-#include"../parsing/checker.h"
+#include <fixtures.h>
+#include <parsing/checker.h>
 
 
 int calculate_user(
