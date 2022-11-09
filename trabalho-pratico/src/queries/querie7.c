@@ -34,11 +34,11 @@ struct driver_city_list{
 
 
 void push_driver_score(DRIVER_CITY *abin, int id, double score, char *name){
-    
-    while ((*abin)->id != id){
 
-        if (id > (*abin)->id) abin = &(*abin)->dir;
-        else abin = &(*abin)->esq;
+    while (*abin != NULL && (*abin)->id != id){
+
+        if (id > (*abin)->id) abin = &((*abin)->dir);
+        else abin = &((*abin)->esq);
     }
 
     if (*abin != NULL){
@@ -47,8 +47,8 @@ void push_driver_score(DRIVER_CITY *abin, int id, double score, char *name){
     }
 
     else{
-
         struct driver_city *new = malloc(sizeof(struct driver_city));
+        new->esq = new->dir = NULL;
         new->id = id;
         new->sp = 1;
         new->score_total = score;
@@ -89,7 +89,6 @@ DRIVER_CITY fill_abin(RIDES rides_list, DRIVERS drivers_list, char *city, int N_
             id = lookup_rides_id_driver(rides_list,p);
             lookup_driver_name(drivers_list,id,name);
             push_driver_score(&new,id,score,name);
-
         }
     }
     
@@ -124,7 +123,7 @@ void convert_abin_to_array(DRIVER_CITY abin, DRIVER_CITY_LIST array, int *index)
 
 int compare_score_average(const void *a,const void *b){
     const struct driver_city_list *x = a, *y = b;
-    return (y->score_average - x->score_average);
+    return ((y->score_average > x->score_average) - (y->score_average < x->score_average));
 }
 
 
@@ -136,81 +135,81 @@ int compare_id(const void *a, const void *b){
 
 
 
-void sort_driver_city_list(void *array, int N, int size, int (*compare_0)(const void*, const void*), int (*compare_1)(const void*, const void*)){
+void sort_driver_city_list(DRIVER_CITY_LIST array, int N){
 
     int start = -1, last = 1;
 
-    qsort(array,N,size,compare_0);
+    qsort(array,N,sizeof(struct driver_city_list),compare_score_average);
 
 
     for (int p = 0; p < N-1; p++){
 
-        int aux = p*size;
+        if (start == -1 && array[p].score_average == array[p+1].score_average){
 
-        if (start == -1 && compare_1(array+aux,array+aux+size) == 0){
-            
-            start = p;
+            start =p;
             last++;
         }
 
-        else if ((compare_1(array+aux,array+aux+size) == 0)) last++;
+        else if (array[p].score_average == array[p+1].score_average) p++;
 
         else if (start != -1){
-            
-            qsort(array+start*size,last,size,compare_1);
+
+            qsort(array+start,last,sizeof(struct driver_city_list),compare_id);
             start = -1;
             last = 1;
         }
     }
 
-    if (start != -1) qsort(array+start*size,last,size,compare_1);
+    if (start != -1) qsort(array+start,last,sizeof(struct driver_city_list),compare_id);
+
 }
 
 
 
-/*
-void resolve_querie8(char *command, int ncommand, DRIVERS drivers_list,RIDES rides_list, int N_RIDES){
+void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rides_list, int N_RIDES){
 
     FILE *ficheiro;
 
-    char output_file[500] = "", *token;
+    char output_file[500] = "", aux_id[30], *token;
     int N, Nodes;
 
-    output_file = set_command_name(output_file,ncommand);
 
-    token = strtok(command," ");
-    token = strtok(NULL, " ");
+    set_command_name(output_file,ncommand);
+
+    token = strtok(command," " "\n");
+    token = strtok(NULL, " " "\n");
     N = atoi(token);
-    token = strtok(NULL, " "); // neste momento token == city
+    token = strtok(NULL, " " "\n"); // neste momento token == city
 
 
     ficheiro = fopen(output_file,"a");
 
+
     DRIVER_CITY abin = fill_abin(rides_list,drivers_list,token,N_RIDES);
+
 
     Nodes = count_nodes(abin);
 
-    DRIVER_CITY_LIST list = malloc(Nodes*sizeof(driver_city_list));
+    DRIVER_CITY_LIST list = malloc(Nodes*sizeof(struct driver_city_list));
 
     Nodes = 0;
 
     convert_abin_to_array(abin,list,&Nodes);
 
     free_cities(abin);
+   
+    sort_driver_city_list(list,Nodes);
 
-    // ordenar o array lista
+    for (int p = 0; p < N; p++){
+
+        convert_id_to_string(aux_id,list[p].id);
+        fprintf(ficheiro, "%s;%s;%.3f\n", aux_id, list[p].name, list[p].score_average);
+    }
+
+    free(list);
+
+    fclose(ficheiro);
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-}*/

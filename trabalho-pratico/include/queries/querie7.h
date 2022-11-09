@@ -39,21 +39,16 @@ int compare_score_average(const void *a,const void *b);
 int compare_id(const void *a, const void *b);
 
 
-void sort_driver_city_list(
-    void *array,
-    int N,
-    int size,
-    int (*compare_0)(const void*, const void*), // primeira função de comparação
-    int (*compare_1)(const void*, const void*) // segunda função de compararação
-);
+void sort_driver_city_list(DRIVER_CITY_LIST array, int N);
 
-/*
-void resolve_querie8(
+
+void resolve_querie7(
     char *command,
     int ncommand,
     DRIVERS drivers_list,
     RIDES rides_list,
     int N_RIDES
 );
-*/
+
+
 #endif

@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic-errors -O2 -Iinclude
 LIBS = -lm
-OBJS = src/main.o src/parsing/checker.o src/parsing/parser.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o src/fixtures.o src/queries/queries.o src/queries/querie1.o src/queries/querie3.o src/queries/querie7.o src/queries/querie8.o
+OBJS = src/main.o src/fixtures.o src/parsing/checker.o src/parsing/parser.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o src/queries/queries.o src/queries/querie1.o src/queries/querie3.o src/queries/querie7.o src/queries/querie8.o
 TARGET = programa-principal
 
 
@@ -18,8 +18,9 @@ teste1:
 	diff Resultados/command5_output.txt exemplos_de_queries/tests_1/command5_output.txt
 	diff Resultados/command6_output.txt exemplos_de_queries/tests_1/command6_output.txt
 	diff Resultados/command7_output.txt exemplos_de_queries/tests_1/command8_output.txt
-	diff Resultados/command8_output.txt exemplos_de_queries/tests_1/command17_output.txt
-	diff Resultados/command9_output.txt exemplos_de_queries/tests_1/command18_output.txt
+	diff Resultados/command8_output.txt exemplos_de_queries/tests_1/command16_output.txt
+	diff Resultados/command9_output.txt exemplos_de_queries/tests_1/command17_output.txt
+	diff Resultados/command10_output.txt exemplos_de_queries/tests_1/command18_output.txt
 
 
 teste2:
@@ -63,6 +64,7 @@ clean_teste1:
 	rm Resultados/command7_output.txt
 	rm Resultados/command8_output.txt
 	rm Resultados/command9_output.txt
+	rm Resultados/command10_output.txt
 
 
 clean_teste2:
