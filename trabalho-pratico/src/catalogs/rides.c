@@ -79,8 +79,8 @@ void calculate_floats(RIDES rides_list, int index, char *car_class, double *scor
     if (flag) *score += rides_list[index].score_driver;
     else *score += rides_list[index].score_user;
     *money += rides_list[index].tip;
-    if (!strcmp(car_class,"basic")) *money += T_BASIC + rides_list[index].distance * TK_BASIC;
-    else if (!strcmp(car_class,"green")) *money += T_GREEN + rides_list[index].distance * TK_GREEN;
+    if (!strcasecmp(car_class,"basic")) *money += T_BASIC + rides_list[index].distance * TK_BASIC;
+    else if (!strcasecmp(car_class,"green")) *money += T_GREEN + rides_list[index].distance * TK_GREEN;
     else *money += T_PREMIUM + rides_list[index].distance * TK_PREMIUM;
 }
 
@@ -100,3 +100,21 @@ int lookup_rides_distance(RIDES rides_list, int index){
     if (rides_list[index].date == NULL) return 0;
     return rides_list[index].distance;
 } 
+
+
+char* lookup_rides_city(RIDES rides_list, int index){
+    if (rides_list[index].date == NULL) return NULL;
+    return rides_list[index].city;
+}
+
+
+float lookup_rides_score_driver(RIDES rides_list, int index){
+    if (rides_list[index].date == NULL) return 0;
+    return rides_list[index].score_driver;
+}
+
+
+int lookup_rides_id_driver(RIDES rides_list, int index){
+    if (rides_list[index].date == NULL) return -1;
+    return rides_list[index].driver;
+}

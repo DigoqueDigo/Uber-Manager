@@ -56,4 +56,10 @@ char* lookup_rides_date(RIDES rides_list, int index);
 
 int lookup_rides_distance(RIDES rides_list, int index);
 
+char* lookup_rides_city(RIDES rides_list, int index);
+
+float lookup_rides_score_driver(RIDES rides_list, int index);
+
+int lookup_rides_id_driver(RIDES rides_list, int index);
+
 #endif
