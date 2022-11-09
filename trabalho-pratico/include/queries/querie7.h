@@ -43,11 +43,11 @@ void sort_driver_city_list(DRIVER_CITY_LIST array, int N);
 
 
 void resolve_querie7(
-    char *command,
-    int ncommand,
-    DRIVERS drivers_list,
-    RIDES rides_list,
-    int N_RIDES
+    char *command, // comando que está numa linha do input
+    int ncommand, // indice do comando
+    DRIVERS drivers_list, // estrutura de dados dos condutores
+    RIDES rides_list, // estrutura de dados das viagens
+    int N_RIDES // comprimento da esturura de dados das viagens
 );
 
 

@@ -210,6 +210,3 @@ void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rid
 
     fclose(ficheiro);
 }
-
-
-
