@@ -105,57 +105,6 @@ int cmprfunc_id_ride(const void *a, const void *b){
 }
 
 
-
-void sort_gender_list(SORT_GENDER list, int N){
-    int start = -1, last = 1;
-    
-    qsort(list,N,sizeof(struct sort_gender),cmprfunc_driver);
-    
-    for (int p = 0; p < N-1; p++){
-       
-        if (start == -1 && list[p].account_creation_driver == list[p+1].account_creation_driver){
-            start = p;
-            last++;
-        }
-       
-        else if (list[p].account_creation_driver == list[p+1].account_creation_driver) last++;
-       
-        else if (start != -1){
-            qsort(list+start,last,sizeof(struct sort_gender),cmprfunc_user);
-            start = -1;
-            last = 1;
-        }
-    }
-    
-    if (start != -1) qsort(list+start,last,sizeof(struct sort_gender),cmprfunc_user);
-    
-    for (int p = 0, start = -1, last = 1; p < N-1; p++){
-
-        if (start == -1 && list[p].account_creation_driver == list[p+1].account_creation_driver){
-
-            if (list[p].account_creation_user == list[p+1].account_creation_user){
-                start = p;
-                last++;
-            }
-        }
-
-        else if (start == -1 && list[p].account_creation_driver == list[p+1].account_creation_driver){
-
-            if (list[p].account_creation_user == list[p+1].account_creation_user) last++;
-        }
-
-        else if (start != -1){
-            qsort(list+start,last,sizeof(struct sort_gender),cmprfunc_id_ride);
-            start = -1;
-            last = 1;
-        }
-    }
-
-    if (start != -1) qsort(list+start,last,sizeof(struct sort_gender),cmprfunc_id_ride);
-}
-
-
-
 void resolve_querie8(char *command, int ncommand, USERS users_list, DRIVERS drivers_list, RIDES rides_list, int N_DRIVERS, int N_RIDES){
     
     FILE *ficheiro;
@@ -184,7 +133,7 @@ void resolve_querie8(char *command, int ncommand, USERS users_list, DRIVERS driv
         fill_sort_gender(users_list,drivers_list,rides_list,list,&N,"M",N_DRIVERS);
     }
 
-    sort_gender_list(list,N);
+    sort_three_compare(list,N,sizeof(struct sort_gender),cmprfunc_driver,cmprfunc_user,cmprfunc_id_ride);
 
     ficheiro = fopen(output_file, "a");
 
