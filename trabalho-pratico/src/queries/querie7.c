@@ -135,37 +135,6 @@ int compare_id(const void *a, const void *b){
 
 
 
-void sort_driver_city_list(DRIVER_CITY_LIST array, int N){
-
-    int start = -1, last = 1;
-
-    qsort(array,N,sizeof(struct driver_city_list),compare_score_average);
-
-
-    for (int p = 0; p < N-1; p++){
-
-        if (start == -1 && array[p].score_average == array[p+1].score_average){
-
-            start =p;
-            last++;
-        }
-
-        else if (array[p].score_average == array[p+1].score_average) p++;
-
-        else if (start != -1){
-
-            qsort(array+start,last,sizeof(struct driver_city_list),compare_id);
-            start = -1;
-            last = 1;
-        }
-    }
-
-    if (start != -1) qsort(array+start,last,sizeof(struct driver_city_list),compare_id);
-
-}
-
-
-
 void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rides_list, int N_RIDES){
 
     FILE *ficheiro;
@@ -197,8 +166,8 @@ void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rid
     convert_abin_to_array(abin,list,&Nodes);
 
     free_cities(abin);
-   
-    sort_driver_city_list(list,Nodes);
+
+    sort_two_compare(list,Nodes,sizeof(struct driver_city_list),compare_score_average,compare_id);
 
     for (int p = 0; p < N; p++){
 

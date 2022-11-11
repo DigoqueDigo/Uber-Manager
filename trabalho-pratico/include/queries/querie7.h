@@ -2,6 +2,7 @@
 #define QUERIE7_H
 
 #include <fixtures.h>
+#include <sort.h>
 
 typedef struct driver_city *DRIVER_CITY;
 
@@ -10,7 +11,6 @@ typedef struct driver_city_list *DRIVER_CITY_LIST;
 
 
 void push_driver_score(DRIVER_CITY *abin, int id, double score, char *name);
-
 
 void free_cities(DRIVER_CITY abin);
 
@@ -35,11 +35,7 @@ void convert_abin_to_array(
 
 int compare_score_average(const void *a,const void *b);
 
-
 int compare_id(const void *a, const void *b);
-
-
-void sort_driver_city_list(DRIVER_CITY_LIST array, int N);
 
 
 void resolve_querie7(

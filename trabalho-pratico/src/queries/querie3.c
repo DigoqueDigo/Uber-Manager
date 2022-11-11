@@ -30,7 +30,7 @@ void free_sort_distance(SORT_DISTANCE list, int N){
 
 
 void fill_sort_distance(USERS users_list, RIDES rides_list, SORT_DISTANCE list, int *N){
-    char name[50], username[50], *date;
+    char name[500], username[500], *date;
     int recente_ride = 0, *positions, sp, aux;
     int total_distance = 0;
     USER start = NULL;
@@ -77,62 +77,11 @@ int compare_recente_ride(const void *a, const void *b){
     return y->recente_ride - x->recente_ride;
 }
 
+
 int compare_username(const void *a, const void *b){
     const struct sort_distance *x = a, *y = b;
     return (strcmp(x->username,y->username));
 }
-
-
-void sort_distance_list(SORT_DISTANCE list, int N){
-    
-    int start = -1, last = 1;
-
-    qsort(list,N,sizeof(struct sort_distance),compare_distance_ride);
-
-    for (int p = 0; p < N-1; p++){
-
-        if (start == -1 && list[p].distance == list[p+1].distance){
-            start = p;
-            last++;
-        }
-
-        else if (list[p].distance == list[p+1].distance) last++;
-
-        else if (start != -1){
-            qsort(list+start,last,sizeof(struct sort_distance),compare_recente_ride);
-            last = 1;
-            start = -1;
-        }
-    } 
-    
-    if (start != -1) qsort(list+start,last,sizeof(struct sort_distance),compare_recente_ride);
-    
-    for (int p = 0, start = -1, last = 1; p < N-1; p++){
-
-        if (start == -1 && list[p].recente_ride == list[p+1].recente_ride){
-
-            if (list[p].distance == list[p+1].distance){
-                start = p;
-                last++;
-            }
-        }
-
-        else if (list[p].recente_ride == list[p+1].recente_ride){
-            
-            if (list[p].distance == list[p+1].distance) last++;
-        }
-
-        else if (start != -1){
-            qsort(list+start,last,sizeof(struct sort_distance),compare_username);
-            last = 1;
-            start = -1;
-        }
-    }
-
-    if (start != -1) qsort(list+start,last,sizeof(struct sort_distance),compare_username);
-}
-
-
 
 
 void resolve_querie3(char *command, int ncommand, USERS users_list, RIDES rides_list, int N_RIDES){
@@ -157,7 +106,7 @@ void resolve_querie3(char *command, int ncommand, USERS users_list, RIDES rides_
 
     fill_sort_distance(users_list,rides_list,list,&N);
 
-    sort_distance_list(list,N);
+    sort_three_compare(list,N,sizeof(struct sort_distance),compare_distance_ride,compare_recente_ride,compare_username);
 
 
     for (int p = 0; p < top; p++){
