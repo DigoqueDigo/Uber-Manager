@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic-errors -O2 -Iinclude
 LIBS = -lm
-OBJS = src/main.o src/sort.c src/fixtures.o src/parsing/checker.o src/parsing/parser.o src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o src/queries/queries.o src/queries/querie1.o src/queries/querie3.o src/queries/querie7.o src/queries/querie8.o
+OBJS = src/main.o src/sort.c src/fixtures.o src/parsing/checker.o src/parsing/parser.o src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o src/queries/queries.o src/queries/querie1.o src/queries/querie3.o src/queries/querie6.o src/queries/querie7.o src/queries/querie8.o
 TARGET = programa-principal
 
 
@@ -18,9 +18,11 @@ teste1:
 	diff Resultados/command5_output.txt exemplos_de_queries/tests_1/command5_output.txt
 	diff Resultados/command6_output.txt exemplos_de_queries/tests_1/command6_output.txt
 	diff Resultados/command7_output.txt exemplos_de_queries/tests_1/command8_output.txt
-	diff Resultados/command8_output.txt exemplos_de_queries/tests_1/command16_output.txt
-	diff Resultados/command9_output.txt exemplos_de_queries/tests_1/command17_output.txt
-	diff Resultados/command10_output.txt exemplos_de_queries/tests_1/command18_output.txt
+	diff Resultados/command8_output.txt exemplos_de_queries/tests_1/command14_output.txt
+	diff Resultados/command9_output.txt exemplos_de_queries/tests_1/command15_output.txt
+	diff Resultados/command10_output.txt exemplos_de_queries/tests_1/command16_output.txt
+	diff Resultados/command11_output.txt exemplos_de_queries/tests_1/command17_output.txt
+	diff Resultados/command12_output.txt exemplos_de_queries/tests_1/command18_output.txt
 
 
 teste2:
@@ -46,17 +48,22 @@ teste2:
 	diff Resultados/command19_output.txt exemplos_de_queries/tests_2/command19_output.txt
 	diff Resultados/command20_output.txt exemplos_de_queries/tests_2/command20_output.txt
 	diff Resultados/command21_output.txt exemplos_de_queries/tests_2/command22_output.txt
-	diff Resultados/command22_output.txt exemplos_de_queries/tests_2/command35_output.txt
-	diff Resultados/command23_output.txt exemplos_de_queries/tests_2/command36_output.txt
-	diff Resultados/command24_output.txt exemplos_de_queries/tests_2/command37_output.txt
-	diff Resultados/command25_output.txt exemplos_de_queries/tests_2/command38_output.txt
-	diff Resultados/command26_output.txt exemplos_de_queries/tests_2/command39_output.txt
-	diff Resultados/command27_output.txt exemplos_de_queries/tests_2/command40_output.txt
-	diff Resultados/command28_output.txt exemplos_de_queries/tests_2/command41_output.txt
-	diff Resultados/command29_output.txt exemplos_de_queries/tests_2/command42_output.txt
-	diff Resultados/command30_output.txt exemplos_de_queries/tests_2/command43_output.txt
-	diff Resultados/command31_output.txt exemplos_de_queries/tests_2/command44_output.txt
-	diff Resultados/command32_output.txt exemplos_de_queries/tests_2/command45_output.txt
+	diff Resultados/command22_output.txt exemplos_de_queries/tests_2/command30_output.txt
+	diff Resultados/command23_output.txt exemplos_de_queries/tests_2/command31_output.txt
+	diff Resultados/command24_output.txt exemplos_de_queries/tests_2/command32_output.txt
+	diff Resultados/command25_output.txt exemplos_de_queries/tests_2/command33_output.txt
+	diff Resultados/command26_output.txt exemplos_de_queries/tests_2/command34_output.txt
+	diff Resultados/command27_output.txt exemplos_de_queries/tests_2/command35_output.txt
+	diff Resultados/command28_output.txt exemplos_de_queries/tests_2/command36_output.txt
+	diff Resultados/command29_output.txt exemplos_de_queries/tests_2/command37_output.txt
+	diff Resultados/command30_output.txt exemplos_de_queries/tests_2/command38_output.txt
+	diff Resultados/command31_output.txt exemplos_de_queries/tests_2/command39_output.txt
+	diff Resultados/command32_output.txt exemplos_de_queries/tests_2/command40_output.txt
+	diff Resultados/command33_output.txt exemplos_de_queries/tests_2/command41_output.txt
+	diff Resultados/command34_output.txt exemplos_de_queries/tests_2/command42_output.txt
+	diff Resultados/command35_output.txt exemplos_de_queries/tests_2/command43_output.txt
+	diff Resultados/command36_output.txt exemplos_de_queries/tests_2/command44_output.txt
+	diff Resultados/command37_output.txt exemplos_de_queries/tests_2/command45_output.txt
 
 
 clean_teste:

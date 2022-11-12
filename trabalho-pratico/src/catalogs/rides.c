@@ -103,6 +103,7 @@ void lookup_rides_username(RIDES rides_list, int index, char *username){
 
 
 char* lookup_rides_date(RIDES rides_list, int index){
+    if (rides_list[index].date == NULL) return NULL;
     return rides_list[index].date;
 }
 
