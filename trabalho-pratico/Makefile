@@ -46,56 +46,21 @@ teste2:
 	diff Resultados/command19_output.txt exemplos_de_queries/tests_2/command19_output.txt
 	diff Resultados/command20_output.txt exemplos_de_queries/tests_2/command20_output.txt
 	diff Resultados/command21_output.txt exemplos_de_queries/tests_2/command22_output.txt
-	diff Resultados/command22_output.txt exemplos_de_queries/tests_2/command40_output.txt
-	diff Resultados/command23_output.txt exemplos_de_queries/tests_2/command41_output.txt
-	diff Resultados/command24_output.txt exemplos_de_queries/tests_2/command42_output.txt
-	diff Resultados/command25_output.txt exemplos_de_queries/tests_2/command43_output.txt
-	diff Resultados/command26_output.txt exemplos_de_queries/tests_2/command44_output.txt
-	diff Resultados/command27_output.txt exemplos_de_queries/tests_2/command45_output.txt
+	diff Resultados/command22_output.txt exemplos_de_queries/tests_2/command35_output.txt
+	diff Resultados/command23_output.txt exemplos_de_queries/tests_2/command36_output.txt
+	diff Resultados/command24_output.txt exemplos_de_queries/tests_2/command37_output.txt
+	diff Resultados/command25_output.txt exemplos_de_queries/tests_2/command38_output.txt
+	diff Resultados/command26_output.txt exemplos_de_queries/tests_2/command39_output.txt
+	diff Resultados/command27_output.txt exemplos_de_queries/tests_2/command40_output.txt
+	diff Resultados/command28_output.txt exemplos_de_queries/tests_2/command41_output.txt
+	diff Resultados/command29_output.txt exemplos_de_queries/tests_2/command42_output.txt
+	diff Resultados/command30_output.txt exemplos_de_queries/tests_2/command43_output.txt
+	diff Resultados/command31_output.txt exemplos_de_queries/tests_2/command44_output.txt
+	diff Resultados/command32_output.txt exemplos_de_queries/tests_2/command45_output.txt
 
 
-clean_teste1:
-	rm Resultados/command1_output.txt
-	rm Resultados/command2_output.txt
-	rm Resultados/command3_output.txt
-	rm Resultados/command4_output.txt
-	rm Resultados/command5_output.txt
-	rm Resultados/command6_output.txt
-	rm Resultados/command7_output.txt
-	rm Resultados/command8_output.txt
-	rm Resultados/command9_output.txt
-	rm Resultados/command10_output.txt
-
-
-clean_teste2:
-	rm Resultados/command1_output.txt
-	rm Resultados/command2_output.txt
-	rm Resultados/command3_output.txt
-	rm Resultados/command4_output.txt
-	rm Resultados/command5_output.txt
-	rm Resultados/command6_output.txt
-	rm Resultados/command7_output.txt
-	rm Resultados/command8_output.txt
-	rm Resultados/command9_output.txt
-	rm Resultados/command10_output.txt
-	rm Resultados/command11_output.txt
-	rm Resultados/command12_output.txt
-	rm Resultados/command13_output.txt
-	rm Resultados/command14_output.txt
-	rm Resultados/command15_output.txt
-	rm Resultados/command16_output.txt
-	rm Resultados/command17_output.txt
-	rm Resultados/command18_output.txt
-	rm Resultados/command19_output.txt
-	rm Resultados/command20_output.txt
-	rm Resultados/command21_output.txt
-	rm Resultados/command22_output.txt
-	rm Resultados/command23_output.txt
-	rm Resultados/command24_output.txt
-	rm Resultados/command25_output.txt
-	rm Resultados/command26_output.txt
-	rm Resultados/command27_output.txt
-
+clean_teste:
+	rm Resultados/*.txt
 
 clean:
 	rm src/*.o

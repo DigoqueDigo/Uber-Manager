@@ -88,7 +88,11 @@ DRIVER_CITY fill_abin(RIDES rides_list, DRIVERS drivers_list, char *city, int N_
             score = lookup_rides_score_driver(rides_list,p);
             id = lookup_rides_id_driver(rides_list,p);
             lookup_driver_name(drivers_list,id,name);
-            push_driver_score(&new,id,score,name);
+
+            if (lookup_driver_accounts_status(drivers_list,id)){
+
+                push_driver_score(&new,id,score,name);
+            }
         }
     }
     
