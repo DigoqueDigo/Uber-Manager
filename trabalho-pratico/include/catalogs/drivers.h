@@ -1,6 +1,7 @@
 #ifndef DRIVERS_H
 #define DRIVERS_H
 
+#define CAP_DRIVERS 5000
 
 typedef struct driver *DRIVERS;
 
@@ -24,6 +25,8 @@ void push_driver(
 void print_drivers(DRIVERS lista);
 
 void push_position_driver(DRIVERS lista, int position, char *driver_id);
+
+void free_drivers(DRIVERS drivers_list, int N_DRIVERS);
 
 // MANAGER
 

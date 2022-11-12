@@ -1,6 +1,7 @@
 #ifndef RIDES_H
 #define RIDES_H
 
+#define CAP_RIDES 100000
 
 #define T_BASIC 3.25
 #define T_GREEN 4
@@ -32,6 +33,7 @@ void push_ride(
 
 void print_rides(RIDES lista);
 
+void free_rides(RIDES rides_list, int N_RIDES);
 
 // MANAGE QUERIE 1
 

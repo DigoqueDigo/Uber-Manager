@@ -19,7 +19,7 @@ struct ride{
 };
 
 struct ride* init_ride_list(){
-    struct ride *new = malloc(1000100*sizeof(struct ride));
+    struct ride *new = malloc(CAP_RIDES*sizeof(struct ride));
     return new;
 }
 
@@ -62,6 +62,17 @@ void print_rides(RIDES lista){
     }
 }
 
+
+void free_rides(RIDES rides_list, int N_RIDES){
+    for (int p = 0; p < N_RIDES; p++){
+        if (rides_list[p].date != NULL){
+            free(rides_list[p].date);
+            free(rides_list[p].user);
+            free(rides_list[p].city);
+        }
+    }
+    free(rides_list);
+}
 
 
 // FUNÇÕES ÚTEIS À QUERIE 1

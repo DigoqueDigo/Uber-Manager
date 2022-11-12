@@ -24,7 +24,7 @@ struct user{
 
 
 USERS init_users(){
-    USERS new = malloc(100000*sizeof(USER));
+    USERS new = malloc(BUCKET*sizeof(USER));
     return new;;
 }
 
@@ -92,6 +92,29 @@ void push_position(USERS lista, int position, char *username){
             bucket->positions = realloc(bucket->positions,bucket->size*sizeof(int));
         }
         bucket->positions[bucket->sp++] = position;
+    }
+}
+
+
+void free_hash_table(USERS users_list){
+    USER aux, temp;
+    for (int p = 0; p < BUCKET; p++){
+
+        for (aux = users_list[p]; aux != NULL; ){
+            temp = aux;
+            aux = aux->prox;
+            free(temp->name);
+            free(temp->username);
+            free(temp->gender);
+            free(temp->birth_date);
+            free(temp->account_creation);
+            free(temp->pay_method);
+            free(temp->account_status);
+            free(temp->positions);
+            free(temp); 
+        }
+
+        free(aux);
     }
 }
 

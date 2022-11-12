@@ -21,7 +21,7 @@ struct driver{
 
 
 DRIVERS init_drivers(){
-    DRIVERS new = malloc(11000*sizeof(struct driver));
+    DRIVERS new = malloc(CAP_DRIVERS*sizeof(struct driver));
     return new;
 }
 
@@ -78,6 +78,24 @@ void push_position_driver(DRIVERS lista, int position, char *driver_id){
 
     }
     lista[index].positions[lista[index].sp++] = position;
+}
+
+
+void free_drivers(DRIVERS drivers_list, int N_DRIVERS){
+    for (int p = 0; p < N_DRIVERS; p++){
+        if (drivers_list[p].name != NULL){
+            free(drivers_list[p].name);
+            free(drivers_list[p].birth_date);
+            free(drivers_list[p].gender);
+            free(drivers_list[p].car_class);
+            free(drivers_list[p].license_plate);
+            free(drivers_list[p].city);
+            free(drivers_list[p].account_creation);
+            free(drivers_list[p].account_status);
+            free(drivers_list[p].positions);
+        }
+    }
+    free(drivers_list);
 }
 
 

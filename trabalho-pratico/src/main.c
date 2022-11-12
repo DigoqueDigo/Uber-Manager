@@ -5,8 +5,6 @@
 #include <parsing/parser.h>
 #include <queries/queries.h>
 
-#define CAP_DRIVERS 5000
-#define CAP_RIDES 100000
 
 
 int main(int argc, char** argv){
@@ -111,6 +109,10 @@ int main(int argc, char** argv){
 
         resolve_queries(argv[2],users_list,drivers_list,rides_list,N_DRIVERS,N_RIDES);
     }
+
+    free_drivers(drivers_list,N_DRIVERS);
+    free_rides(rides_list,N_RIDES);
+    free_hash_table(users_list);
 
 
     return 0;
