@@ -24,12 +24,12 @@ int check_name(char *string){
 int check_date(char *string){
     if (strlen(string) != 10) return 0;
     if (string[2] != '/' || string[5] != '/') return 0;
-    string[2] = '\0'; string[5] = '\0';
+    string[2] = string[5] = '\0';
     int a = atoi(string), b = atoi(string+3), c = atoi(string+6);
     if (a < 1 || a > 31) return 0;
     if (b < 1 || b > 12) return 0;
     if (c < 1 || c > 2022) return 0;
-    string[2] = '/'; string[5] = '/';
+    string[2] = string[5] = '/';
     return 1;
 }
 

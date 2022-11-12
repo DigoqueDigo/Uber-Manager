@@ -40,10 +40,10 @@ void convert_id_to_string(char *string, int id){
 
 
 int convert_date_to_int(char *string){
-    string[2] = '\0'; string[5] = '\0';
+    string[2] = string[5] = '\0';
     int a = atoi(string), b = atoi(string+3), c = atoi(string+6);
-    string[2] = '/'; string[5] = '/';
-    return (a + (b<<7) + (c<<14));
+    string[2] = string[5] = '/';
+    return (a + (b<<5) + (c<<9));
 }
 
 
