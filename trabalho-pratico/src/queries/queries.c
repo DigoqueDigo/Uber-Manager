@@ -9,7 +9,7 @@
 
 
 
-int resolve_queries(char *path, USERS users_list, DRIVERS drivers_list, RIDES rides_list, int N_DRIVERS, int N_RIDES){
+int resolve_queries(char *path, USERS users_list, DRIVERS drivers_list, RIDES rides_list, CITIES cities_list, int N_DRIVERS, int N_RIDES, int N_CITIES){
 
     FILE *commands;
 
@@ -39,7 +39,7 @@ int resolve_queries(char *path, USERS users_list, DRIVERS drivers_list, RIDES ri
                 break;
 
             case 7:
-                resolve_querie7(linha,p,drivers_list,rides_list,N_RIDES);
+                resolve_querie7(linha,p,drivers_list,rides_list,cities_list,N_CITIES);
                 break;
 
             case 8:

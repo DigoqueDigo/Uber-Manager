@@ -18,8 +18,9 @@ void free_cities(DRIVER_CITY abin);
 DRIVER_CITY fill_abin(
     RIDES rides_list, // estrutura de dados com as viagens
     DRIVERS drivers_list, // estrutura de dados com os condutores
+    CITIES cities_list,
     char *city, // cidade que predentemos procurar nas viagens
-    int N_RIDES // tamanho da estrutura das viagens
+    int N_CITIES
 );
 
 
@@ -43,7 +44,8 @@ void resolve_querie7(
     int ncommand, // indice do comando
     DRIVERS drivers_list, // estrutura de dados dos condutores
     RIDES rides_list, // estrutura de dados das viagens
-    int N_RIDES // comprimento da esturura de dados das viagens
+    CITIES cities_list,
+    int N_CITIES
 );
 
 

@@ -113,7 +113,7 @@ int main(int argc, char** argv){
 
     if (argc == 3){
 
-        resolve_queries(argv[2],users_list,drivers_list,rides_list,N_DRIVERS,N_RIDES);
+        resolve_queries(argv[2],users_list,drivers_list,rides_list,cities_list,N_DRIVERS,N_RIDES,N_CITIES);
     }
 
     free_drivers(drivers_list,N_DRIVERS);

@@ -63,3 +63,17 @@ void free_cities_list(CITIES cities_list, int N_CITIES){
     }
     free(cities_list);
 }
+
+
+int* lookup_cities_positions(CITIES cities_list, char *city, int *sp, int N_CITIES){
+    int p;
+    for (p = 0; p < N_CITIES && cities_list[p].city != NULL && strcmp(cities_list[p].city,city) != 0; p++);
+
+    if (p == N_CITIES){
+        *sp = 0;
+        return NULL;
+    }
+
+    *sp = cities_list[p].sp;
+    return cities_list[p].positions;
+}

@@ -72,26 +72,31 @@ void free_cities(DRIVER_CITY abin){
 
 
 
-DRIVER_CITY fill_abin(RIDES rides_list, DRIVERS drivers_list, char *city, int N_RIDES){
+DRIVER_CITY fill_abin(RIDES rides_list, DRIVERS drivers_list, CITIES cities_list, char *city, int N_CITIES){
     
     DRIVER_CITY new = NULL;
     char *token, name[200];
     double score;
-    int id; // este id corresponde ao driver
+    int *positions, id, sp; // este id corresponde ao driver
 
-    for (int p = 1; p < N_RIDES; p++){ //depois testar com o p a começar em zero
+    positions = lookup_cities_positions(cities_list,city,&sp,N_CITIES);
 
-        token = lookup_rides_city(rides_list,p);
+    if (positions != NULL){
 
-        if (token && !strcmp(token,city)){
+        for (int p = 1; p < sp; p++){ //depois testar com o p a começar em zero
 
-            score = lookup_rides_score_driver(rides_list,p);
-            id = lookup_rides_id_driver(rides_list,p);
-            lookup_driver_name(drivers_list,id,name);
+            token = lookup_rides_city(rides_list,positions[p]);
 
-            if (lookup_driver_accounts_status(drivers_list,id)){
+            if (token && !strcmp(token,city)){
 
-                push_driver_score(&new,id,score,name);
+                score = lookup_rides_score_driver(rides_list,positions[p]);
+                id = lookup_rides_id_driver(rides_list,positions[p]);
+                lookup_driver_name(drivers_list,id,name);
+
+                if (lookup_driver_accounts_status(drivers_list,id)){
+
+                    push_driver_score(&new,id,score,name);
+                }
             }
         }
     }
@@ -139,7 +144,7 @@ int compare_id(const void *a, const void *b){
 
 
 
-void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rides_list, int N_RIDES){
+void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rides_list, CITIES cities_list, int N_CITIES){
 
     FILE *ficheiro;
 
@@ -158,7 +163,7 @@ void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rid
     ficheiro = fopen(output_file,"a");
 
 
-    DRIVER_CITY abin = fill_abin(rides_list,drivers_list,token,N_RIDES);
+    DRIVER_CITY abin = fill_abin(rides_list,drivers_list,cities_list,token,N_CITIES);
 
 
     Nodes = count_nodes(abin);

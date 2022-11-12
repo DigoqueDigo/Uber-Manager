@@ -21,4 +21,6 @@ CITIES realloc_cities(CITIES cities_list, int new_size);
 
 void free_cities_list(CITIES cities_list, int N_CITIES);
 
+int* lookup_cities_positions(CITIES cities_list, char *city, int *sp, int N_CITIES);
+
 #endif
