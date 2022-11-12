@@ -4,6 +4,7 @@
 #include <catalogs/users.h>
 #include <catalogs/drivers.h>
 #include <catalogs/rides.h>
+#include <catalogs/cities.h>
 
 
 int calculate_idade(char *birth_date);

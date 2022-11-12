@@ -15,10 +15,11 @@ int main(int argc, char** argv){
     RIDES rides_list = init_ride_list();
     USERS users_list = init_users();
     DRIVERS drivers_list = init_drivers();
+    CITIES cities_list = init_cities();
     char aux_path[1000];
     char string[1000];
-    int N_RIDES = 0, N_DRIVERS = 0; 
-    int SIZE_DRIVERS = CAP_DRIVERS, SIZE_RIDES = CAP_RIDES; 
+    int N_RIDES = 0, N_DRIVERS = 0, N_CITIES = 0; 
+    int SIZE_DRIVERS = CAP_DRIVERS, SIZE_RIDES = CAP_RIDES, SIZE_CITIES = CAP_CITIES; 
     int path_size = strlen(argv[1]);
 
     strcpy(aux_path,argv[1]);
@@ -88,7 +89,12 @@ int main(int argc, char** argv){
             rides_list = realloc_rides(rides_list,SIZE_RIDES);
         }
 
-        if (set_ride_line(linha,string,rides_list,users_list,drivers_list)){
+        if (N_CITIES >= SIZE_CITIES){
+            SIZE_CITIES *= 2;
+            cities_list = realloc_cities(cities_list,SIZE_CITIES);
+        }
+
+        if (set_ride_line(linha,string,rides_list,users_list,drivers_list,cities_list,&N_CITIES)){
             destroy_driver_line(linha);
         }
 
@@ -113,6 +119,7 @@ int main(int argc, char** argv){
     free_drivers(drivers_list,N_DRIVERS);
     free_rides(rides_list,N_RIDES);
     free_hash_table(users_list);
+    free_cities_list(cities_list,N_CITIES);
 
 
     return 0;

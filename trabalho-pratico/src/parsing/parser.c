@@ -186,7 +186,7 @@ void destroy_user_line(LINE line){
 }
 
 
-int set_ride_line(LINE linha, char *string, RIDES lista, USERS lista_users, DRIVERS lista_drivers){
+int set_ride_line(LINE linha, char *string, RIDES lista, USERS lista_users, DRIVERS lista_drivers, CITIES cities_list, int *N_CITIES){
     int p;
     char *token;
     
@@ -251,6 +251,8 @@ int set_ride_line(LINE linha, char *string, RIDES lista, USERS lista_users, DRIV
         push_position(lista_users,index,linha[3].data);
 
         push_position_driver(lista_drivers,index,linha[2].data);
+
+        push_city(cities_list,linha[4].data,index,N_CITIES);
 
 
         push_ride(lista,

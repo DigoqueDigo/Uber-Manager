@@ -5,6 +5,7 @@
 #include <catalogs/users.h>
 #include <catalogs/rides.h>
 #include <catalogs/drivers.h>
+#include <catalogs/cities.h>
 
 
 typedef struct line *LINE;
@@ -24,6 +25,6 @@ void print_user_line(LINE line);
 
 void destroy_user_line(LINE line);
 
-int set_ride_line(LINE line, char *string, RIDES lista, USERS lista_users, DRIVERS lista_drivers);
+int set_ride_line(LINE line, char *string, RIDES lista, USERS lista_users, DRIVERS lista_drivers, CITIES cities_list, int *N_CITIES);
 
 #endif
