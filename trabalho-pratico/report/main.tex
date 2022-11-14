@@ -72,11 +72,11 @@
 
 Quando estamos perante uma situação na qual temos de lidar com a manipulação de grandes quantidades de dados existem sempre algumas opções que devemos preferir adotar e outras que pelo contrário devemos evitar a todo o custo, portanto ao longo deste relatório iremos explicar as estratégias que utilizámos para abordar este problema e porque razão optámos por uma estratégia em específico e não outra qualquer.
 
-Posto isto, importa também realçar que nas estruturas que iremos exemplificar mais à frente tivemos em conta a natureza dos dados com os quais estávamos a lidar e as questões que tinham de ser resolvidas em tempo útil, assim sendo, caso levássemos em conta outros quaisquer fatores certamente a abordagem adotada teria sido outra.
+Posto isto, importa também realçar que nas estruturas que iremos exemplificar mais à frente tivemos em conta a natureza dos dados com os quais estávamos a lidar e as questões que tinham de ser resolvidas em tempo útil, assim sendo, caso levássemos em conta outros quaisquer fatores certamente, a abordagem adotada teria sido outra.
 
 \chapter{Catálogos}
 
-Antes de mais, a primeira etapa do projeto diz respeito ao armazenamento dos dados, ou seja, tínhamos de guardar toda a informação útil numa determinada estrutura de dados, portanto como reparámos que existem três entidades fundamentais \textit{(users, drivers, rides)}, decidimos criar uma estrutura de dados para cada uma destas entidades e mais uma para as cidades, visto que em várias \textit{queries} as cidades são um dos parâmetros visados.
+Antes de mais, a primeira etapa do projeto diz respeito ao armazenamento dos dados, ou seja, tínhamos de guardar toda a informação útil numa determinada estrutura, portanto, como reparámos que existem três entidades fundamentais \textit{(users, drivers, rides)}, decidimos criar uma estrutura de dados para cada uma destas entidades e mais uma para as cidades, visto que em várias \textit{queries} as cidades são um dos parâmetros visados.
 
 \section{Utilizadores}
 
@@ -90,26 +90,26 @@ Antes de mais, a primeira etapa do projeto diz respeito ao armazenamento dos dad
     \end{subfigure}
 \end{figure}
 
-Tal como é possível observar pela estrutura presente no ficheiro \textit{users.c}, é possível depreender que um utilizador é um elemento de uma lista ligada, visto que um dos campos corresponde a um apontador para outro \texttt{\small\textbf{struct user}}, além disso, existe mais um campo em particular para além daqueles que como estão presentes no ficheiro \textit{csv} também teria de estar contidos aqui, falamos nem mais nem menos do campo \texttt{\small\textbf{positions}}, este parâmetro representa um \textit{array} dinâmico que começa com tamanho que é definido por \textbf{\small\texttt{CAP\_USER}}, e que depois vai multiplicado por dois à medida que o valor de \texttt{\small\textbf{sp}} iguala o valor do \small\texttt{\textbf{size}}, sendo que \texttt{\small\textbf{sp}} representa o número de elementos que o \textit{array} dinâmico \texttt{\small\textbf{positions}} possui, por fim o \textit{array} \texttt{\small\textbf{positions}} possui todas as posições em que um determinado utilizador aparece no \textit{array} das viagens.
+Tal como é possível observar pela estrutura presente no ficheiro \textit{users.c}, é possível depreender que um utilizador é um elemento de uma lista ligada, visto que um dos campos corresponde a um apontador para outro \texttt{\small\textbf{struct user}}, além disso, existe mais um campo em particular para além daqueles que, como estão presentes no ficheiro \textit{users.csv}, teriam de estar aqui obrigatoriamente, falamos nem mais nem menos do campo \texttt{\small\textbf{positions}}, este parâmetro representa um \textit{array} dinâmico que começa com tamanho definido por \textbf{\small\texttt{CAP\_USER}}, e que depois vai multiplicado por dois à medida que o valor de \texttt{\small\textbf{sp}} iguala o valor do \small\texttt{\textbf{size}}, sendo que \texttt{\small\textbf{sp}} representa o número de elementos que o \textit{array} \texttt{\small\textbf{positions}} possui, elementos esses que representam todas as posições em que um determinado utilizador aparece no \textit{array} das viagens.
 
-Passando para o ficheiro \textit{users.h} percebe-se de que forma os utilizadores estão organizados, neste caso os utilizadores são guardados numa tabela de \textit{hash}, em que cada utilizador é mapeado para uma determinada posição conforme o seu \texttt{\small\textbf{username}} e é acrescentado no início da lista ligada para poupar o máximo de tempo possível, assim a estrutura \texttt{\small\textbf{USERS}} representa uma tabela de \textit{hash} com 8000 \textit{buckets}, onde cada utilizador pode ser acedido em tempo praticamente constante (não sendo constante pois é necessário percorrer a lista ligada de um determinado \textit{bucket} até encontrar o \texttt{\small\textbf{username}} que pretendemos).
+Passando para o ficheiro \textit{users.h}, percebe-se de que forma os utilizadores estão organizados, neste caso os utilizadores são guardados numa tabela de \textit{hash}, onde cada utilizador é mapeado para uma determinada posição conforme o seu \texttt{\small\textbf{username}}, e é acrescentado no início da lista ligada para poupar o máximo de tempo possível. Assim a estrutura \texttt{\small\textbf{USERS}} representa uma tabela de \textit{hash} com 8000 \textit{buckets}, onde cada utilizador pode ser acedido em tempo praticamente constante (não sendo constante pois é necessário percorrer a lista ligada de um determinado \textit{bucket} até encontrar o \texttt{\small\textbf{username}} que pretendemos).
 
 
 
 \normalsize\textbf{Vantagens}
     \begin{enumerate}
-        \item Ao utilizar uma tabela de \textit{hash} podemos encontrar um utilizador mais facilmente uma vez que a função de \textit{hash} mapeia apenas para um determinado índice.
+        \item Ao utilizar uma tabela de \textit{hash} podemos encontrar um utilizador mais facilmente, uma vez que a função de \textit{hash} mapeia apenas para um determinado índice.
 
-        \item Ao utilizar uma lista ligada em cada um dos \textit{buckets} é possível inserir um utilizador no início da lista de forma constante, algo que não seria possível num \textit{array}.
+        \item Com a utilização de uma lista ligada em cada um dos \textit{buckets} é possível inserir um utilizador no início da lista em tempo constante, algo que não seria possível num \textit{array}.
         
         \item Ao usufruir de uma lista ligada apenas vamos alocar a quantidade exata de memória que necessitamos para representar os nossos dados. 
     \end{enumerate}
 
 \normalsize\textbf{Desvantagens}
     \begin{enumerate}
-        \item A utilização de listas ligadas não tira partido na memória espacial, uma vez que o apontadores para os próximos elementos da lista estarão dispersos na memória, como tal, a \textit{miss rate} aumenta o portanto demora mais tempo a aceder ao elemento seguinte da lista ligada.
+        \item A utilização de listas ligadas não tira partido na memória espacial, dado que o apontadores para os próximos elementos da lista estão dispersos na memória, como tal, a \textit{miss rate} aumenta e portanto demoramos mais tempo a aceder ao elemento seguinte da lista ligada.
         
-        \item Ao utilizar uma tabela de \textit{hash} vai ser desperdiçado bastante tempo para libertar a memória que foi necessária alocar anteriormente, visto que teremos que percorrer cada uma das listas ligadas presentes na tabela de \textit{hash}.
+        \item Para libertar toda a memória que uma tabela de \textit{hash} ocupa é necessário despender algum tempo, visto que temos que percorrer as listas ligadas presentes em cada um dos \textit{buckets}.
     \end{enumerate}
 
 \pagebreak
@@ -125,29 +125,92 @@ Passando para o ficheiro \textit{users.h} percebe-se de que forma os utilizadore
     \end{subfigure}
 \end{figure}
 
-Agora na estrutura dos condutores, a estratégia adotada foi muito parecida à dos utilizadores, mais uma vez, todos os campos que estão presentes nos ficheiro \textit{drivers.csv} também estão aqui presentes, e além disso também existe outro \textit{array} dinâmico \textbf{\small\texttt{positions}} que a exemplo do anterior possui um tamanho inicial definido por \textbf{\small\texttt{CAP\_DRIVER}}, e tem como elementos todas as posições que um determinado condutor aparece no \textit{array} das viagens.
+Agora na estrutura dos condutores, a estratégia adotada foi muito parecida à dos utilizadores, mais uma vez, todos os campos que estão presentes no ficheiro \textit{drivers.csv} também estão aqui presentes, e além disso também existe outro \textit{array} dinâmico \textbf{\small\texttt{positions}}, que a exemplo do anterior, possui um tamanho inicial definido por \textbf{\small\texttt{CAP\_DRIVER}}, e tem como elementos todas as posições onde um determinado condutor aparece no \textit{array} das viagens.
 
-De seguida, ao analisar o ficheiro \textit{drivers.h}, vemos que a estrutura \textbf{\small\texttt{DRIVERS}} é um \textit{array} dinâmico de tamanho inicial definido por \textbf{\small\texttt{CAP\_DRIVERS}}, onde cada elemento é um condutor. Neste caso a forma de mapeamento utilizada para colocar um determinado condutor numa posição do \textit{array} foi o \textbf{\small\texttt{id}} do condutor, ou seja, um condutor com um \textbf{\small\texttt{id}} correspondente a \textbf{\small\texttt{000000000162}} será mapeado na posição de índice \textbf{\small\texttt{162}} do \textit{array} \textbf{\small\texttt{DRIVERS}}.
+De seguida, ao analisar o ficheiro \textit{drivers.h}, vemos que a estrutura \textbf{\small\texttt{DRIVERS}} é um \textit{array} dinâmico de tamanho inicial definido por \textbf{\small\texttt{CAP\_DRIVERS}}, onde cada elemento é um condutor. Neste caso, a forma de mapeamento utilizada para colocar um determinado condutor numa posição do \textit{array} foi o \textbf{\small\texttt{id}} do condutor, ou seja, um condutor com um \textbf{\small\texttt{id}} correspondente a \textbf{\small\texttt{000000000162}} será mapeado na posição de índice \textbf{\small\texttt{162}} do \textit{array} \textbf{\small\texttt{DRIVERS}}.
 
 
 \normalsize\textbf{Vantagens}
     \begin{enumerate}
-        \item A utilização de um \textit{array} tira partido da localidade espacial, o que aumenta o \textit{hit rate}, e consequentemente leva a um ganho de tempo caso pretendamos percorrer o \textit{array} de início a fim.
+        \item A utilização de um \textit{array} tira partido da localidade espacial, o que aumenta o \textit{hit rate}, e consequentemente leva a um ganho de tempo caso pretendamos percorrer o \textit{array}.
         
-        \item Ao utilizar um \textit{array} dinâmico, nunca corremos o risco de alocar demasiada memória do que aquela de é extremamente necessária, no pior dos casos alocamos o dobro daquela que seria pretendida.
+        \item Ao utilizar um \textit{array} dinâmico, nunca corremos o risco de alocar demasiada memória do que aquela que é extremamente necessária, no pior dos casos alocamos o dobro daquela que seria pretendida.
         
         \pagebreak
-        \item Quando pretendemos libertar a memória do \textit{array} \textbf{\small\texttt{DRIVERS}} não vai ser necessário percorrer o \textit{array}, ao contrário da tabela de \textit{hash}, neste caso a operação de libertar memória será feita em tempo constante.
+        \item Quando pretendermos libertar a memória do \textit{array} \textbf{\small\texttt{DRIVERS}} não vai ser necessário percorrer o \textit{array}, ao contrário da tabela de \textit{hash}, neste caso a operação de libertar memória será feita em tempo constante.
         
-        \item Se pretende aceder a um determinado utilizador, é possível fazer essa operação em tempo constante desde que saiba qual o \textbf{\small\texttt{id}} do condutor em questão.
+        \item Se pretendermos aceder a um determinado utilizador, é possível fazer essa operação em tempo constante desde que saibamos qual o \textbf{\small\texttt{id}} do condutor em questão.
     \end{enumerate}
 
 \normalsize\textbf{Desvantagens}
     \begin{enumerate}
-        \item A menos que saibamos qual o índice de um determinado condutor no \textit{array} \textbf{\small\texttt{DRIVERS}}, teremos de percorrer o \textit{array} até encontrar o condutor que pretendemos.
+        \item A menos que saibamos qual o índice de um determinado condutor, teremos de percorrer o \textit{array} \textbf{\small\texttt{DRIVERS}}até encontrar o condutor que pretendemos.
 
-        \item Ao utilizar esta forma de mapear um condutor no \textit{array} \textbf{\small\texttt{DRIVERS}} a posição de índice zero está sempre vazia uma vez que nenhum condutor tem um \textbf{\small\texttt{id}} igual a zero.
+        \item Ao utilizar esta forma de mapear um condutor, a posição de índice zero estará sempre vazia, uma vez que nenhum condutor tem um \textbf{\small\texttt{id}} igual a zero.
     \end{enumerate}
 
+
+\section{Viagens}
+
+\begin{figure}[hbt!]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/rides.png}
+        \caption*{Estrutura de dados das viagens}
+        \label{fig:rides}
+    \end{subfigure}
+\end{figure}
+
+Passando agora à estrutura das viagens, vemos que uma viagem possui apenas os campos extremamente necessários, ou seja, os campos que existem no ficheiro \textit{rides.csv}, e ao contrário das estruturas anteriores, não possui nenhum \textit{array} de inteiros.
+
+Assim a estrutura \textbf{\small\texttt{RIDES}} está implementada como sendo um \textit{array} dinâmico com tamanho inicial definido por\textbf{\small\texttt{CAP\_RIDES}}, onde cada elemento é uma viagem.E mais uma vez, a forma de mapeamento utilizada para determinar qual a posição de uma viagem é o \textbf{\small\texttt{id}} da própria viagem, ou seja, uma viagem com o \textbf{\small\texttt{id}} correspondente a \textbf{\small\texttt{000000000162}} é inserida na posição de índice \textbf{\small\texttt{162}} no \textit{array} \textbf{\small\texttt{RIDES}}.
+
+\pagebreak
+
+\normalsize\textbf{Vantagens}
+\begin{itemize}
+   
+    \item Quando for pretendido percorrer o \textit{array} \textbf{\small\texttt{RIDES}} o programa vai beneficiar da localidade espacial, ou 
+    seja, será necessário menos tempo para percorrer as posições do \textit{array} uma vez que os valores vão estar em \textit{cache}.
+    
+    \item Se pretendermos aceder a uma determinada viagem, essa operação pode ser feita em tempo constante caso saibamos previamente qual o \textbf{\small\texttt{id}} da viagem em questão, uma vez que as viagem são mapeadas conforme o seu \textbf{\small\texttt{id}}.
+
+    \item Para libertar a memória alocada pelo \textit{array} \textbf{\small\texttt{RIDES}} não é necessário percorrer o \textit{array}.
+
+    \item Como o \textit{array} \textbf{\small\texttt{RIDES}} é dinâmico, no pior dos casos é alocado o dobro da memória extremamente necessária.
+\end{itemize}
+
+\normalsize\textbf{Desvantagens}
+\begin{itemize}
+    \item Sem saber qual o \textbf{\small\texttt{id}} de uma viagem é necessário percorrer o \textit{array} \textbf{\small\texttt{RIDES}} para encontrar aquilo que pretendemos.
+    
+    \item A exemplo do que acontece no \textit{array} \textbf{\small\texttt{DRIVERS}}, também o \textit{array} \textbf{\small\texttt{RIDES}} possui a primeira posição vazia, ou seja, no índice zero do não existe qualquer elemento.
+\end{itemize}
+
+
+\section{Cidades}
+
+\begin{figure}[hbt!]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/cities.png}
+        \caption*{Estrutura de dados das cidades}
+        \label{fig:cities}
+    \end{subfigure}
+\end{figure}
+
+Este módulo foi criado dado o facto de o parâmetro cidade ser requerido em várias \textit{queries}, como tal, ao fazer uma busca de uma determinada cidade no \textit{array} \textbf{\small\texttt{RIDES}} seria necessário percorrer o \textit{array} todo, algo que levaria imenso tempo do o tamanho elevadíssimo do mesmo.
+
+Portanto para compensar tal debilidade foi criada a seguinte estrutura, onde cada cidade possui um \textit{array} que contém todas as posições onde a cidade em questão aparece no \textit{array} \textbf{\small\texttt{RIDES}}, assim quando quisermos fazer a busca de uma cidade já sabemos previamente quais as posições que devemos analisar.
+
+
+
+Ao analisar o código, vemos que o \textit{array} \textbf{\small\texttt{positions}} é um \textit{array} dinâmico de tamanho inicial definido por \textbf{\small\texttt{CAP\_CITY}}, e que possui um total de elementos definido pelo valor que \textbf{\small\texttt{sp}} toma. Por fim, o \textit{array} \textbf{\small\texttt{CITIES}}  segue uma estrutura semelhante, onde \textbf{\small\texttt{CAP\_CITIES}} define o seu tamanho inicial e cada um dos seus elementos é uma \textbf{\small\texttt{struct city}}.
+
+\section{Notas finais}
+
+Perante esta estrutura de dados certamente fica mais fácil responder às \textit{queries} em tempo útil, contudo uma das grandes desvantagem é que esta estratégia ocupa demasiado espaço em memória, pois tanto os utilizadores, condutores e cidades armazenam todas as posições correspondentes à suas aparições no \textit{array} \textbf{\small\texttt{RIDES}}.
 
 \end{document}
