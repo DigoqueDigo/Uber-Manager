@@ -24,7 +24,9 @@ int main(int argc, char** argv){
 
     strcpy(aux_path,argv[1]);
     strcat(aux_path,"drivers.csv");
-
+    printf("path csv: ->%s<-\n", argv[1]);
+    printf("path input: ->%s<-\n", argv[2]);
+    printf("new path: ->%s<-\n", aux_path);
 
     FILE *ficheiro_rides, *ficheiro_users, *ficheiro_drivers;
 
