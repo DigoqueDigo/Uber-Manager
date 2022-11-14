@@ -43,7 +43,7 @@ void push_driver(DRIVERS lista, char *id, char *name, char *birth_date, char *ge
     new.account_creation = strdup(account_creation);
     new.account_status = strdup(account_status);
     new.sp = 0;
-    new.size = 100;
+    new.size = CAP_DRIVER;
     new.positions = malloc(new.size*sizeof(int));
     lista[new.id] = new;
 }

@@ -1,6 +1,7 @@
 #ifndef DRIVERS_H
 #define DRIVERS_H
 
+#define CAP_DRIVER 100
 #define CAP_DRIVERS 5000
 
 typedef struct driver *DRIVERS;

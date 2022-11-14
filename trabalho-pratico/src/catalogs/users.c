@@ -40,7 +40,7 @@ USER init_user(char *username, char *name, char *gender, char *birth_date, char 
     new->account_status = strdup(account_status);
     new->prox = NULL;
     new->sp = 0;
-    new->size = 10;
+    new->size = CAP_USER;
     new->positions = malloc(new->size*sizeof(int));
     return new;
 }

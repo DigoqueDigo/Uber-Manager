@@ -16,7 +16,7 @@ int main(int argc, char** argv){
     USERS users_list = init_users();
     DRIVERS drivers_list = init_drivers();
     CITIES cities_list = init_cities();
-    char aux_path[1000];
+    char aux_path[1000] = "";
     char string[1000];
     int N_RIDES = 0, N_DRIVERS = 0, N_CITIES = 0; 
     int SIZE_DRIVERS = CAP_DRIVERS, SIZE_RIDES = CAP_RIDES, SIZE_CITIES = CAP_CITIES; 

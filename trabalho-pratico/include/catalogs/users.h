@@ -1,6 +1,7 @@
 #ifndef USERS_H
 #define USERS_H
 
+#define CAP_USER 10
 #define BUCKET 8000
 
 typedef struct user* USER;
