@@ -59,6 +59,9 @@
 
 \titleformat{\section}{\bfseries\fontfamily{ptm}\selectfont}{}{0pt}{\large}[{\titlerule[1pt]}]
 
+\titleformat{\subsection}{\bfseries\fontfamily{ptm}\selectfont}{}{0pt}{\large}[\vspace{2pt}]
+
+
 \titlespacing{\chapter}{0pt}{-30pt}{30pt}
 
 
@@ -112,7 +115,7 @@ Passando para o ficheiro \textit{users.h}, percebe-se de que forma os utilizador
         \item Para libertar toda a memória que uma tabela de \textit{hash} ocupa é necessário despender algum tempo, visto que temos que percorrer as listas ligadas presentes em cada um dos \textit{buckets}.
     \end{enumerate}
 
-\pagebreak
+\vspace{-0.35cm}
 \section{Condutores}
 
 \begin{figure}[hbt!]
@@ -136,7 +139,6 @@ De seguida, ao analisar o ficheiro \textit{drivers.h}, vemos que a estrutura \te
         
         \item Ao utilizar um \textit{array} dinâmico, nunca corremos o risco de alocar demasiada memória do que aquela que é extremamente necessária, no pior dos casos alocamos o dobro daquela que seria pretendida.
         
-        \pagebreak
         \item Quando pretendermos libertar a memória do \textit{array} \textbf{\small\texttt{DRIVERS}} não vai ser necessário percorrer o \textit{array}, ao contrário da tabela de \textit{hash}, neste caso a operação de libertar memória será feita em tempo constante.
         
         \item Se pretendermos aceder a um determinado utilizador, é possível fazer essa operação em tempo constante desde que saibamos qual o \textbf{\small\texttt{id}} do condutor em questão.
@@ -149,7 +151,7 @@ De seguida, ao analisar o ficheiro \textit{drivers.h}, vemos que a estrutura \te
         \item Ao utilizar esta forma de mapear um condutor, a posição de índice zero estará sempre vazia, uma vez que nenhum condutor tem um \textbf{\small\texttt{id}} igual a zero.
     \end{enumerate}
 
-
+\pagebreak
 \section{Viagens}
 
 \begin{figure}[hbt!]
@@ -166,8 +168,6 @@ Passando agora à estrutura das viagens, vemos que uma viagem possui apenas os c
 
 Assim a estrutura \textbf{\small\texttt{RIDES}} está implementada como sendo um \textit{array} dinâmico com tamanho inicial definido por\textbf{\small\texttt{CAP\_RIDES}}, onde cada elemento é uma viagem.E mais uma vez, a forma de mapeamento utilizada para determinar qual a posição de uma viagem é o \textbf{\small\texttt{id}} da própria viagem, ou seja, uma viagem com o \textbf{\small\texttt{id}} correspondente a \textbf{\small\texttt{000000000162}} é inserida na posição de índice \textbf{\small\texttt{162}} no \textit{array} \textbf{\small\texttt{RIDES}}.
 
-\pagebreak
-
 \normalsize\textbf{Vantagens}
 \begin{itemize}
    
@@ -181,6 +181,7 @@ Assim a estrutura \textbf{\small\texttt{RIDES}} está implementada como sendo um
     \item Como o \textit{array} \textbf{\small\texttt{RIDES}} é dinâmico, no pior dos casos é alocado o dobro da memória extremamente necessária.
 \end{itemize}
 
+\pagebreak
 \normalsize\textbf{Desvantagens}
 \begin{itemize}
     \item Sem saber qual o \textbf{\small\texttt{id}} de uma viagem é necessário percorrer o \textit{array} \textbf{\small\texttt{RIDES}} para encontrar aquilo que pretendemos.
@@ -212,5 +213,25 @@ Ao analisar o código, vemos que o \textit{array} \textbf{\small\texttt{position
 \section{Notas finais}
 
 Perante esta estrutura de dados certamente fica mais fácil responder às \textit{queries} em tempo útil, contudo uma das grandes desvantagem é que esta estratégia ocupa demasiado espaço em memória, pois tanto os utilizadores, condutores e cidades armazenam todas as posições correspondentes à suas aparições no \textit{array} \textbf{\small\texttt{RIDES}}.
+
+
+\chapter{Queries}
+
+Durante a resolução das diversas consultas propostas procurámos sempre fazer tais operações no menor tempo possível aproveitando ao máximo a estrutura de dados que tínhamos implementado, todavia a nossa implementação não se revelou a melhor para algumas das consulta e portanto, enquanto algumas questões podem ser facilmente resolvidas em tempo constante, outras são resolvidas em tempo linear, o que não é ótimo dado o elevado número de elementos que cada estrutura possui.
+
+\section{Querie 1}
+
+A \textit{querie} 1 consiste fundamentalmente em recolher a informação de um determinado utilizador ou condutor, isto conforme se primeiro parâmetro do \textit{input} seja uma \textit{string} de inteiros ou um \textit{username}, portanto a primeira fazer para a resolução deste problema passa por identificar qual o tipo de \textit{input} com que estamos a lidar, depois disso, podemos tirar partido do \textit{array} \textbf{\small\texttt{positions}} definido anteriormente, e a partir daí obtemos toda a informação necessária.    
+
+\normalsize\textbf{Primeira fase}
+
+Nesta fase temos de saber distinguir se um \textit{input} é referente a um utilizador ou condutor, portanto a estratégia adotada foi utilizar a função \textbf{\small\texttt{atoi()}}, ou seja, esta transforma uma \textit{string} num inteiro, portanto se a \textit{string} apenas contiver inteiros vai ser devolvido o inteiro correspondente, por outro lado, se um primeiro carácter for uma letra do alfabeto a função vai retornar zero. Assim, desta forma, é possível distinguir um utilizador de um condutor.  
+
+\normalsize\textbf{Segunda fase}
+
+Como já sabemos qual a entidade em questão, resta-nos colocar o \textbf{\small\texttt{username}} do utilizador na função de \textit{hash} e obter o índice do \textit{bucket} para sabermos qual a lista que devemos percorrer. Assim quando estivermos na celula correta apenas temos de guardar o \textit{array} \textbf{\small\texttt{positions}}, uma vez que este contem todas as posições do utilizador no \textit{array} \textbf{\small\texttt{RIDES}}.
+
+Caso estejamos perante um utilizador, muda o facto de podermos aceder ao condutor em tempo constante, visto que este é mapeado conforme o seu \textbf{\small\texttt{id}}.
+
 
 \end{document}
