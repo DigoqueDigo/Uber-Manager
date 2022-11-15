@@ -23,7 +23,7 @@ int main(int argc, char** argv){
     int path_size = strlen(argv[1]);
 
     strcpy(aux_path,argv[1]);
-    strcat(aux_path,"drivers.csv");
+    strcat(aux_path,"/drivers.csv");
     printf("path csv: ->%s<-\n", argv[1]);
     printf("path input: ->%s<-\n", argv[2]);
     printf("new path: ->%s<-\n", aux_path);
@@ -34,7 +34,7 @@ int main(int argc, char** argv){
     ficheiro_drivers = fopen(aux_path, "r");
 
     if (ficheiro_drivers == NULL){
-        perror("drivers.csv");
+        perror("/drivers.csv");
         return -1;
     }
 
@@ -55,13 +55,13 @@ int main(int argc, char** argv){
     fclose(ficheiro_drivers);
 
     aux_path[path_size] = '\0';
-    strcat(aux_path,"users.csv");
+    strcat(aux_path,"/users.csv");
 
 
     ficheiro_users = fopen(aux_path, "r");
 
     if (ficheiro_users == NULL){
-        perror("users.csv\n");
+        perror("/users.csv\n");
         return -1;
     }
 
@@ -75,12 +75,12 @@ int main(int argc, char** argv){
     fclose(ficheiro_users);
 
     aux_path[path_size] = '\0';
-    strcat(aux_path,"rides.csv");
+    strcat(aux_path,"/rides.csv");
 
     ficheiro_rides = fopen(aux_path, "r");
 
     if (ficheiro_rides == NULL){
-        perror("rides.csv");
+        perror("/rides.csv");
         return -1;
     }
 
