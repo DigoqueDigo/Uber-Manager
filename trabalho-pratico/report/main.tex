@@ -217,21 +217,67 @@ Perante esta estrutura de dados certamente fica mais fácil responder às \texti
 
 \chapter{Queries}
 
-Durante a resolução das diversas consultas propostas procurámos sempre fazer tais operações no menor tempo possível aproveitando ao máximo a estrutura de dados que tínhamos implementado, todavia a nossa implementação não se revelou a melhor para algumas das consulta e portanto, enquanto algumas questões podem ser facilmente resolvidas em tempo constante, outras são resolvidas em tempo linear, o que não é ótimo dado o elevado número de elementos que cada estrutura possui.
+Durante a resolução das diversas consultas propostas procurámos sempre fazer tais operações no menor tempo possível aproveitando ao máximo a estrutura de dados que tínhamos implementado, todavia a nossa implementação não se revelou a melhor para algumas das consulta e portanto, enquanto algumas questões podem ser facilmente resolvidas em tempo linear, outras são resolvidas em tempo quadrático, o que não é ótimo dado o elevado número de elementos que cada estrutura possui.
 
 \section{Querie 1}
 
 A \textit{querie} 1 consiste fundamentalmente em recolher a informação de um determinado utilizador ou condutor, isto conforme se primeiro parâmetro do \textit{input} seja uma \textit{string} de inteiros ou um \textit{username}, portanto a primeira fazer para a resolução deste problema passa por identificar qual o tipo de \textit{input} com que estamos a lidar, depois disso, podemos tirar partido do \textit{array} \textbf{\small\texttt{positions}} definido anteriormente, e a partir daí obtemos toda a informação necessária.    
 
-\normalsize\textbf{Primeira fase}
+\normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
 Nesta fase temos de saber distinguir se um \textit{input} é referente a um utilizador ou condutor, portanto a estratégia adotada foi utilizar a função \textbf{\small\texttt{atoi()}}, ou seja, esta transforma uma \textit{string} num inteiro, portanto se a \textit{string} apenas contiver inteiros vai ser devolvido o inteiro correspondente, por outro lado, se um primeiro carácter for uma letra do alfabeto a função vai retornar zero. Assim, desta forma, é possível distinguir um utilizador de um condutor.  
 
-\normalsize\textbf{Segunda fase}
+\normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
 Como já sabemos qual a entidade em questão, resta-nos colocar o \textbf{\small\texttt{username}} do utilizador na função de \textit{hash} e obter o índice do \textit{bucket} para sabermos qual a lista que devemos percorrer. Assim quando estivermos na celula correta apenas temos de guardar o \textit{array} \textbf{\small\texttt{positions}}, uma vez que este contem todas as posições do utilizador no \textit{array} \textbf{\small\texttt{RIDES}}.
 
 Caso estejamos perante um utilizador, muda o facto de podermos aceder ao condutor em tempo constante, visto que este é mapeado conforme o seu \textbf{\small\texttt{id}}.
+
+\normalsize\textbf{Terceira fase }{\titlerule[0.5pt]}
+
+Depois de obtermos o \textit{array} \textbf{\small\texttt{positions}} já sabemos quais as posições que devemos analisar no \textit{array} \textbf{\small\texttt{RIDES}}, portanto a partir daí basta recolher todos os dados necessários quer para um utilizador, quer para um condutor.
+
+\normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
+
+Esta consulta tem uma complexidade pertencente a \(\theta(N)\), onde \(N\) corresponde ao número de viagens que um utilizador ou condutor fizeram, pelo que a análise de um condutor demore mais tempo.
+
+\vspace{-6pt}
+\section{Querie 3}
+
+Nesta busca o objetivo consistia em listar um determinado número de utilizadores conforme a distância que estes tinham percorrido, como tal, é necessário calcular qual a distância total que um determinado utilizador percorreu para depois comparar com os restantes.
+
+\normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
+
+Como os utilizadores estão numa tabela de \textit{hash} é necessário percorrer cada uma das listas ligadas para obter todos os utilizadores, assim a primeira fase consiste em ir retornando utilizadores conforme vamos percorrendo a tabela.
+
+\normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
+
+Conforme vamos recebendo os utilizadores podemos obter o \textit{array} \textbf{\small\texttt{positions}}, daí segue que podemos fazer uma análise tendo em conta apenas elementos que recebemos do \textit{array} e calcular o total acumulado das avaliações de cada utilizador para depois calcular a média das avaliações.
+
+\normalsize\textbf{Terceira fase }{\titlerule[0.5pt]}
+
+Assim que soubermos a média de um utilizador, basta colocar esse mesmo utilizador e a sua média num \textit{array} para por fim podermos fazer uma ordenação, e assim listar apenas o \textit{top} \(N\) utilizadores.
+
+\normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
+
+Esta consulta possui uma complexidade que pertencente a \(\theta(N^2)\), sendo que \(N\) simboliza o total de viagens que um utilizador fez. 
+
+
+\section{Querie 4}
+
+Nesta consulta surge o desafio de calcular o preço médio das viagens numa dada cidade, algo que se torna bastante fácil dada a existência do módulo \textbf{\small\texttt{cities}}, uma vez que este contem os índices das viagens realizadas em cada uma das cidade.
+
+\normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
+
+Como nos é dada uma determinada cidade, basta apenas procurar essa cidade no \textit{array} \textbf{\small\texttt{CITIES}} e retornar o \textit{array} \textbf{\small\texttt{positions}} correspondente, pois desta forma apenas iremos aceder à posições do \textit{array} \textbf{\small\texttt{RIDES}} que pretendemos.
+
+\normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
+
+Assim que obtemos as posições que devemos analisar, basta aceder a essa posições e calcular o total acumulado do preço para depois dividir pelo número de elementos do \textit{array} \textbf{\small\texttt{positions}}, e assim obtemos o preço médio das viagens numa determinada cidade.
+
+\normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
+
+Esta consulta possui uma complexidade pertencente a \(\theta(N)\), onde \(N\) representa o número de viagens realizadas na cidade em questão.
 
 
 \end{document}
