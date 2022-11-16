@@ -37,6 +37,8 @@
 \usepackage{lastpage}
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage{tabularx}
+\usepackage{array}
 %------------------------------
 
 %Margens
@@ -67,6 +69,7 @@
 
 \titlecontents{section}[40pt]{\vskip3pt\bfseries}{\thecontentslabel\quad}{}{~~\normalfont\dotfill\bfseries\contentspage}[]
 
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
 \begin{document}
 
@@ -208,28 +211,28 @@ Portanto, para compensar tal debilidade, foi criada a seguinte estrutura, onde c
 
 Ao verificar o código, vemos que o \textit{array} \textbf{\small\texttt{positions}} é um \textit{array} dinâmico de tamanho inicial definido por \textbf{\small\texttt{CAP\_CITY}} e que possui um total de elementos definido pelo valor que \textbf{\small\texttt{sp}} toma. Por fim, o \textit{array} \textbf{\small\texttt{CITIES}}  segue uma estrutura semelhante, onde \textbf{\small\texttt{CAP\_CITIES}} define o seu tamanho inicial e cada um dos seus elementos é uma \textbf{\small\texttt{struct city}}.
 
-\section{Notas finais}
+\section{Nota final}
 
-Perante esta estrutura de dados certamente fica mais fácil responder às \textit{queries} em tempo útil, contudo uma das grandes desvantagem é que esta estratégia ocupa demasiado espaço em memória, pois tanto os utilizadores, condutores e cidades armazenam todas as posições correspondentes à suas aparições no \textit{array} \textbf{\small\texttt{RIDES}}.
+Perante esta estrutura de dados certamente fica mais fácil responder às \textit{queries} em tempo útil, contudo uma das grandes desvantagens deve-se ao facto de esta estratégia ocupar demasiado espaço na memória, pois tanto os utilizadores, condutores e cidades armazenam todas as posições correspondentes à suas aparições no \textit{array} \textbf{\small\texttt{RIDES}}.
 
 
 \chapter{Queries}
 
-Durante a resolução das diversas consultas propostas procurámos sempre fazer tais operações no menor tempo possível aproveitando ao máximo a estrutura de dados que tínhamos implementado, todavia a nossa implementação não se revelou a melhor para algumas das consulta e portanto, enquanto algumas questões podem ser facilmente resolvidas em tempo linear, outras são resolvidas em tempo quadrático, o que não é ótimo dado o elevado número de elementos que cada estrutura possui.
+Durante a resolução das diversas consultas propostas procurámos sempre fazer tais operações no menor tempo possível aproveitando ao máximo a estrutura de dados que tínhamos implementado, todavia a nossa implementação não se revelou a melhor para algumas das consultas, e portanto, enquanto algumas \textit{queries} podem ser facilmente resolvidas em tempo linear, outras são resolvidas em tempo quadrático, o que não é ótimo dado o elevado número de elementos que cada estrutura possui.
 
 \section{Querie 1}
 
-A \textit{querie} 1 consiste fundamentalmente em recolher a informação de um determinado utilizador ou condutor, isto conforme se primeiro parâmetro do \textit{input} seja uma \textit{string} de inteiros ou um \textit{username}, portanto a primeira fazer para a resolução deste problema passa por identificar qual o tipo de \textit{input} com que estamos a lidar, depois disso, podemos tirar partido do \textit{array} \textbf{\small\texttt{positions}} definido anteriormente, e a partir daí obtemos toda a informação necessária.    
+A \textit{querie} 1 consiste fundamentalmente em recolher a informação de um determinado utilizador ou condutor, isto conforme o primeiro parâmetro do \textit{input} seja uma \textit{string} de inteiros ou um \textit{username}. Assim sendo, a primeira fase da resolução deste problema passa por identificar qual o tipo de \textit{input} com que estamos a lidar, depois disso, podemos tirar partido do \textit{array} \textbf{\small\texttt{positions}} definido anteriormente, e a partir daí obtemos toda a informação necessária.    
 
 \normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
-Nesta fase temos de saber distinguir se um \textit{input} é referente a um utilizador ou condutor, portanto a estratégia adotada foi utilizar a função \textbf{\small\texttt{atoi()}}, ou seja, esta transforma uma \textit{string} num inteiro, portanto se a \textit{string} apenas contiver inteiros vai ser devolvido o inteiro correspondente, por outro lado, se um primeiro carácter for uma letra do alfabeto a função vai retornar zero. Assim, desta forma, é possível distinguir um utilizador de um condutor.  
+Nesta fase temos de saber distinguir se um \textit{input} é referente a um utilizador ou condutor, como tal, decidimos tirar o máximo partido da função \textbf{\small\texttt{atoi()}}, ou seja, esta transforma uma \textit{string} num inteiro, portanto se a \textit{string} apenas contiver inteiros vai ser devolvido o inteiro correspondente, por outro lado, se um primeiro carácter for uma letra do alfabeto a função vai retornar zero. Assim, desta forma, é possível distinguir um utilizador de um condutor.  
 
 \normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
-Como já sabemos qual a entidade em questão, resta-nos colocar o \textbf{\small\texttt{username}} do utilizador na função de \textit{hash} e obter o índice do \textit{bucket} para sabermos qual a lista que devemos percorrer. Assim quando estivermos na celula correta apenas temos de guardar o \textit{array} \textbf{\small\texttt{positions}}, uma vez que este contem todas as posições do utilizador no \textit{array} \textbf{\small\texttt{RIDES}}.
+Como já sabemos qual a entidade em questão, resta-nos colocar o \textbf{\small\texttt{username}} do utilizador na função de \textit{hash} e obter o índice do \textit{bucket} para sabermos qual a lista que devemos percorrer. Assim, quando estivermos na célula correta apenas temos de guardar o \textit{array} \textbf{\small\texttt{positions}}, uma vez que este contem todas as posições do utilizador no \textit{array} \textbf{\small\texttt{RIDES}}.
 
-Caso estejamos perante um utilizador, muda o facto de podermos aceder ao condutor em tempo constante, visto que este é mapeado conforme o seu \textbf{\small\texttt{id}}.
+Caso estejamos perante um condutor, muda o facto de podermos aceder ao mesmo em tempo constante, visto que este é mapeado conforme o seu \textbf{\small\texttt{id}}.
 
 \normalsize\textbf{Terceira fase }{\titlerule[0.5pt]}
 
@@ -237,12 +240,12 @@ Depois de obtermos o \textit{array} \textbf{\small\texttt{positions}} já sabemo
 
 \normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
 
-Esta consulta tem uma complexidade pertencente a \(\theta(N)\), onde \(N\) corresponde ao número de viagens que um utilizador ou condutor fizeram, pelo que a análise de um condutor demore mais tempo.
+Esta consulta tem uma complexidade pertencente a \(\theta(N)\), sendo que \(N\) corresponde ao número de viagens realizadas por um utilizador ou condutor, consequentemente a análise de um condutor demora mais tempo.
 
 \vspace{-6pt}
 \section{Querie 3}
 
-Nesta busca o objetivo consistia em listar um determinado número de utilizadores conforme a distância que estes tinham percorrido, como tal, é necessário calcular qual a distância total que um determinado utilizador percorreu para depois comparar com os restantes.
+Nesta busca, o objetivo consistia em listar um determinado número de utilizadores conforme a distância que estes tinham percorrido, como tal, é necessário calcular a distância total que cada um dos utilizadores percorreu para depois poder fazer uma análise comparativa.
 
 \normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
@@ -250,11 +253,11 @@ Como os utilizadores estão numa tabela de \textit{hash} é necessário percorre
 
 \normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
-Conforme vamos recebendo os utilizadores podemos obter o \textit{array} \textbf{\small\texttt{positions}}, daí segue que podemos fazer uma análise tendo em conta apenas elementos que recebemos do \textit{array} e calcular o total acumulado das avaliações de cada utilizador para depois calcular a média das avaliações.
+À medida que recebemos os utilizadores, podemos obter o \textit{array} \textbf{\small\texttt{positions}}. Daí segue que conseguimos fazer uma análise tendo apenas em conta os elementos do \textit{array} recebido, portanto basta aceder às posições indicadas e calcular o total acumulado das distância de cada uma das viagens.
 
 \normalsize\textbf{Terceira fase }{\titlerule[0.5pt]}
 
-Assim que soubermos a média de um utilizador, basta colocar esse mesmo utilizador e a sua média num \textit{array} para por fim podermos fazer uma ordenação, e assim listar apenas o \textit{top} \(N\) utilizadores.
+Assim que soubermos a distância percorrida por um utilizador, basta colocar esse mesmo utilizador e a sua distância num \textit{array}, a meio de fazermos uma ordenação e assim listar apenas o \textit{top} \(N\) utilizadores.
 
 \normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
 
@@ -267,15 +270,85 @@ Nesta consulta surge o desafio de calcular o preço médio das viagens numa dada
 
 \normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
-Como nos é dada uma determinada cidade, basta apenas procurar essa cidade no \textit{array} \textbf{\small\texttt{CITIES}} e retornar o \textit{array} \textbf{\small\texttt{positions}} correspondente, pois desta forma apenas iremos aceder às posições do \textit{array} \textbf{\small\texttt{RIDES}} que pretendemos.
+Como nos é dada uma determinada cidade, basta procurar essa cidade no \textit{array} \textbf{\small\texttt{CITIES}} e retornar o \textit{array} \textbf{\small\texttt{positions}} correspondente, pois desta forma iremos aceder às posições exatas do \textit{array} \textbf{\small\texttt{RIDES}}.
 
 \normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
-Assim que obtemos as posições que devemos analisar, basta aceder a essa posições e calcular o total acumulado do preço para depois dividir pelo número de elementos do \textit{array} \textbf{\small\texttt{positions}}, e assim obtemos o preço médio das viagens numa determinada cidade.
+Assim que obtivermos as posições que devemos analisar, basta aceder a essas posições e calcular o total acumulado do preço para depois dividir pelo número de elementos do \textit{array} \textbf{\small\texttt{positions}}, e assim descobrimos o preço médio das viagens numa determinada cidade.
 
 \normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
 
 Esta consulta possui uma complexidade pertencente a \(\theta(N)\), onde \(N\) representa o número de viagens realizadas na cidade em questão.
 
+\chapter{Testes de Desempenho}
+
+
+\begin{tabularx}{\textwidth} { 
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X | }
+ \hline
+ \textbf{\# Comando} & \textbf{Comando} & \textbf{Tempo de execução (s)} \\
+ \hline
+ \texttt{\textbf{1}} & \texttt{\textbf{1 PetrPacheco}}  & \texttt{\textbf{0.000061}}  \\
+ \hline
+ \texttt{\textbf{2}} & \texttt{\textbf{1 ÂngVieira}}  & \texttt{\textbf{0.000077}}  \\
+ \hline
+ \texttt{\textbf{3}} & \texttt{\textbf{1 LeTavares103}}  & \texttt{\textbf{0.000070}}  \\
+ \hline
+ \texttt{\textbf{4}} & \texttt{\textbf{1 NoMaia}}  & \texttt{\textbf{0.000030}}  \\
+ \hline
+ \texttt{\textbf{5}} & \texttt{\textbf{1 ErPinheiro7}}  & \texttt{\textbf{0.000049}}  \\
+ \hline
+ \texttt{\textbf{6}} & \texttt{\textbf{1 FrederAraújo}}  & \texttt{\textbf{0.000042}}  \\
+ \hline
+ \texttt{\textbf{7}} & \texttt{\textbf{1 PeFernandes144}}  & \texttt{\textbf{0.000049}}  \\
+ \hline
+ \texttt{\textbf{8}} & \texttt{\textbf{1 ASousa7}}  & \texttt{\textbf{0.000029}}  \\
+ \hline
+ \texttt{\textbf{9}} & \texttt{\textbf{1 RReis26}}  & \texttt{\textbf{0.000023}}  \\
+ \hline
+ \texttt{\textbf{10}} & \texttt{\textbf{1 TerLima}}  & \texttt{\textbf{0.000049}}  \\
+ \hline
+ \texttt{\textbf{11}} & \texttt{\textbf{1 000000002639}}  & \texttt{\textbf{0.000033}}  \\
+ \hline
+ \texttt{\textbf{12}} & \texttt{\textbf{1 000000008561}}  & \texttt{\textbf{0.000026}}  \\
+ \hline
+ \texttt{\textbf{13}} & \texttt{\textbf{1 000000004987}}  & \texttt{\textbf{0.000028}}  \\
+ \hline
+ \texttt{\textbf{14}} & \texttt{\textbf{1 000000001936}}  & \texttt{\textbf{0.000027}}  \\
+ \hline
+ \texttt{\textbf{15}} & \texttt{\textbf{1 000000003518}}  & \texttt{\textbf{0.000034}}  \\
+ \hline
+ \texttt{\textbf{16}} & \texttt{\textbf{1 000000002581}}  & \texttt{\textbf{0.000042}}  \\
+ \hline
+ \texttt{\textbf{17}} & \texttt{\textbf{1 000000004456}}  & \texttt{\textbf{0.000035}}  \\
+ \hline
+ \texttt{\textbf{18}} & \texttt{\textbf{1 000000000879}}  & \texttt{\textbf{0.000030}}  \\
+ \hline
+ \texttt{\textbf{19}} & \texttt{\textbf{1 000000009721}}  & \texttt{\textbf{0.000030}}  \\
+ \hline
+ \texttt{\textbf{20}} & \texttt{\textbf{1 000000003558}}  & \texttt{\textbf{0.000029}}  \\
+ \hline
+ \texttt{\textbf{21}} & \texttt{\textbf{3 50}}  & \texttt{\textbf{0.298107}}  \\
+ \hline
+ \texttt{\textbf{22}} & \texttt{\textbf{4 Faro}}  & \texttt{\textbf{0.019807}}  \\
+ \hline
+ \texttt{\textbf{23}} & \texttt{\textbf{4 Setúbal}}  & \texttt{\textbf{0.023207}}  \\
+ \hline
+\end{tabularx}
+
+\vspace{15pt}
+\begin{center}
+\begin{tabular}{ |p{4.73cm}|p{4.73cm}|p{4.73cm}|  }
+ \hline
+ \multicolumn{3}{|c|}{\textbf{Tempos para recolha de dados (s)}} \\
+ \hline
+ \centering\textbf{Utilizadores} & \hfil \textbf{Condutores} & \hfil \textbf{Viagens/Cidades} \\
+ \hline
+ \centering\textbf{\texttt{0.037811}} & \hfil \texttt{\textbf{0.036662}} & \hfil \texttt{\textbf{0.114012}}\\
+ \hline
+\end{tabular}
+\end{center}
 
 \end{document}
