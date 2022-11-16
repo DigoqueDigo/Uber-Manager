@@ -49,26 +49,6 @@ void push_driver(DRIVERS lista, char *id, char *name, char *birth_date, char *ge
 }
 
 
-void print_drivers(DRIVERS lista){
-    for (int p = 1; p < 10001; p++){
-        printf("%d;%s;%s;%s;%s;%s;%s;%s;%s || ",
-            lista[p].id,
-            lista[p].name,
-            lista[p].birth_date,
-            lista[p].gender,
-            lista[p].car_class,
-            lista[p].license_plate,
-            lista[p].city,
-            lista[p].account_creation,
-            lista[p].account_status);
-        for (int i = 0; i < lista[p].sp; i++){
-            printf("%d ", lista[p].positions[i]);
-        }
-        putchar('\n');
-    }
-}
-
-
 void push_position_driver(DRIVERS lista, int position, char *driver_id){
     int index = atoi(driver_id);
     if (lista[index].name == NULL) return;
@@ -101,7 +81,7 @@ void free_drivers(DRIVERS drivers_list, int N_DRIVERS){
 
 
 
-// FUNÇÕES ÚTEIS À QUERIE 1
+// FUNÇÕES DE MANAGER
 
 void lookup_car_class(DRIVERS drivers_list, int index, char *car_class){
     struct driver aux = drivers_list[index];
@@ -120,7 +100,6 @@ int* lookup_driver(DRIVERS drivers_list, int id, char *name, char *gender, char 
     return aux.positions;
 }
 
-// FUNÇÕES ÚTEIS À QUEIRE 8
 
 int* lookup_driver_positions(DRIVERS drivers_list, int index, int *sp){
     struct driver aux = drivers_list[index];

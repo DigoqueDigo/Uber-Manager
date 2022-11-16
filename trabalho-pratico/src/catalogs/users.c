@@ -3,7 +3,6 @@
 #include <string.h>
 #include <catalogs/users.h>
 
-// username;name;gender;birth_date;account_creation;pay_method;account_status
 
 
 struct user{
@@ -20,7 +19,6 @@ struct user{
     struct user *prox;
 };
 
-// O multiplicador do sizeof apenas necessitava de ser igual ao numero de buckets, ou seja, 500 neste caso
 
 
 USERS init_users(){
@@ -45,8 +43,6 @@ USER init_user(char *username, char *name, char *gender, char *birth_date, char 
     return new;
 }
 
-// 8000 Buckets de linked_lists
-// Também é nesta função que defino o número de buckets
 
 int hash_func(char *username){
     int x = 0, p;
@@ -55,13 +51,11 @@ int hash_func(char *username){
         x *= p;
     }
     x *= strlen(username);
-    x = x % BUCKET;  // número de buckets
+    x = x % BUCKET;
     if (x < 0) x = -x;
     return x;
 }
 
-
-// Insere sempre no inicio da lista
 
 void push_user_bucket(USER *lista, USER x){
     if (*lista == NULL){
@@ -97,10 +91,15 @@ void push_position(USERS lista, int position, char *username){
 
 
 void free_hash_table(USERS users_list){
+    
     USER aux, temp;
+    
     for (int p = 0; p < BUCKET; p++){
 
-        for (aux = users_list[p]; aux != NULL; ){
+        aux = users_list[p];
+
+        while (aux != NULL){
+            
             temp = aux;
             aux = aux->prox;
             free(temp->name);
@@ -116,34 +115,13 @@ void free_hash_table(USERS users_list){
 
         free(aux);
     }
-}
 
-
-void print_users(USERS lista){
-    for (int p = 0; p < BUCKET; p++){
-        for (USER aux = lista[p]; aux != NULL; aux = aux->prox){
-            printf("%s;%s;%s;%s;%s;%s;%s;",
-                aux->username,
-                aux->name,
-                aux->gender,
-                aux->birth_date,
-                aux->account_creation,
-                aux->pay_method,
-                aux->account_status);
-            for (int i = 0; i < aux->sp; i++){
-                printf("%d ", aux->positions[i]);
-            }
-            putchar('\n');
-        }
-        printf(":::::::::::::::::::::::::::::::::\n");
-    }
+    free(users_list);
 }
 
 
 
-
-
-// FUNÇÕES ÚTEIS À QUERIE 1
+// FUNÇÕES DE MANAGER
 
 
 // return 1 se encontrou o utilizador e colocou os dados
@@ -162,7 +140,7 @@ int* lookup_username(USERS users_list, char *username, char *name, char *gender,
 
 
 
-// FUNÇões ÚTEIS À QUERIE 8
+// FUNÇÕES ÚTEIS À QUERIE 8
 
 // função que guarda em três pointers o nome e a birth_date, returna 1 se consegui recolher os dados
 

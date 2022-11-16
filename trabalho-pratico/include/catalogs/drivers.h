@@ -23,7 +23,6 @@ void push_driver(
     char *account_status
 );
 
-void print_drivers(DRIVERS lista);
 
 void push_position_driver(DRIVERS lista, int position, char *driver_id);
 

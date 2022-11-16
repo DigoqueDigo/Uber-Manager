@@ -30,12 +30,9 @@ void push_ride(
     char *tip
 );
 
-
-void print_rides(RIDES lista);
-
 void free_rides(RIDES rides_list, int N_RIDES);
 
-// MANAGE QUERIE 1
+// MANAGER
 
 // retorna o id de um driver de uma determinada viagem
 

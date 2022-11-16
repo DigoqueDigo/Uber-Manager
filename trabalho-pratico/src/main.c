@@ -11,7 +11,7 @@ int main(int argc, char** argv){
 
 //    Inicio do fetch dos dados
 
-    LINE linha = malloc(120);
+    LINE linha = malloc(200);
     RIDES rides_list = init_ride_list();
     USERS users_list = init_users();
     DRIVERS drivers_list = init_drivers();
@@ -24,9 +24,6 @@ int main(int argc, char** argv){
 
     strcpy(aux_path,argv[1]);
     strcat(aux_path,"/drivers.csv");
-    printf("path csv: ->%s<-\n", argv[1]);
-    printf("path input: ->%s<-\n", argv[2]);
-    printf("new path: ->%s<-\n", aux_path);
 
     FILE *ficheiro_rides, *ficheiro_users, *ficheiro_drivers;
 
@@ -105,14 +102,6 @@ int main(int argc, char** argv){
 
     fclose(ficheiro_rides);
 
-//    print_drivers(drivers_list);
-
-//    print_users(users_list);
-
-//    print_rides(rides_list);
-
-//    Fim do fetch de dados  
-
     if (argc == 3){
 
         resolve_queries(argv[2],users_list,drivers_list,rides_list,cities_list,N_DRIVERS,N_RIDES,N_CITIES);
@@ -122,6 +111,7 @@ int main(int argc, char** argv){
     free_rides(rides_list,N_RIDES);
     free_hash_table(users_list);
     free_cities_list(cities_list,N_CITIES);
+    free(linha);
 
 
     return 0;

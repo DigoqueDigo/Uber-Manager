@@ -39,8 +39,6 @@ void push_position(USERS lista, int position, char *username);
 
 void free_hash_table(USERS users_list);
 
-void print_users(USERS lista);
-
 
 // MANAGER
 

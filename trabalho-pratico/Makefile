@@ -83,3 +83,5 @@ clean:
 	rm src/queries/*.o
 	rm src/parsing/*.o
 	rm src/catalogs/*.o
+	rm $(TARGET)
+	rm -r $(PATH_RESULTS)/

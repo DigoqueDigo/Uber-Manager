@@ -4,7 +4,6 @@
 #include <catalogs/rides.h>
 
 
-//#id; date; driver; user; city; distance; score_user; score_driver; tip
 
 struct ride{
     int id;
@@ -12,11 +11,12 @@ struct ride{
     int driver;
     char *user;
     char *city;
-    int distance;
-    int score_user;
-    int score_driver;
+    short int distance;
+    short int score_user;
+    short int score_driver;
     float tip;
 };
+
 
 struct ride* init_ride_list(){
     struct ride *new = malloc(CAP_RIDES*sizeof(struct ride));
@@ -45,24 +45,6 @@ void push_ride(RIDES lista, char *id, char *date, char *driver, char *user, char
 }
 
 
-void print_rides(RIDES lista){
-    for (int p = 1; p < 1000001; p++){
-        struct ride content = lista[p];
-    
-        printf("%d;%s;%d;%s;%s;%d;%d;%d;%.3f\n",
-        content.id,
-        content.date,
-        content.driver,
-        content.user,
-        content.city,
-        content.distance,
-        content.score_user,
-        content.score_driver,
-        content.tip);
-    }
-}
-
-
 void free_rides(RIDES rides_list, int N_RIDES){
     for (int p = 0; p < N_RIDES; p++){
         if (rides_list[p].date != NULL){
@@ -75,7 +57,7 @@ void free_rides(RIDES rides_list, int N_RIDES){
 }
 
 
-// FUNÇÕES ÚTEIS À QUERIE 1
+// FUNÇÕES DE MANAGER
 
 
 int lookup_id_driver(RIDES rides_list, int index){
