@@ -4,60 +4,123 @@
 #include <queries/querie1.h>
 
 
-/*
-    USER
-    nome;genero;idade;avaliacao_media;numero_viagens;total_gasto
-
-    DRIVER
-    nome;genero;idade;avaliacao_media;numero_viagens;total_auferido
-
-*/
 
 
-int calculate_user(USERS users_list, DRIVERS drivers_list, RIDES rides_list, char *username, char *name, char *gender, char *birth_date, int *numero_viagens, double *score, double *money){
-    int id_driver;
-    int *positions = lookup_username(users_list,username,name,gender,birth_date,numero_viagens);
-    char car_class[10];
-    if (positions == NULL) return 0;
-    for (int p = 0; p < *numero_viagens; p++){
-        id_driver = lookup_id_driver(rides_list,positions[p]);
-        lookup_car_class(drivers_list,id_driver,car_class);
-        calculate_floats(rides_list,positions[p],car_class,score,money,0);
+void calculate_user(USERS users_list, DRIVERS drivers_list, RIDES rides_list, FILE *ficheiro, char *username){
+    
+    int sp, *positions, id_driver, distance, age;
+    char birth_date[100], gender[100], name[100], car_class[100];
+    double average_score = 0,  money = 0, tip;
+
+    positions = lookup_user_positions(users_list,username,&sp);
+
+    if (positions == NULL || lookup_user_account_status(users_list,username) == 0) return;
+
+    lookup_user_name(users_list,username,name);
+    lookup_user_gender(users_list,username,gender);
+    lookup_user_birth_date(users_list,username,birth_date);
+
+    for (int p = 0; p < sp; p++){
+
+        id_driver = lookup_rides_id_driver(rides_list,positions[p]);
+
+        if (id_driver != -1){
+
+            distance = lookup_rides_distance(rides_list,positions[p]);
+
+            if (distance){
+
+                average_score += lookup_rides_score_user(rides_list,positions[p]);
+
+                lookup_car_class(drivers_list,id_driver,car_class);
+                tip = lookup_rides_tip(rides_list,positions[p]);
+
+                if (!strcasecmp(car_class,"basic")){
+
+                    money += distance * TK_BASIC + T_BASIC + tip;
+                }
+
+                else if (!strcasecmp(car_class,"green")){
+
+                    money += distance * TK_GREEN + T_GREEN + tip;
+                }
+
+                else if (!strcasecmp(car_class,"premium")){
+
+                    money += distance * TK_PREMIUM + T_PREMIUM + tip;
+                }
+            }
+        }
     }
-    *score /= *numero_viagens;
-    return 1;
+
+    average_score /= sp;
+
+    age = calculate_idade(birth_date);
+
+    fprintf(ficheiro, "%s;%s;%d;%.3f;%d;%.3f\n", name, gender, age, average_score, sp, money);
 }
 
 
-int calculate_driver(DRIVERS drivers_list, RIDES rides_list, int id, char *name, char *gender, char *birth_date, int *numero_viagens, double *score, double *money){
-    char car_class[10];
-    int *positions = lookup_driver(drivers_list,id,name,gender,birth_date,car_class,numero_viagens);
-    if (positions == NULL) return 0;
-    for (int p = 0; p < *numero_viagens; p++){
-        calculate_floats(rides_list,positions[p],car_class,score,money,1);
+
+void calculate_driver(DRIVERS drivers_list, RIDES rides_list, FILE *ficheiro, int id){
+    
+    int sp, *positions, distance, age;
+    char birth_date[100], gender[100], name[100], car_class[100];
+    double average_score = 0, money = 0, tip;
+
+    if (lookup_driver_name(drivers_list,id,name) == 0) return;
+
+    if (lookup_driver_accounts_status(drivers_list,id) == 0) return;
+
+    positions = lookup_driver_positions(drivers_list,id,&sp);
+    lookup_car_class(drivers_list,id,car_class);
+    lookup_driver_gender(drivers_list,id,gender);
+    lookup_driver_birth_date(drivers_list,id,birth_date);
+
+    for (int p = 0; p < sp; p++){
+
+        distance = lookup_rides_distance(rides_list,positions[p]);
+
+        if (distance){
+
+            tip = lookup_rides_tip(rides_list,positions[p]);
+            average_score += lookup_rides_score_driver(rides_list,positions[p]);
+
+            if (!strcasecmp(car_class,"basic")){
+
+                money += distance * TK_BASIC + T_BASIC + tip;
+            }
+
+            else if (!strcasecmp(car_class,"green")){
+
+                money += distance * TK_GREEN + T_GREEN + tip;
+            }
+
+            else if (!strcasecmp(car_class,"premium")){
+
+                money += distance * TK_PREMIUM + T_PREMIUM + tip;
+            }
+        }
     }
-    *score /= *numero_viagens;
-    return 1;
+
+    average_score /= sp;
+    age = calculate_idade(birth_date);
+
+    fprintf(ficheiro, "%s;%s;%d;%.3f;%d;%.3f\n", name, gender, age, average_score, sp, money);
 }
 
 
-// o valor é uma variavel que diz se estou a tratar de um id ou username
 
 void resolve_querie1(char *commands, int ncommand, USERS lista, DRIVERS drivers_lista, RIDES rides_lista, int N_DRIVERS){
 
     FILE *ficheiro;
 
-    int idade, numero_viagens, valor;
-
-    double score = 0, money = 0; 
-
-    char output_name[40], output_genero[3], birth_date[12], *token = strtok(commands, " " "\n");
-
-    char output_file[500] = "";
+    int valor;
+    char output_file[500] = "", *token;
 
     set_command_name(output_file,ncommand);
 
-    
+    token = strtok(commands, " " "\n");
     token = strtok(NULL, " " "\n");
 
     valor = check_id(token);
@@ -68,24 +131,10 @@ void resolve_querie1(char *commands, int ncommand, USERS lista, DRIVERS drivers_
 
         valor = atoi(token);
 
-        if (valor < N_DRIVERS && calculate_driver(drivers_lista,rides_lista,valor,output_name,output_genero,birth_date,&numero_viagens,&score,&money)){
-
-            idade = calculate_idade(birth_date);
-
-            fprintf(ficheiro, "%s;%s;%d;%.3f;%d;%.3f\n", output_name, output_genero, idade, score, numero_viagens, money);            
-
-        }
+        if (valor < N_DRIVERS) calculate_driver(drivers_lista,rides_lista,ficheiro,valor);
     }
 
-    else{
-        
-        if (calculate_user(lista,drivers_lista,rides_lista,token,output_name,output_genero,birth_date,&numero_viagens,&score,&money)){
-
-            idade = calculate_idade(birth_date);
-
-           fprintf(ficheiro, "%s;%s;%d;%.3f;%d;%.3f\n", output_name, output_genero, idade, score, numero_viagens, money);
-        }
-    }
+    else calculate_user(lista,drivers_lista,rides_lista,ficheiro,token);
 
     fclose(ficheiro);
 }

@@ -80,24 +80,11 @@ void free_drivers(DRIVERS drivers_list, int N_DRIVERS){
 
 
 
-
 // FUNÇÕES DE MANAGER
 
 void lookup_car_class(DRIVERS drivers_list, int index, char *car_class){
     struct driver aux = drivers_list[index];
     strcpy(car_class,aux.car_class);
-}
-
-
-int* lookup_driver(DRIVERS drivers_list, int id, char *name, char *gender, char *birth_date, char *car_class, int *numero_viagens){
-    struct driver aux = drivers_list[id];
-    if (aux.name == NULL || !strcmp(aux.account_status,"inactive")) return NULL;
-    strcpy(name,aux.name);
-    strcpy(gender,aux.gender);
-    strcpy(birth_date,aux.birth_date);
-    strcpy(car_class,aux.car_class);
-    *numero_viagens = aux.sp;
-    return aux.positions;
 }
 
 
@@ -129,4 +116,9 @@ void lookup_driver_gender(DRIVERS drivers_list, int index, char *gender){
 int lookup_driver_accounts_status(DRIVERS drivers_list, int index){
     if (drivers_list[index].account_status == NULL || !strcmp(drivers_list[index].account_status,"inactive")) return 0;
     return 1;
+}
+
+
+void lookup_driver_birth_date(DRIVERS drivers_list, int index, char *date){
+    if (drivers_list[index].account_status != NULL) strcpy(date,drivers_list[index].birth_date);
 }

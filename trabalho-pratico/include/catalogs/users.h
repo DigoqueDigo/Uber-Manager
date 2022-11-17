@@ -42,15 +42,6 @@ void free_hash_table(USERS users_list);
 
 // MANAGER
 
-int* lookup_username(
-    USERS users_list,
-    char *username,
-    char *name,
-    char *genero,
-    char *birth_date,
-    int *numero_viagens
-);
-
 
 int lookup_user(
     USERS list,
@@ -70,5 +61,17 @@ USER lookup_positions_and_name(
     int **positions,
     int *sp
 );
+
+
+int* lookup_user_positions(USERS users_list, char *username, int *sp);
+
+void lookup_user_name(USERS users_list, char *username, char *name);
+
+void lookup_user_birth_date(USERS users_list, char *username, char *date);
+
+void lookup_user_gender(USERS users_list, char *username, char *date);
+
+int lookup_user_account_status(USERS users_list, char *username);
+
 
 #endif

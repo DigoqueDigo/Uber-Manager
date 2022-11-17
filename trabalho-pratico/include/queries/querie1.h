@@ -5,29 +5,19 @@
 #include <parsing/checker.h>
 
 
-int calculate_user(
+void calculate_user(
     USERS users_list,
     DRIVERS drivers_list,
     RIDES rides_list,
-    char *username,
-    char *name,
-    char *gender,
-    char *birth_date,
-    int *numero_viagens,
-    double *score,
-    double *money)
-;
+    FILE *ficheiro,
+    char *username
+);
 
-int calculate_driver(
+void calculate_driver(
     DRIVERS drivers_list,
     RIDES rides_list,
-    int id,
-    char *name,
-    char *gender,
-    char *birth_date,
-    int *numero_viagens,
-    double *score,
-    double *money
+    FILE *ficheiro,
+    int id
 );
 
 void resolve_querie1(

@@ -38,17 +38,6 @@ void free_rides(RIDES rides_list, int N_RIDES);
 
 int lookup_id_driver(RIDES rides_list, int index);
 
-// calcula os float apenas para uma viagem
-
-void calculate_floats(
-    RIDES rides_list,
-    int index,
-    char *car_class,
-    double *score,
-    double *money,
-    int flag
-);
-
 void lookup_rides_username(RIDES rides_list, int index, char *username);
 
 char* lookup_rides_date(RIDES rides_list, int index);
@@ -60,5 +49,9 @@ char* lookup_rides_city(RIDES rides_list, int index);
 float lookup_rides_score_driver(RIDES rides_list, int index);
 
 int lookup_rides_id_driver(RIDES rides_list, int index);
+
+double lookup_rides_tip(RIDES rides_list, int index);
+
+int lookup_rides_score_user(RIDES rides_list, int index);
 
 #endif
