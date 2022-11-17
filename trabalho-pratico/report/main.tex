@@ -76,7 +76,7 @@
 
 \chapter{Introdução}
 
-Quando estamos perante uma situação na qual temos de lidar com a manipulação de grandes quantidades de dados existem sempre algumas opções que devemos preferir adotar e outras que, pelo contrário, devemos evitar a todo o custo, portanto ao longo deste relatório iremos explicar as estratégias que utilizámos para abordar este problema, e porque razão optámos por uma estratégia em específico e não outra qualquer.
+Quando estamos perante uma situação na qual temos de lidar com a manipulação de grandes quantidades de dados existem sempre algumas opções que devemos preferir adotar e outras que, pelo contrário, devemos evitar a todo o custo, portanto, ao longo deste relatório iremos explicar as estratégias que utilizámos para abordar este problema, e porque razão optámos por uma estratégia em específico e não outra qualquer.
 
 Posto isto, importa também realçar que nas estruturas que iremos exemplificar mais à frente tivemos em conta a natureza dos dados com os quais estávamos a lidar e as questões que tinham de ser resolvidas em tempo útil, assim sendo, caso levássemos em conta outros quaisquer fatores, certamente a abordagem adotada teria sido outra.
 
@@ -139,7 +139,7 @@ De seguida, passando ao ficheiro \textit{drivers.h}, vemos que a estrutura \text
     \begin{enumerate}
         \item A utilização de um \textit{array} tira partido da localidade espacial, o que aumenta o \textit{hit rate}, e consequentemente leva a um ganho de tempo caso pretendamos percorrer o \textit{array}.
         
-        \item Com um \textit{array} dinâmico nunca corremos o risco de alocar demasiada memória do que aquela que é extremamente necessária, no pior dos casos alocamos o dobro daquela que seria pretendida.
+        \item Com um \textit{array} dinâmico nunca corremos o risco de alocar uma quantidade de memória muito maior do que aquela que é extremamente necessária, no pior dos casos alocamos o dobro daquela que seria pretendida.
         
         \item Quando pretendermos libertar a memória do \textit{array} \textbf{\small\texttt{DRIVERS}} não vai ser necessário percorrer o \textit{array}, ao contrário da tabela de \textit{hash}, neste caso a operação de libertar memória será feita em tempo constante.
         
@@ -179,7 +179,7 @@ Assim, a estrutura \textbf{\small\texttt{RIDES}} está implementada como sendo u
 
     \item Para libertar a memória alocada pelo \textit{array} \textbf{\small\texttt{RIDES}} não é necessário percorrer o \textit{array}.
 
-    \item Como o \textit{array} \textbf{\small\texttt{RIDES}} é dinâmico, no pior dos casos é alocado o dobro da memória considerada necessária.
+    \item Como o \textit{array} \textbf{\small\texttt{RIDES}} é dinâmico, no pior dos casos é alocada o dobro da memória considerada necessária.
 \end{itemize}
 
 \pagebreak
@@ -205,7 +205,7 @@ Assim, a estrutura \textbf{\small\texttt{RIDES}} está implementada como sendo u
 
 Este módulo foi criado devido ao facto de o parâmetro "cidade" ser requerido em várias \textit{queries}, como tal, ao fazer uma busca de uma determinada cidade no \textit{array} \textbf{\small\texttt{RIDES}} seria necessário percorrer o \textit{array} todo, algo que levaria imenso tempo dado o elevadíssimo  tamanho do mesmo.
 
-Portanto, para compensar tal debilidade, foi criada a seguinte estrutura, onde cada cidade possui um \textit{array} que contém todas as posições em que ocorre no \textit{array} \textbf{\small\texttt{RIDES}}, assim quando quisermos fazer a busca, já sabemos previamente quais as posições que devemos analisar.
+Portanto, para compensar tal debilidade, foi criada a seguinte estrutura, onde uma cidade possui um \textit{array} com todas as posições das suas ocorrências no \textit{array} \textbf{\small\texttt{RIDES}}, assim quando quisermos fazer uma busca, já sabemos previamente quais as posições que devemos analisar.
 
 
 
@@ -213,12 +213,12 @@ Ao verificar o código, vemos que o \textit{array} \textbf{\small\texttt{positio
 
 \section{Nota final}
 
-Perante esta estrutura de dados certamente fica mais fácil responder às \textit{queries} em tempo útil, contudo uma das grandes desvantagens deve-se ao facto de esta estratégia ocupar demasiado espaço na memória, pois tanto os utilizadores, condutores e cidades armazenam todas as posições correspondentes à suas aparições no \textit{array} \textbf{\small\texttt{RIDES}}.
+Perante esta estrutura de dados certamente fica mais fácil responder às \textit{queries} em tempo útil, contudo uma das grandes desvantagens deve-se ao facto de esta estratégia ocupar demasiado espaço em memória, pois tanto os utilizadores, condutores e cidades armazenam todas as posições correspondentes à suas aparições no \textit{array} \textbf{\small\texttt{RIDES}}.
 
 
 \chapter{Queries}
 
-Durante a resolução das diversas consultas propostas procurámos sempre fazer tais operações no menor tempo possível aproveitando ao máximo a estrutura de dados que tínhamos implementado, todavia a nossa implementação não se revelou a melhor para algumas das consultas, e portanto, enquanto algumas \textit{queries} podem ser facilmente resolvidas em tempo linear, outras são resolvidas em tempo quadrático, o que não é ótimo dado o elevado número de elementos que cada estrutura possui.
+Durante a resolução das diversas consultas, procurámos sempre fazer tais operações no menor tempo possível, aproveitando ao máximo a estrutura de dados que tínhamos implementado, todavia a nossa implementação não se revelou a melhor para algumas das consultas, e portanto, enquanto algumas \textit{queries} podem ser facilmente resolvidas em tempo linear, outras são resolvidas em tempo quadrático, o que não é ótimo dado o elevado número de elementos que cada estrutura possui.
 
 \section{Querie 1}
 
@@ -226,7 +226,7 @@ A \textit{querie} 1 consiste fundamentalmente em recolher a informação de um d
 
 \normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
-Nesta fase temos de saber distinguir se um \textit{input} é referente a um utilizador ou condutor, como tal, decidimos tirar o máximo partido da função \textbf{\small\texttt{atoi()}}, ou seja, esta transforma uma \textit{string} num inteiro, portanto se a \textit{string} apenas contiver inteiros vai ser devolvido o inteiro correspondente, por outro lado, se um primeiro carácter for uma letra do alfabeto a função vai retornar zero. Assim, desta forma, é possível distinguir um utilizador de um condutor.  
+Nesta fase temos de saber distinguir se um \textit{input} é referente a um utilizador ou condutor, como tal, decidimos tirar o máximo partido da função \textbf{\small\texttt{atoi()}}, ou seja, como esta transforma uma \textit{string} num inteiro, se a \textit{string} apenas contiver inteiros vai ser devolvido o inteiro correspondente, por outro lado, se o primeiro carácter for uma letra do alfabeto a função vai retornar zero. Assim, desta forma, é possível distinguir um utilizador de um condutor.  
 
 \normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
@@ -236,7 +236,7 @@ Caso estejamos perante um condutor, muda o facto de podermos aceder ao mesmo em 
 
 \normalsize\textbf{Terceira fase }{\titlerule[0.5pt]}
 
-Depois de obtermos o \textit{array} \textbf{\small\texttt{positions}} já sabemos quais as posições que devemos analisar no \textit{array} \textbf{\small\texttt{RIDES}}, portanto a partir daí basta recolher todos os dados necessários quer para um utilizador, quer para um condutor.
+Depois de obtermos o \textit{array} \textbf{\small\texttt{positions}} já sabemos quais as posições que devemos analisar no \textit{array} \textbf{\small\texttt{RIDES}}, portanto a partir daí basta recolher todos os dados necessários, quer para um utilizador, quer para um condutor.
 
 \normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
 
@@ -249,11 +249,11 @@ Nesta busca, o objetivo consistia em listar um determinado número de utilizador
 
 \normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
-Como os utilizadores estão numa tabela de \textit{hash} é necessário percorrer cada uma das listas ligadas para obter todos os utilizadores, assim a primeira fase consiste em ir retornando utilizadores conforme vamos percorrendo a tabela.
+Como os utilizadores estão numa tabela de \textit{hash} é necessário percorrer cada uma das listas ligadas para obter todos os dados, assim a primeira fase consiste em ir retornando os utilizadores conforme vamos percorrendo a tabela.
 
 \normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
-À medida que recebemos os utilizadores, podemos obter o \textit{array} \textbf{\small\texttt{positions}}. Daí segue que conseguimos fazer uma análise tendo apenas em conta os elementos do \textit{array} recebido, portanto basta aceder às posições indicadas e calcular o total acumulado das distância de cada uma das viagens.
+À medida que recebemos os utilizadores, podemos obter o \textit{array} \textbf{\small\texttt{positions}}. Daí segue que conseguimos fazer uma análise tendo apenas em conta os elementos do \textit{array} recebido, portanto basta aceder às posições indicadas e calcular o total acumulado das distância efetuadas nas viagens.
 
 \normalsize\textbf{Terceira fase }{\titlerule[0.5pt]}
 
@@ -266,11 +266,11 @@ Esta consulta possui uma complexidade que pertencente a \(\theta(N^2)\), sendo q
 
 \section{Querie 4}
 
-Nesta consulta surge o desafio de calcular o preço médio das viagens numa dada cidade, algo que se torna bastante fácil dada a existência do módulo \textbf{\small\texttt{cities}}, uma vez que este contem os índices das viagens realizadas em cada uma das cidade.
+Nesta consulta surge o desafio de calcular o preço médio das viagens numa dada cidade, algo que se torna bastante fácil dada a existência do módulo \textbf{\small\texttt{cities}}, uma vez que este contem os índices das viagens realizadas em cada uma das cidades.
 
 \normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
-Como nos é dada uma determinada cidade, basta procurar essa cidade no \textit{array} \textbf{\small\texttt{CITIES}} e retornar o \textit{array} \textbf{\small\texttt{positions}} correspondente, pois desta forma iremos aceder às posições exatas do \textit{array} \textbf{\small\texttt{RIDES}}.
+Como nos é dada uma determinada cidade, basta procurar essa cidade no \textit{array} \textbf{\small\texttt{CITIES}} e retornar o \textit{array} \textbf{\small\texttt{positions}} correspondente, assim desta forma iremos aceder às posições exatas do \textit{array} \textbf{\small\texttt{RIDES}}.
 
 \normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
@@ -278,7 +278,16 @@ Assim que obtivermos as posições que devemos analisar, basta aceder a essas po
 
 \normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
 
-Esta consulta possui uma complexidade pertencente a \(\theta(N)\), onde \(N\) representa o número de viagens realizadas na cidade em questão.
+Esta consulta possui uma complexidade pertencente a \(\theta(N)\), onde \(N\) representa o número de viagens realizadas numa dada cidade.
+
+\section{Nota Final}
+
+Durante a primeira fase do projeto o nosso grupo conseguiu realizar mais algumas \textit{queries}, contudo por questões de extensão do documento não nos é possível explicar as restantes consultas. Além disso, algumas delas, apesar de resolvidas, não estão do nosso agrado, portanto também não faria sentido colocá-las aqui.
+
+De qualquer modo, na segunda fase do projeto iremos focar a nossa análise nas \textit{queires} que não foram aqui mencionadas, para assim fazer um tratamento rigoroso do desempenho do nosso programa. 
+
+
+
 
 \chapter{Testes de Desempenho}
 
@@ -290,51 +299,51 @@ Esta consulta possui uma complexidade pertencente a \(\theta(N)\), onde \(N\) re
  \hline
  \textbf{\# Comando} & \textbf{Comando} & \textbf{Tempo de execução (s)} \\
  \hline
- \texttt{\textbf{1}} & \texttt{\textbf{1 PetrPacheco}}  & \texttt{\textbf{0.000050}}  \\
+ \texttt{\textbf{1}} & \texttt{\textbf{1 PetrPacheco}} & \texttt{\textbf{0.000050}}  \\
  \hline
- \texttt{\textbf{2}} & \texttt{\textbf{1 ÂngVieira}}  & \texttt{\textbf{0.000040}}  \\
+ \texttt{\textbf{2}} & \texttt{\textbf{1 ÂngVieira}} & \texttt{\textbf{0.000040}}  \\
  \hline
- \texttt{\textbf{3}} & \texttt{\textbf{1 LeTavares103}}  & \texttt{\textbf{0.000021}}  \\
+ \texttt{\textbf{3}} & \texttt{\textbf{1 LeTavares103}} & \texttt{\textbf{0.000021}}  \\
  \hline
- \texttt{\textbf{4}} & \texttt{\textbf{1 NoMaia}}  & \texttt{\textbf{0.000021}}  \\
+ \texttt{\textbf{4}} & \texttt{\textbf{1 NoMaia}} & \texttt{\textbf{0.000021}}  \\
  \hline
- \texttt{\textbf{5}} & \texttt{\textbf{1 ErPinheiro7}}  & \texttt{\textbf{0.000052}}  \\
+ \texttt{\textbf{5}} & \texttt{\textbf{1 ErPinheiro7}} & \texttt{\textbf{0.000052}}  \\
  \hline
- \texttt{\textbf{6}} & \texttt{\textbf{1 FrederAraújo}}  & \texttt{\textbf{0.000046}}  \\
+ \texttt{\textbf{6}} & \texttt{\textbf{1 FrederAraújo}} & \texttt{\textbf{0.000046}}  \\
  \hline
- \texttt{\textbf{7}} & \texttt{\textbf{1 PeFernandes144}}  & \texttt{\textbf{0.000042}}  \\
+ \texttt{\textbf{7}} & \texttt{\textbf{1 PeFernandes144}} & \texttt{\textbf{0.000042}}  \\
  \hline
- \texttt{\textbf{8}} & \texttt{\textbf{1 ASousa7}}  & \texttt{\textbf{0.000026}}  \\
+ \texttt{\textbf{8}} & \texttt{\textbf{1 ASousa7}} & \texttt{\textbf{0.000026}}  \\
  \hline
- \texttt{\textbf{9}} & \texttt{\textbf{1 RReis26}}  & \texttt{\textbf{0.000022}}  \\
+ \texttt{\textbf{9}} & \texttt{\textbf{1 RReis26}} & \texttt{\textbf{0.000022}}  \\
  \hline
- \texttt{\textbf{10}} & \texttt{\textbf{1 TerLima}}  & \texttt{\textbf{0.000023}}  \\
+ \texttt{\textbf{10}} & \texttt{\textbf{1 TerLima}} & \texttt{\textbf{0.000023}}  \\
  \hline
- \texttt{\textbf{11}} & \texttt{\textbf{1 000000002639}}  & \texttt{\textbf{0.000012}}  \\
+ \texttt{\textbf{11}} & \texttt{\textbf{1 000000002639}} & \texttt{\textbf{0.000012}}  \\
  \hline
- \texttt{\textbf{12}} & \texttt{\textbf{1 000000008561}}  & \texttt{\textbf{0.000027}}  \\
+ \texttt{\textbf{12}} & \texttt{\textbf{1 000000008561}} & \texttt{\textbf{0.000027}}  \\
  \hline
- \texttt{\textbf{13}} & \texttt{\textbf{1 000000004987}}  & \texttt{\textbf{0.000026}}  \\
+ \texttt{\textbf{13}} & \texttt{\textbf{1 000000004987}} & \texttt{\textbf{0.000026}}  \\
  \hline
- \texttt{\textbf{14}} & \texttt{\textbf{1 000000001936}}  & \texttt{\textbf{0.000027}}  \\
+ \texttt{\textbf{14}} & \texttt{\textbf{1 000000001936}} & \texttt{\textbf{0.000027}}  \\
  \hline
- \texttt{\textbf{15}} & \texttt{\textbf{1 000000003518}}  & \texttt{\textbf{0.000043}}  \\
+ \texttt{\textbf{15}} & \texttt{\textbf{1 000000003518}} & \texttt{\textbf{0.000043}}  \\
  \hline
- \texttt{\textbf{16}} & \texttt{\textbf{1 000000002581}}  & \texttt{\textbf{0.000030}}  \\
+ \texttt{\textbf{16}} & \texttt{\textbf{1 000000002581}} & \texttt{\textbf{0.000030}}  \\
  \hline
- \texttt{\textbf{17}} & \texttt{\textbf{1 000000004456}}  & \texttt{\textbf{0.000027}}  \\
+ \texttt{\textbf{17}} & \texttt{\textbf{1 000000004456}} & \texttt{\textbf{0.000027}}  \\
  \hline
- \texttt{\textbf{18}} & \texttt{\textbf{1 000000000879}}  & \texttt{\textbf{0.000026}}  \\
+ \texttt{\textbf{18}} & \texttt{\textbf{1 000000000879}} & \texttt{\textbf{0.000026}}  \\
  \hline
- \texttt{\textbf{19}} & \texttt{\textbf{1 000000009721}}  & \texttt{\textbf{0.000032}}  \\
+ \texttt{\textbf{19}} & \texttt{\textbf{1 000000009721}} & \texttt{\textbf{0.000032}}  \\
  \hline
- \texttt{\textbf{20}} & \texttt{\textbf{1 000000003558}}  & \texttt{\textbf{0.000025}}  \\
+ \texttt{\textbf{20}} & \texttt{\textbf{1 000000003558}} & \texttt{\textbf{0.000025}}  \\
  \hline
- \texttt{\textbf{21}} & \texttt{\textbf{3 50}}  & \texttt{\textbf{0.253828}}  \\
+ \texttt{\textbf{21}} & \texttt{\textbf{3 50}} & \texttt{\textbf{0.253828}}  \\
  \hline
- \texttt{\textbf{22}} & \texttt{\textbf{4 Faro}}  & \texttt{\textbf{0.018316}}  \\
+ \texttt{\textbf{22}} & \texttt{\textbf{4 Faro}} & \texttt{\textbf{0.018316}}  \\
  \hline
- \texttt{\textbf{23}} & \texttt{\textbf{4 Setúbal}}  & \texttt{\textbf{0.013000}}  \\
+ \texttt{\textbf{23}} & \texttt{\textbf{4 Setúbal}} & \texttt{\textbf{0.013000}}  \\
  \hline
 \end{tabularx}
 
