@@ -6,6 +6,8 @@ TARGET = programa-principal
 PATH_RESULTS = Resultados
 PATH_CSV_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/csv
 PATH_INPUT_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/inputs
+PATH_CSV_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/csv
+PATH_INPUT_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/inputs
 
 
 $(TARGET): $(OBJS)
@@ -15,6 +17,7 @@ $(TARGET): $(OBJS)
 
 teste1:
 	./$(TARGET) $(PATH_CSV_DIOGO) $(PATH_INPUT_DIOGO)/input.txt
+#	./$(TARGET) $(PATH_CSV_JOAO) $(PATH_INPUT_JOAO)/input.txt
 	diff Resultados/command1_output.txt exemplos_de_queries/tests_1/command1_output.txt
 	diff Resultados/command2_output.txt exemplos_de_queries/tests_1/command2_output.txt
 	diff Resultados/command3_output.txt exemplos_de_queries/tests_1/command3_output.txt
@@ -34,6 +37,7 @@ teste1:
 
 teste2:
 	./$(TARGET) $(PATH_CSV_DIOGO) $(PATH_INPUT_DIOGO)/input2.txt
+#	./$(TARGET) $(PATH_CSV_JOAO) $(PATH_INPUT_JOAO)/input2.txt
 	diff Resultados/command1_output.txt exemplos_de_queries/tests_2/command1_output.txt
 	diff Resultados/command2_output.txt exemplos_de_queries/tests_2/command2_output.txt
 	diff Resultados/command3_output.txt exemplos_de_queries/tests_2/command3_output.txt
