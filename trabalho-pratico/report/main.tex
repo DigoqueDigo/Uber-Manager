@@ -78,7 +78,7 @@
 
 Quando estamos perante uma situação na qual temos de lidar com a manipulação de grandes quantidades de dados existem sempre algumas opções que devemos preferir adotar e outras que, pelo contrário, devemos evitar a todo o custo, portanto, ao longo deste relatório iremos explicar as estratégias que utilizámos para abordar este problema, e porque razão optámos por uma estratégia em específico e não outra qualquer.
 
-Posto isto, importa também realçar que nas estruturas que iremos exemplificar mais à frente tivemos em conta a natureza dos dados com os quais estávamos a lidar e as questões que tinham de ser resolvidas em tempo útil, assim sendo, caso levássemos em conta outros quaisquer fatores, certamente a abordagem adotada teria sido outra.
+Posto isto, importa também realçar que nas estruturas que iremos exemplificar mais à frente tivemos em conta a natureza dos dados com os quais estávamos a lidar e as questões que tinham de ser resolvidas em tempo útil, assim sendo, caso levássemos em conta outros quaisquer fatores, certamente a abordagem adotada teria sido diferente.
 
 \chapter{Catálogos}
 
@@ -137,7 +137,7 @@ De seguida, passando ao ficheiro \textit{drivers.h}, vemos que a estrutura \text
 
 \normalsize\textbf{Vantagens}
     \begin{enumerate}
-        \item A utilização de um \textit{array} tira partido da localidade espacial, o que aumenta o \textit{hit rate}, e consequentemente leva a um ganho de tempo caso pretendamos percorrer o \textit{array}.
+        \item A utilização de um \textit{array} tira partido da localidade espacial, o que aumenta o \textit{hit rate}, e consequentemente leva a um ganho de tempo, caso pretendamos percorrer o \textit{array}.
         
         \item Com um \textit{array} dinâmico nunca corremos o risco de alocar uma quantidade de memória muito maior do que aquela que é extremamente necessária, no pior dos casos alocamos o dobro daquela que seria pretendida.
         
@@ -168,16 +168,16 @@ De seguida, passando ao ficheiro \textit{drivers.h}, vemos que a estrutura \text
 
 Passando agora à estrutura das viagens, vemos que uma viagem possui apenas os campos presentes no ficheiro \textit{rides.csv}, e ao contrário das estruturas anteriores, não possui nenhum \textit{array} de inteiros.
 
-Assim, a estrutura \textbf{\small\texttt{RIDES}} está implementada como sendo um \textit{array} dinâmico com tamanho inicial definido por \textbf{\small\texttt{CAP\_RIDES}}, onde cada elemento é uma viagem. E novamente, a forma de mapeamento utilizada para determinar qual a posição de uma viagem, é o \textbf{\small\texttt{id}} da mesma, ou seja, uma viagem com um \textbf{\small\texttt{id}} correspondente a \textbf{\small\texttt{000000000162}} é inserida na posição de índice \textbf{\small\texttt{162}} do \textit{array} \textbf{\small\texttt{RIDES}}.
+Assim, a estrutura \textbf{\small\texttt{RIDES}} está implementada como sendo um \textit{array} dinâmico com tamanho inicial definido por \textbf{\small\texttt{CAP\_RIDES}}, onde cada elemento é uma viagem. E, novamente, a forma de mapeamento utilizada para determinar qual a posição de uma viagem, é o \textbf{\small\texttt{id}} da mesma, ou seja, uma viagem com um \textbf{\small\texttt{id}} correspondente a \textbf{\small\texttt{000000008439}} é inserida na posição de índice \textbf{\small\texttt{8439}} do \textit{array} \textbf{\small\texttt{RIDES}}.
 
 \normalsize\textbf{Vantagens}
 \begin{itemize}
    
-    \item Quando for pretendido percorrer o \textit{array} \textbf{\small\texttt{RIDES}}, o programa vai beneficiar da localidade espacial, ou seja, será necessário menos tempo para percorrer as posições do \textit{array}, dado que os endereços estarão em \textit{cache}.
+    \item Quando for pretendido percorrer o \textit{array} \textbf{\small\texttt{RIDES}}, o programa vai beneficiar da localidade espacial, ou seja, será necessário menos tempo para percorrer as suas posições, dado que os endereços estarão em \textit{cache}.
     
-    \item Se pretendermos aceder a uma determinada viagem, essa operação pode ser feita em tempo constante caso saibamos previamente qual o \textbf{\small\texttt{id}} da viagem em questão, uma vez que as viagem são mapeadas conforme o seu \textbf{\small\texttt{id}}.
+    \item Se pretendermos aceder a uma determinada viagem, essa operação pode ser feita em tempo constante, caso saibamos previamente qual o \textbf{\small\texttt{id}} da viagem em questão, uma vez que as viagem são mapeadas conforme o seu \textbf{\small\texttt{id}}.
 
-    \item Para libertar a memória alocada pelo \textit{array} \textbf{\small\texttt{RIDES}} não é necessário percorrer o \textit{array}.
+    \item Para libertar a memória alocada pelo \textit{array} \textbf{\small\texttt{RIDES}} não é necessário percorrer o mesmo.
 
     \item Como o \textit{array} \textbf{\small\texttt{RIDES}} é dinâmico, no pior dos casos é alocada o dobro da memória considerada necessária.
 \end{itemize}
@@ -209,11 +209,11 @@ Portanto, para compensar tal debilidade, foi criada a seguinte estrutura, onde u
 
 
 
-Ao verificar o código, vemos que o \textit{array} \textbf{\small\texttt{positions}} é um \textit{array} dinâmico de tamanho inicial definido por \textbf{\small\texttt{CAP\_CITY}} e que possui um total de elementos definido pelo valor que \textbf{\small\texttt{sp}} toma. Por fim, o \textit{array} \textbf{\small\texttt{CITIES}}  segue uma estrutura semelhante, onde \textbf{\small\texttt{CAP\_CITIES}} define o seu tamanho inicial e cada um dos seus elementos é uma \textbf{\small\texttt{struct city}}.
+Ao verificar o código, vemos que o \textit{array} \textbf{\small\texttt{positions}} é um \textit{array} dinâmico de tamanho inicial definido por \textbf{\small\texttt{CAP\_CITY}}, e que possui um total de elementos definido pelo valor que o \textbf{\small\texttt{sp}} toma. Por fim, o \textit{array} \textbf{\small\texttt{CITIES}}  segue uma estrutura semelhante, onde \textbf{\small\texttt{CAP\_CITIES}} define o seu tamanho inicial e cada um dos seus elementos é uma \textbf{\small\texttt{struct city}}.
 
 \section{Nota final}
 
-Perante esta estrutura de dados certamente fica mais fácil responder às \textit{queries} em tempo útil, contudo uma das grandes desvantagens deve-se ao facto de esta estratégia ocupar demasiado espaço em memória, pois tanto os utilizadores, condutores e cidades armazenam todas as posições correspondentes à suas aparições no \textit{array} \textbf{\small\texttt{RIDES}}.
+Perante esta estrutura de dados certamente fica mais fácil responder às \textit{queries} em tempo útil, contudo uma das grandes desvantagens deve-se ao facto de esta estratégia ocupar demasiado espaço em memória, pois tanto os utilizadores, condutores e cidades armazenam todas as posições correspondentes às suas aparições no \textit{array} \textbf{\small\texttt{RIDES}}.
 
 
 \chapter{Queries}
@@ -226,17 +226,17 @@ A \textit{querie} 1 consiste fundamentalmente em recolher a informação de um d
 
 \normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
-Nesta fase temos de saber distinguir se um \textit{input} é referente a um utilizador ou condutor, como tal, decidimos tirar o máximo partido da função \textbf{\small\texttt{atoi()}}, ou seja, como esta transforma uma \textit{string} num inteiro, se a \textit{string} apenas contiver inteiros vai ser devolvido o inteiro correspondente, por outro lado, se o primeiro carácter for uma letra do alfabeto a função vai retornar zero. Assim, desta forma, é possível distinguir um utilizador de um condutor.  
+Nesta fase temos de saber distinguir se um \textit{input} é referente a um utilizador ou condutor, como tal, decidimos aproveitar ao máximo a função \textbf{\small\texttt{atoi()}}, ou seja, como esta transforma uma \textit{string} num inteiro, se a \textit{string} apenas contiver inteiros vai ser devolvido o inteiro correspondente, por outro lado, se o primeiro carácter for uma letra do alfabeto a função vai retornar zero. Assim, desta forma, é possível distinguir um utilizador de um condutor.  
 
 \normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
-Como já sabemos qual a entidade em questão, resta-nos colocar o \textbf{\small\texttt{username}} do utilizador na função de \textit{hash} e obter o índice do \textit{bucket} para sabermos qual a lista que devemos percorrer. Assim, quando estivermos na célula correta apenas temos de guardar o \textit{array} \textbf{\small\texttt{positions}}, uma vez que este contem todas as posições do utilizador no \textit{array} \textbf{\small\texttt{RIDES}}.
+Como já sabemos qual a entidade em questão, resta-nos colocar o \textbf{\small\texttt{username}} do utilizador na função de \textit{hash} e obter o índice do \textit{bucket} para sabermos qual a lista que devemos percorrer. Assim, quando estivermos na célula correta, apenas teremos de guardar o \textit{array} \textbf{\small\texttt{positions}}, uma vez que este contem todas as posições do utilizador no \textit{array} \textbf{\small\texttt{RIDES}}.
 
 Caso estejamos perante um condutor, muda o facto de podermos aceder ao mesmo em tempo constante, visto que este é mapeado conforme o seu \textbf{\small\texttt{id}}.
 
 \normalsize\textbf{Terceira fase }{\titlerule[0.5pt]}
 
-Depois de obtermos o \textit{array} \textbf{\small\texttt{positions}} já sabemos quais as posições que devemos analisar no \textit{array} \textbf{\small\texttt{RIDES}}, portanto a partir daí basta recolher todos os dados necessários, quer para um utilizador, quer para um condutor.
+Depois de obtermos o \textit{array} \textbf{\small\texttt{positions}} já sabemos quais as posições que devemos analisar no \textit{array} \textbf{\small\texttt{RIDES}}, portanto, a partir daí basta recolher todos os dados necessários, quer para um utilizador, quer para um condutor.
 
 \normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
 
@@ -253,7 +253,7 @@ Como os utilizadores estão numa tabela de \textit{hash} é necessário percorre
 
 \normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
-À medida que recebemos os utilizadores, podemos obter o \textit{array} \textbf{\small\texttt{positions}}. Daí segue que conseguimos fazer uma análise tendo apenas em conta os elementos do \textit{array} recebido, portanto basta aceder às posições indicadas e calcular o total acumulado das distância efetuadas nas viagens.
+À medida que recebemos os utilizadores, podemos obter o \textit{array} \textbf{\small\texttt{positions}}. Daí segue que conseguimos fazer uma análise tendo apenas em conta os elementos do \textit{array} recebido, portanto basta aceder às posições indicadas e calcular o total acumulado das distâncias efetuadas nas viagens.
 
 \normalsize\textbf{Terceira fase }{\titlerule[0.5pt]}
 
@@ -270,11 +270,11 @@ Nesta consulta surge o desafio de calcular o preço médio das viagens numa dada
 
 \normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
-Como nos é dada uma determinada cidade, basta procurar essa cidade no \textit{array} \textbf{\small\texttt{CITIES}} e retornar o \textit{array} \textbf{\small\texttt{positions}} correspondente, assim desta forma iremos aceder às posições exatas do \textit{array} \textbf{\small\texttt{RIDES}}.
+Como nos é dada uma determinada cidade, basta procurar essa cidade no \textit{array} \textbf{\small\texttt{CITIES}} e retornar o \textit{array} \textbf{\small\texttt{positions}} correspondente, assim, desta forma, iremos aceder às posições exatas do \textit{array} \textbf{\small\texttt{RIDES}}.
 
 \normalsize\textbf{Segunda fase }{\titlerule[0.5pt]}
 
-Assim que obtivermos as posições que devemos analisar, basta aceder a essas posições e calcular o total acumulado do preço para depois dividir pelo número de elementos do \textit{array} \textbf{\small\texttt{positions}}, e assim descobrimos o preço médio das viagens numa determinada cidade.
+Assim que obtivermos as posições que devemos analisar, basta aceder a essas posições e calcular o total acumulado do preço, para depois dividir pelo número de elementos do \textit{array} \textbf{\small\texttt{positions}}, assim descobrimos o preço médio das viagens numa determinada cidade.
 
 \normalsize\textbf{Análise de complexidade }{\titlerule[0.5pt]}
 
@@ -282,9 +282,9 @@ Esta consulta possui uma complexidade pertencente a \(\theta(N)\), onde \(N\) re
 
 \section{Nota Final}
 
-Durante a primeira fase do projeto o nosso grupo conseguiu realizar mais algumas \textit{queries}, contudo por questões de extensão do documento não nos é possível explicar as restantes consultas. Além disso, algumas delas, apesar de resolvidas, não estão do nosso agrado, portanto também não faria sentido colocá-las aqui.
+Durante a primeira fase do projeto o nosso grupo conseguiu realizar mais algumas \textit{queries}, contudo por questões de extensão do documento não nos é possível explicar as restantes consultas. Além disso, algumas delas, apesar de resolvidas, não estão do nosso agrado, e portanto também não faria sentido colocá-las aqui.
 
-De qualquer modo, na segunda fase do projeto iremos focar a nossa análise nas \textit{queires} que não foram aqui mencionadas, para assim fazer um tratamento rigoroso do desempenho do nosso programa. 
+De qualquer modo, na segunda fase do projeto iremos focar a nossa análise nas \textit{queires} que não foram aqui mencionadas, a meio de fazermos um tratamento mais rigoroso do desempenho do programa. 
 
 
 
@@ -355,7 +355,7 @@ De qualquer modo, na segunda fase do projeto iremos focar a nossa análise nas \
  \hline
  \centering\textbf{Utilizadores} & \hfil \textbf{Condutores} & \hfil \textbf{Viagens/Cidades} \\
  \hline
- \centering\textbf{\texttt{0.022621}} & \hfil \texttt{\textbf{0.068262}} & \hfil \texttt{\textbf{2.002561}}\\
+ \centering\textbf{\texttt{0.068262}} & \hfil \texttt{\textbf{0.022621}} & \hfil \texttt{\textbf{2.002561}}\\
  \hline
 \end{tabular}
 \end{center}
