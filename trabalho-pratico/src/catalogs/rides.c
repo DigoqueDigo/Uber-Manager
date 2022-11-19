@@ -88,7 +88,7 @@ char* lookup_rides_city(RIDES rides_list, int index){
 }
 
 
-float lookup_rides_score_driver(RIDES rides_list, int index){
+double lookup_rides_score_driver(RIDES rides_list, int index){
     if (rides_list[index].date == NULL) return 0;
     return rides_list[index].score_driver;
 }

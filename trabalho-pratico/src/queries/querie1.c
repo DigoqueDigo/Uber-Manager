@@ -111,7 +111,7 @@ void calculate_driver(DRIVERS drivers_list, RIDES rides_list, FILE *ficheiro, in
 
 
 
-void resolve_querie1(char *commands, int ncommand, USERS lista, DRIVERS drivers_lista, RIDES rides_lista, int N_DRIVERS){
+void resolve_querie1(char *command, int ncommand, USERS users_list, DRIVERS drivers_list, RIDES rides_list, int N_DRIVERS){
 
     FILE *ficheiro;
 
@@ -120,7 +120,7 @@ void resolve_querie1(char *commands, int ncommand, USERS lista, DRIVERS drivers_
 
     set_command_name(output_file,ncommand);
 
-    token = strtok(commands, " " "\n");
+    token = strtok(command, " " "\n");
     token = strtok(NULL, " " "\n");
 
     valor = check_id(token);
@@ -131,10 +131,10 @@ void resolve_querie1(char *commands, int ncommand, USERS lista, DRIVERS drivers_
 
         valor = atoi(token);
 
-        if (valor < N_DRIVERS) calculate_driver(drivers_lista,rides_lista,ficheiro,valor);
+        if (valor < N_DRIVERS) calculate_driver(drivers_list,rides_list,ficheiro,valor);
     }
 
-    else calculate_user(lista,drivers_lista,rides_lista,ficheiro,token);
+    else calculate_user(users_list,drivers_list,rides_list,ficheiro,token);
 
     fclose(ficheiro);
 }
