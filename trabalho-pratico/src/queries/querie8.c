@@ -141,10 +141,7 @@ void resolve_querie8(char *command, int ncommand, USERS users_list, DRIVERS driv
 
         if (calculate_idade(list[p].account_driver) >= age && calculate_idade(list[p].account_user) >= age){
 
-            char aux_id[15];
-            convert_id_to_string(aux_id,list[p].id_driver);
-
-            fprintf(ficheiro, "%s;%s;%s;%s\n", aux_id, list[p].name_driver,list[p].username,list[p].name_user);   
+            fprintf(ficheiro, "%012d;%s;%s;%s\n", list[p].id_driver, list[p].name_driver,list[p].username,list[p].name_user);   
         }   
     }
     

@@ -32,15 +32,6 @@ void creat_date(int age, char *string);
 
 
 /**
- * @brief Função que convert um inteiro num id
- * 
- * @param string zona de memória onde será guardado o id resultante
- * @param id inteiro que será convertido num id
- */
-void convert_id_to_string(char *string, int id);
-
-
-/**
  * @brief Função que convert uma data num inteiro
  * 
  * @param string data a partir da qual será calculado um inteiro

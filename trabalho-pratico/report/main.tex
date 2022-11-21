@@ -220,9 +220,9 @@ Perante esta estrutura de dados certamente fica mais fácil responder às \texti
 
 Durante a resolução das diversas consultas, procurámos sempre fazer tais operações no menor tempo possível, aproveitando ao máximo a estrutura de dados que tínhamos implementado, todavia a nossa implementação não se revelou a melhor para algumas das consultas, e portanto, enquanto algumas \textit{queries} podem ser facilmente resolvidas em tempo linear, outras são resolvidas em tempo quadrático, o que não é ótimo dado o elevado número de elementos que cada estrutura possui.
 
-\section{Querie 1}
+\section{Query 1}
 
-A \textit{querie} 1 consiste fundamentalmente em recolher a informação de um determinado utilizador ou condutor, isto conforme o primeiro parâmetro do \textit{input} seja uma \textit{string} de inteiros ou um \textit{username}. Assim sendo, a primeira fase da resolução deste problema passa por identificar qual o tipo de \textit{input} com que estamos a lidar, depois disso, podemos tirar partido do \textit{array} \textbf{\small\texttt{positions}} definido anteriormente, e a partir daí obtemos toda a informação necessária.    
+A \textit{query} 1 consiste fundamentalmente em recolher a informação de um determinado utilizador ou condutor, isto conforme o primeiro parâmetro do \textit{input} seja uma \textit{string} de inteiros ou um \textit{username}. Assim sendo, a primeira fase da resolução deste problema passa por identificar qual o tipo de \textit{input} com que estamos a lidar, depois disso, podemos tirar partido do \textit{array} \textbf{\small\texttt{positions}} definido anteriormente, e a partir daí obtemos toda a informação necessária.    
 
 \normalsize\textbf{Primeira fase }{\titlerule[0.5pt]}
 
@@ -243,7 +243,7 @@ Depois de obtermos o \textit{array} \textbf{\small\texttt{positions}} já sabemo
 Esta consulta tem uma complexidade pertencente a \(\theta(N)\), sendo que \(N\) corresponde ao número de viagens realizadas por um condutor ou utilizador.
 
 \vspace{-6pt}
-\section{Querie 3}
+\section{Query 3}
 
 Nesta busca, o objetivo consistia em listar um determinado número de utilizadores conforme a distância que estes tinham percorrido, como tal, é necessário calcular a distância total que cada um dos utilizadores percorreu para depois poder fazer uma análise comparativa.
 
@@ -264,7 +264,7 @@ Assim que soubermos a distância percorrida por um utilizador, basta colocar ess
 Esta consulta possui uma complexidade que pertencente a \(\theta(N^2)\), sendo que \(N\) simboliza o total de viagens que um utilizador fez. 
 
 
-\section{Querie 4}
+\section{Query 4}
 
 Nesta consulta surge o desafio de calcular o preço médio das viagens numa dada cidade, algo que se torna bastante fácil dada a existência do módulo \textbf{\small\texttt{cities}}, uma vez que este contem os índices das viagens realizadas em cada uma das cidades.
 

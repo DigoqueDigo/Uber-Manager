@@ -28,17 +28,6 @@ void creat_date(int age, char *string){
 }
 
 
-void convert_id_to_string(char *string, int id){
-    int p;
-    char aux[15];
-    sprintf(aux, "%d", id);
-    id = 12 - strlen(aux);
-    for (p = 0; p < id; p++) string[p] = '0';
-    for (int i = 0; p < 12; i++, p++) string[p] = aux[i];
-    string[p] = '\0';
-}
-
-
 int convert_date_to_int(char *string){
     string[2] = string[5] = '\0';
     int a = atoi(string), b = atoi(string+3), c = atoi(string+6);

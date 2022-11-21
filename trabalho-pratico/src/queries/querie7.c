@@ -148,7 +148,7 @@ void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rid
 
     FILE *ficheiro;
 
-    char output_file[500] = "", aux_id[30], *token;
+    char output_file[500] = "", *token;
     int N, Nodes;
 
 
@@ -180,8 +180,7 @@ void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rid
 
     for (int p = 0; p < N; p++){
 
-        convert_id_to_string(aux_id,list[p].id);
-        fprintf(ficheiro, "%s;%s;%.3f\n", aux_id, list[p].name, list[p].score_average);
+        fprintf(ficheiro, "%012d;%s;%.3f\n", list[p].id, list[p].name, list[p].score_average);
     }
 
     free(list);
