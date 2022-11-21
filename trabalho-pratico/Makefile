@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic-errors -O2 -Iinclude
 LIBS = -lm
-OBJS = src/main.o src/sort.o src/fixtures.o src/parsing/checker.o src/parsing/parser.o src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o src/queries/queries.o src/queries/querie1.o src/queries/querie3.o src/queries/querie4.o src/queries/querie6.o src/queries/querie7.o src/queries/querie8.o
+OBJS = src/main.o src/sort.o src/fixtures.o src/parsing/checker.o src/parsing/parser.o src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o src/queries/queries.o src/queries/querie1.o src/queries/querie3.o src/queries/querie4.o src/queries/querie6.o src/queries/querie7.o src/queries/querie8.o src/queries/querie9.o
 TARGET = programa-principal
 PATH_RESULTS = Resultados
 PATH_CSV_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/csv
@@ -33,6 +33,7 @@ teste1:
 	diff Resultados/command13_output.txt exemplos_de_queries/tests_1/command16_output.txt
 	diff Resultados/command14_output.txt exemplos_de_queries/tests_1/command17_output.txt
 	diff Resultados/command15_output.txt exemplos_de_queries/tests_1/command18_output.txt
+	diff Resultados/command16_output.txt exemplos_de_queries/tests_1/command19_output.txt
 
 
 teste2:
@@ -77,6 +78,11 @@ teste2:
 	diff Resultados/command37_output.txt exemplos_de_queries/tests_2/command43_output.txt
 	diff Resultados/command38_output.txt exemplos_de_queries/tests_2/command44_output.txt
 	diff Resultados/command39_output.txt exemplos_de_queries/tests_2/command45_output.txt
+	diff Resultados/command40_output.txt exemplos_de_queries/tests_2/command46_output.txt
+	diff Resultados/command41_output.txt exemplos_de_queries/tests_2/command47_output.txt
+	diff Resultados/command42_output.txt exemplos_de_queries/tests_2/command48_output.txt
+	diff Resultados/command43_output.txt exemplos_de_queries/tests_2/command49_output.txt
+	diff Resultados/command44_output.txt exemplos_de_queries/tests_2/command50_output.txt
 
 
 clean_teste:

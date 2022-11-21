@@ -45,13 +45,13 @@ void sort_three_compare(void *array, int N, size_t size, int (*comp1)(const void
 
     for (int p = 0, index = 0; p < N-1; p++, index += size){
 
-        if (start == -1 && !comp2(ptr+index,ptr+index+size)){
+        if (start == -1 && !comp2(ptr+index,ptr+index+size) && !comp1(ptr+index,ptr+index+size)){
 
             start = index;
             last++;
         }
 
-        else if (!comp2(ptr+index,ptr+index+size)) last++;
+        else if (!comp2(ptr+index,ptr+index+size) && !comp1(ptr+index,ptr+index+size)) last++;
 
         else if (start != -1){
 
