@@ -3,13 +3,6 @@
 #include <string.h>
 #include <queries/querie4.h>
 
-#define T_BASIC 3.25
-#define T_GREEN 4
-#define T_PREMIUM 5.2
-#define TK_BASIC 0.62
-#define TK_GREEN 0.79
-#define TK_PREMIUM 0.94
-
 
 double preco_medio_cidade(DRIVERS drivers_list, RIDES rides_list, CITIES cities_list, int N_CITIES, char* city){
     char aux[500];
@@ -47,6 +40,7 @@ double preco_medio_cidade(DRIVERS drivers_list, RIDES rides_list, CITIES cities_
 
     return (total/count);
 }
+
 
 void resolve_querie4(char* command, int ncommand, DRIVERS drivers_list, RIDES rides_list, CITIES cities_list, int N_CITIES){
     FILE *ficheiro;
