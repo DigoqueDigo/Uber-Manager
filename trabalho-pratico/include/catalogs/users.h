@@ -19,7 +19,7 @@
  \def BUCKET
  \brief Número de buckets que a tabela de hash possui
 */
-#define BUCKET 8000
+#define BUCKET 49999
 
 
 /*!
@@ -70,13 +70,12 @@ USER init_user(
 
 
 /**
- * @brief Função que calcula o indice de um utilizados na tabela de hash
+ * @brief Função que calcula o indice de um utilizados na tabela de hash, esta função foi inspirada a partir deste site (http://www.cse.yorku.ca/~oz/hash.html)
  * 
- * @param username string a partir da qual será calculado o indice
+ * @param str string a partir da qual será calculado o indice
  * @return indice que corresponde ao utilizar em questão
  */
-int hash_func(char *username);
-
+int hash_func(char *str);
 
 /**
  * @brief Função que adiciona um utilizador no inicio de um lista ligada

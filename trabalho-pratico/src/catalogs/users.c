@@ -44,16 +44,17 @@ USER init_user(char *username, char *name, char *gender, char *birth_date, char 
 }
 
 
-int hash_func(char *username){
-    int x = 0, p;
-    for (p = 0; username[p] != '\0'; p++){
-        x += username[p];
-        x *= p;
+int hash_func(char *str){
+    long hash = 5381;
+    int c;
+
+    for (int p = 0; str[p] != '\0'; p++){
+        c = str[p];
+        hash = ((hash << 5) + hash) + c;
     }
-    x *= strlen(username);
-    x = x % BUCKET;
-    if (x < 0) x = -x;
-    return x;
+    
+    if (hash < 0) hash = -hash;
+    return hash % BUCKET;
 }
 
 
