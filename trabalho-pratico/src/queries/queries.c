@@ -3,6 +3,7 @@
 #include <string.h>
 #include <queries/queries.h>
 #include <queries/querie1.h>
+#include <queries/querie2.h>
 #include <queries/querie3.h>
 #include <queries/querie4.h>
 #include <queries/querie6.h>
@@ -35,6 +36,10 @@ int resolve_queries(char *path, USERS users_list, DRIVERS drivers_list, RIDES ri
 
             case 1: 
                 resolve_querie1(linha,p,users_list,drivers_list,rides_list,N_DRIVERS);
+                break;
+
+            case 2:
+                resolve_querie2(linha,p,drivers_list,rides_list,N_DRIVERS);
                 break;
 
             case 3:
