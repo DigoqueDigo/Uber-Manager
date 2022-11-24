@@ -23,6 +23,7 @@ struct user{
 
 USERS init_users(){
     USERS new = malloc(BUCKET*sizeof(USER));
+    for (int p = 0; p < BUCKET; new[p] = NULL, p++);
     return new;;
 }
 
@@ -202,7 +203,7 @@ void lookup_user_birth_date(USERS users_list, char *username, char *date){
 
 void lookup_user_gender(USERS users_list, char *username, char *gender){
 
-        int index = hash_func(username);
+    int index = hash_func(username);
     USER aux = users_list[index];
 
     for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
@@ -223,4 +224,17 @@ int lookup_user_account_status(USERS users_list, char *username){
     if (aux == NULL || !strcmp(aux->account_status,"inactive")) return 0;
 
     return 1;
+}
+
+
+char* lookup_user_account_creation(USERS users_list, char *username){
+
+    int index = hash_func(username);
+    USER aux = users_list[index];
+
+    for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
+
+    if (aux == NULL) return NULL;
+
+    return aux->account_creation;
 }

@@ -109,7 +109,7 @@ void lookup_driver_account_creation(DRIVERS drivers_list, int index, char *accou
 
 void lookup_driver_gender(DRIVERS drivers_list, int index, char *gender){
     if (drivers_list[index].gender == NULL) strcpy(gender,"invalid");
-    strcpy(gender,drivers_list[index].gender);
+    else strcpy(gender,drivers_list[index].gender);
 }
 
 

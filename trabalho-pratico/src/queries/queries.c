@@ -59,7 +59,7 @@ int resolve_queries(char *path, USERS users_list, DRIVERS drivers_list, RIDES ri
                 break;
 
             case 8:
-                resolve_querie8(linha,p,users_list,drivers_list,rides_list,N_DRIVERS,N_RIDES);
+                resolve_querie8(linha,p,users_list,drivers_list,rides_list,N_DRIVERS);
                 break;
 
             case 9:

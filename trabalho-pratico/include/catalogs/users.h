@@ -209,4 +209,6 @@ void lookup_user_gender(USERS users_list, char *username, char *gender);
 int lookup_user_account_status(USERS users_list, char *username);
 
 
+char* lookup_user_account_creation(USERS users_list, char *username);
+
 #endif
