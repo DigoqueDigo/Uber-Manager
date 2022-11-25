@@ -82,6 +82,11 @@ void free_drivers(DRIVERS drivers_list, int N_DRIVERS){
 
 // FUNÇÕES DE MANAGER
 
+int analyse_driver(DRIVERS drivers_list, int index){
+    if (drivers_list[index].name == NULL) return 0;
+    return 1;
+}
+
 void lookup_car_class(DRIVERS drivers_list, int index, char *car_class){
     struct driver aux = drivers_list[index];
     strcpy(car_class,aux.car_class);

@@ -59,6 +59,11 @@ void free_rides(RIDES rides_list, int N_RIDES){
 
 // FUNÇÕES DE MANAGER
 
+int analyse_ride(RIDES rides_list, int index){
+    if (rides_list[index].date == NULL) return 0;
+    return 1;
+}
+
 
 int lookup_id_driver(RIDES rides_list, int index){
     return rides_list[index].driver;

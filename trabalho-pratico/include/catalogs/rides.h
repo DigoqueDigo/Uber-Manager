@@ -122,6 +122,7 @@ void free_rides(RIDES rides_list, int N_RIDES);
 
 // MANAGER
 
+int analyse_ride(RIDES rides_list, int index);
 
 /**
  * @brief Função que recolhe o id de um condutor

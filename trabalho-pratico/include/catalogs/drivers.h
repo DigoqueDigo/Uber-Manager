@@ -96,6 +96,8 @@ void free_drivers(DRIVERS drivers_list, int N_DRIVERS);
 
 // MANAGER
 
+int analyse_driver(DRIVERS drivers_list, int index);
+
 
 /**
  * @brief Função recolhe informação da classe do carro de um condutor
