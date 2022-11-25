@@ -11,22 +11,21 @@ double calculate_average_distance(RIDES rides_list, CITIES cities_list, int N_CI
     double acc = 0;
     int sp, *positions, aux_date, count = 0;
 
-    positions = lookup_cities_positions(cities_list,city,&sp,N_CITIES);
+    if (analyse_city(cities_list,city,N_CITIES) == 0) return acc;
 
-    if (positions == NULL) return acc;
+    positions = lookup_cities_positions(cities_list,city,&sp,N_CITIES);
 
     for (int p = 0; p < sp; p++){
 
-        date_ride = lookup_rides_date(rides_list,positions[p]);
+        if (analyse_ride(rides_list,positions[p])){
 
-        if (date_ride != NULL){
-    
-           aux_date = convert_date_to_int(date_ride);
+            date_ride = lookup_rides_date(rides_list,positions[p]);
+            aux_date = convert_date_to_int(date_ride);
 
-           if (date1 <= aux_date && aux_date <= date2){
+            if (date1 <= aux_date && aux_date <= date2){
                
-               acc += lookup_rides_distance(rides_list,positions[p]);
-               count++;
+                acc += lookup_rides_distance(rides_list,positions[p]);
+                count++;
            }
         }
     }

@@ -64,6 +64,18 @@ void free_cities_list(CITIES cities_list, int N_CITIES){
     free(cities_list);
 }
 
+//MANAGER
+
+int analyse_city(CITIES cities_list, char *city, int N_CITIES){
+    int p;
+
+    for (p = 0; p < N_CITIES && !strcmp(cities_list[p].city,city); p++);
+
+    if (p == N_CITIES) return 0;
+
+    return 1;
+}
+
 
 int* lookup_cities_positions(CITIES cities_list, char *city, int *sp, int N_CITIES){
     int p;

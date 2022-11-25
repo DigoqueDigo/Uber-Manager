@@ -126,6 +126,19 @@ void free_hash_table(USERS users_list){
 // FUNÇÕES DE MANAGER
 
 
+int analyse_user(USERS users_list, char *username){
+
+    int index = hash_func(username);
+    USER aux = users_list[index];
+
+    for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
+
+    if (aux == NULL) return 0;
+
+    return 1;
+}
+
+
 int lookup_user(USERS list, char *username, char *name, char *account_creation, char *gender){
     USER aux;
     int index = hash_func(username);

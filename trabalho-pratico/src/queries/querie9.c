@@ -43,20 +43,19 @@ int fill_sort_tip(SORT_TIP *sort_tip_list, RIDES rides_list, int date_1, int dat
 
     for (int p = 1; p < N_RIDES; p++){
 
-        date = lookup_rides_date(rides_list,p);
+        if (analyse_ride(rides_list,p)){
 
-        if (date != NULL){
-
+            date = lookup_rides_date(rides_list,p);
             date_int = convert_date_to_int(date);
             tip = lookup_rides_tip(rides_list,p);
 
             if (date_1 <= date_int && date_int <= date_2 && tip != 0){
 
-
                 distance = lookup_rides_distance(rides_list,p);
                 city = lookup_rides_city(rides_list,p);
 
                 if (N >= size){
+                    
                     size *= 2;
                     *sort_tip_list = realloc(*sort_tip_list,size*sizeof(struct sort_tip));
                     

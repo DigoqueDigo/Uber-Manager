@@ -75,26 +75,24 @@ void free_cities(DRIVER_CITY abin){
 DRIVER_CITY fill_abin(RIDES rides_list, DRIVERS drivers_list, CITIES cities_list, char *city, int N_CITIES){
     
     DRIVER_CITY new = NULL;
-    char *token, name[200];
+    char name[200];
     double score;
-    int *positions, id, sp; // este id corresponde ao driver
+    int *positions, id, sp;
 
-    positions = lookup_cities_positions(cities_list,city,&sp,N_CITIES);
+    if (analyse_city(cities_list,city,N_CITIES)){
 
-    if (positions != NULL){
+        positions = lookup_cities_positions(cities_list,city,&sp,N_CITIES);
 
-        for (int p = 1; p < sp; p++){ //depois testar com o p a começar em zero
+        for (int p = 0; p < sp; p++){
 
-            token = lookup_rides_city(rides_list,positions[p]);
-
-            if (token && !strcmp(token,city)){
+            if (analyse_ride(rides_list,positions[p])){
 
                 score = lookup_rides_score_driver(rides_list,positions[p]);
                 id = lookup_rides_id_driver(rides_list,positions[p]);
-                lookup_driver_name(drivers_list,id,name);
 
-                if (lookup_driver_accounts_status(drivers_list,id)){
-
+                if (analyse_driver(drivers_list,id) && lookup_driver_accounts_status(drivers_list,id)){
+                    
+                    lookup_driver_name(drivers_list,id,name);
                     push_driver_score(&new,id,score,name);
                 }
             }
@@ -162,11 +160,15 @@ void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rid
 
     ficheiro = fopen(output_file,"a");
 
-
     DRIVER_CITY abin = fill_abin(rides_list,drivers_list,cities_list,token,N_CITIES);
 
-
     Nodes = count_nodes(abin);
+
+    if (Nodes == 0){
+
+        fclose(ficheiro);
+        return;
+    }
 
     DRIVER_CITY_LIST list = malloc(Nodes*sizeof(struct driver_city_list));
 

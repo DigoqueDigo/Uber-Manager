@@ -39,50 +39,64 @@ int fill_sort_gender(USERS users_list, DRIVERS drivers_list, RIDES rides_list, S
     
     char driver_name[500] = "", driver_account_creation[500] = "", driver_gender[30] = "";
     char user_name[500] = "", username[500] = "", user_gender[30] = "", *user_account_creation;
-    int *positions, sp, N = 0, size = CAP_GENDER;
+    int *positions, sp, N = 0, temp, size = CAP_GENDER;
     
     for (int p = 1; p < N_DRIVERS; p++){
 
-        lookup_driver_gender(drivers_list,p,driver_gender);
+        if (analyse_driver(drivers_list,p)){
 
-        if (!strcmp(driver_gender,gender) && lookup_driver_accounts_status(drivers_list,p)){
-            
+            lookup_driver_gender(drivers_list,p,driver_gender);
             lookup_driver_account_creation(drivers_list,p,driver_account_creation);
 
-            if (calculate_idade(driver_account_creation) >= age){
+            temp = calculate_idade(driver_account_creation);
+ 
+
+            if (temp >= age && !strcmp(driver_gender,gender) && lookup_driver_accounts_status(drivers_list,p)){
 
                 positions = lookup_driver_positions(drivers_list,p,&sp);
                 lookup_driver_name(drivers_list,p,driver_name);
             
+                
                 for (int i = 0; i < sp; i++){
-               
-                    lookup_rides_username(rides_list,positions[i],username);
-                    lookup_user_gender(users_list,username,user_gender);
-
-                    if (!strcmp(user_gender,gender) && lookup_user_account_status(users_list,username)){
-                        
-                        lookup_user_name(users_list,username,user_name);
-                        user_account_creation = lookup_user_account_creation(users_list,username);
 
                     
-                        if (user_account_creation != NULL && calculate_idade(user_account_creation) >= age){
+                    if (analyse_ride(rides_list,positions[i])){
 
-                            int aux_1 = convert_date_to_int(driver_account_creation);
-                            int aux_2 = convert_date_to_int(user_account_creation);
+                        lookup_rides_username(rides_list,positions[i],username);
 
-                            if (N >= size){
+                        
+                        if (analyse_user(users_list,username)){
+                        
+                            lookup_user_gender(users_list,username,user_gender);
 
-                                size *= 2;
-                                *list = realloc(*list,size*sizeof(struct sort_gender));
-                            }                           
+                            
+                            if (!strcmp(user_gender,gender) && lookup_user_account_status(users_list,username)){
 
-                            (*list)[N].id_driver = p;
-                            (*list)[N].account_creation_driver = aux_1;
-                            (*list)[N].account_creation_user = aux_2;
-                            (*list)[N].name_driver = strdup(driver_name);
-                            (*list)[N].username = strdup(username);
-                            (*list)[N].name_user = strdup(user_name);
-                            (*list)[N++].id_ride = positions[i];
+                                lookup_user_name(users_list,username,user_name);
+                                user_account_creation = lookup_user_account_creation(users_list,username);
+
+                    
+                                if (calculate_idade(user_account_creation) >= age){
+
+                                    int aux_1 = convert_date_to_int(driver_account_creation);
+                                    int aux_2 = convert_date_to_int(user_account_creation);
+
+                                    
+                                    if (N >= size){
+
+                                        size *= 2;
+                                        *list = realloc(*list,size*sizeof(struct sort_gender));
+                                    }                           
+
+                                    (*list)[N].id_driver = p;
+                                    (*list)[N].account_creation_driver = aux_1;
+                                    (*list)[N].account_creation_user = aux_2;
+                                    (*list)[N].name_driver = strdup(driver_name);
+                                    (*list)[N].username = strdup(username);
+                                    (*list)[N].name_user = strdup(user_name);
+                                    (*list)[N++].id_ride = positions[i];
+                                }
+                            }
                         }
                     }
                 }

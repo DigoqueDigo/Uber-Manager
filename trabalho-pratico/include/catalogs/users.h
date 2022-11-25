@@ -130,6 +130,8 @@ void free_hash_table(USERS users_list);
 
 // MANAGER
 
+int analyse_user(USERS users_list, char *username);
+
 
 /**
  * @brief Função que recolhe alguns dados dos utilizadores de forma especifica

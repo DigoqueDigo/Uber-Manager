@@ -68,6 +68,9 @@ CITIES realloc_cities(CITIES cities_list, int new_size);
 void free_cities_list(CITIES cities_list, int N_CITIES);
 
 
+int analyse_city(CITIES cities_list, char *city, int N_CITIES);
+
+
 /**
  * @brief Função recolhe a informação dos indices de uma certa cidade
  * 
