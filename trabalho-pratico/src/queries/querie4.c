@@ -6,34 +6,38 @@
 
 double preco_medio_cidade(DRIVERS drivers_list, RIDES rides_list, CITIES cities_list, int N_CITIES, char* city){
     char aux[500];
-    int sp, dist, id, count = 0;
+    int sp, dist, id, count = 0, *positions;
     double total = 0;
-    int *positions = lookup_cities_positions(cities_list,city,&sp,N_CITIES);
 
-    if (positions == NULL) return 0;
+    if (!analyse_city(cities_list,city,N_CITIES)) return 0;
+
+    positions = lookup_cities_positions(cities_list,city,&sp,N_CITIES);
 
     for (int p = 0; p < sp; p++){
 
-        dist = lookup_rides_distance(rides_list,positions[p]);
-        id = lookup_rides_id_driver(rides_list,positions[p]);
+        if (analyse_ride(rides_list,positions[p])){
 
-        
-        if (dist != 0 && id != -1){
+            dist = lookup_rides_distance(rides_list,positions[p]);
+            id = lookup_rides_id_driver(rides_list,positions[p]);
 
-            count++;
 
-            lookup_car_class(drivers_list,id,aux);
+            if (analyse_driver(drivers_list,id)){
 
-            if (!strcasecmp(aux,"basic")){
-                total += (dist*TK_BASIC) + T_BASIC;
-            }
+                count++;
 
-            else if (!strcasecmp(aux,"green")){
-                total += (dist*TK_GREEN) + T_GREEN;
-            }
+                lookup_car_class(drivers_list,id,aux);
 
-            else if (!strcasecmp(aux,"premium")){
-                total += (dist*TK_PREMIUM) + T_PREMIUM;
+                if (!strcasecmp(aux,"basic")){
+                    total += (dist*TK_BASIC) + T_BASIC;
+                }
+
+                else if (!strcasecmp(aux,"green")){
+                    total += (dist*TK_GREEN) + T_GREEN;
+                }
+
+                else if (!strcasecmp(aux,"premium")){
+                    total += (dist*TK_PREMIUM) + T_PREMIUM;
+                }
             }
         }
     }

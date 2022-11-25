@@ -44,7 +44,7 @@ int resolve_queries(char *path, USERS users_list, DRIVERS drivers_list, RIDES ri
                 break;
 
             case 3:
-                resolve_querie3(linha,p,users_list,rides_list,N_RIDES);
+                resolve_querie3(linha,p,users_list,rides_list);
                 break;
 
             case 4:

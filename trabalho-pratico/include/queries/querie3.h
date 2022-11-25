@@ -10,6 +10,7 @@
  \brief Módulo para a resolução da querie 3
 */
 
+#define CAP_DISTANCE 1000
 
 /*!
  * @brief Estrutura responsável pelo armazenamento temporario de dados e pela sua ordenação
@@ -22,10 +23,9 @@ typedef struct sort_distance *SORT_DISTANCE;
 /**
  * @brief Função que inicializa um estrutura de ordenação
  * 
- * @param N_RIDES
  * @return estrutura de dados onde serão colocadas as avaliações dos condutores numa dada cidade
  */
-SORT_DISTANCE init_sort_distance(int N_RIDES);
+SORT_DISTANCE init_sort_distance();
 
 
 /**
@@ -43,9 +43,8 @@ void free_sort_distance(SORT_DISTANCE list, int N);
  * @param users_list array com as informações dos utilizadores
  * @param rides_list array com as informações das viagens
  * @param list estrutura onde os utilizadores serão armazenados
- * @param N comprimento da estrutura onde estão a ser colocados os dados
  */
-void fill_sort_distance(USERS users_list, RIDES rides_list, SORT_DISTANCE list, int *N);
+int fill_sort_distance(USERS users_list, RIDES rides_list, SORT_DISTANCE *list);
 
 
 /**
@@ -87,6 +86,6 @@ int compare_username(const void *a, const void *b);
  * @param rides_list array com as informações das cidades
  * @param N_RIDES tamanho do array das viagens
  */
-void resolve_querie3(char *command, int ncommand, USERS users_list, RIDES rides_list, int N_RIDES);
+void resolve_querie3(char *command, int ncommand, USERS users_list, RIDES rides_list);
 
 #endif
