@@ -139,17 +139,6 @@ int analyse_user(USERS users_list, char *username){
 }
 
 
-int lookup_user(USERS list, char *username, char *name, char *account_creation, char *gender){
-    USER aux;
-    int index = hash_func(username);
-    for (aux = list[index]; aux != NULL && strcmp(username,aux->username) != 0; aux = aux->prox);
-    if (aux == NULL || strcmp(aux->gender,gender) != 0 || !strcmp(aux->account_status,"inactive")) return 0;
-    strcpy(name,aux->name);
-    strcpy(account_creation,aux->account_creation);
-    return 1;
-}
-
-
 USER lookup_positions_and_name(USERS users_list, USER start, int *bucket, char *name, char *username, int **positions, int *sp){
     
     if (start == NULL){

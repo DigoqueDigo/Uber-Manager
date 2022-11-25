@@ -59,6 +59,7 @@ void free_rides(RIDES rides_list, int N_RIDES){
 
 // FUNÇÕES DE MANAGER
 
+
 int analyse_ride(RIDES rides_list, int index){
     if (rides_list[index].date == NULL) return 0;
     return 1;
@@ -76,31 +77,26 @@ void lookup_rides_username(RIDES rides_list, int index, char *username){
 
 
 char* lookup_rides_date(RIDES rides_list, int index){
-    if (rides_list[index].date == NULL) return NULL;
     return rides_list[index].date;
 }
 
 
 int lookup_rides_distance(RIDES rides_list, int index){
-    if (rides_list[index].date == NULL) return 0;
     return rides_list[index].distance;
 } 
 
 
 char* lookup_rides_city(RIDES rides_list, int index){
-    if (rides_list[index].date == NULL) return NULL;
     return rides_list[index].city;
 }
 
 
 double lookup_rides_score_driver(RIDES rides_list, int index){
-    if (rides_list[index].date == NULL) return 0;
     return rides_list[index].score_driver;
 }
 
 
 int lookup_rides_id_driver(RIDES rides_list, int index){
-    if (rides_list[index].date == NULL) return -1;
     return rides_list[index].driver;
 }
 

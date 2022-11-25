@@ -88,8 +88,7 @@ int analyse_driver(DRIVERS drivers_list, int index){
 }
 
 void lookup_car_class(DRIVERS drivers_list, int index, char *car_class){
-    struct driver aux = drivers_list[index];
-    strcpy(car_class,aux.car_class);
+    strcpy(car_class,drivers_list[index].car_class);
 }
 
 
@@ -100,10 +99,8 @@ int* lookup_driver_positions(DRIVERS drivers_list, int index, int *sp){
 }
 
 
-int lookup_driver_name(DRIVERS drivers_list, int index, char *name){
-    if (drivers_list[index].name == NULL) return 0;
+void lookup_driver_name(DRIVERS drivers_list, int index, char *name){
     strcpy(name,drivers_list[index].name);
-    return 1;
 }
 
 
@@ -113,17 +110,16 @@ void lookup_driver_account_creation(DRIVERS drivers_list, int index, char *accou
 
 
 void lookup_driver_gender(DRIVERS drivers_list, int index, char *gender){
-    if (drivers_list[index].gender == NULL) strcpy(gender,"invalid");
-    else strcpy(gender,drivers_list[index].gender);
+    strcpy(gender,drivers_list[index].gender);
 }
 
 
 int lookup_driver_accounts_status(DRIVERS drivers_list, int index){
-    if (drivers_list[index].account_status == NULL || !strcmp(drivers_list[index].account_status,"inactive")) return 0;
+    if (!strcmp(drivers_list[index].account_status,"inactive")) return 0;
     return 1;
 }
 
 
 void lookup_driver_birth_date(DRIVERS drivers_list, int index, char *date){
-    if (drivers_list[index].account_status != NULL) strcpy(date,drivers_list[index].birth_date);
+    strcpy(date,drivers_list[index].birth_date);
 }

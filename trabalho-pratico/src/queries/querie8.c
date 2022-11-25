@@ -37,8 +37,8 @@ void free_sort_gender(SORT_GENDER list, int N){
 
 int fill_sort_gender(USERS users_list, DRIVERS drivers_list, RIDES rides_list, SORT_GENDER *list, char *gender, int N_DRIVERS, int age){
     
-    char driver_name[500] = "", driver_account_creation[500] = "", driver_gender[30] = "";
-    char user_name[500] = "", username[500] = "", user_gender[30] = "", *user_account_creation;
+    char driver_name[500], driver_account_creation[500], driver_gender[30];
+    char user_name[500], username[500], user_gender[30], *user_account_creation;
     int *positions, sp, N = 0, temp, size = CAP_GENDER;
     
     for (int p = 1; p < N_DRIVERS; p++){

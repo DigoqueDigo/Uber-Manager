@@ -126,9 +126,8 @@ int* lookup_driver_positions(DRIVERS drivers_list, int index, int *sp);
  * @param drivers_list estrutura de dados dos condutores
  * @param index id do condutor que pretendemos encontrar
  * @param name string para a qual será copiado o nome do condutor
- * @return 1 se a operação foi possivel, 0 caso contrário
  */
-int lookup_driver_name(DRIVERS drivers_list, int index, char *name);
+void lookup_driver_name(DRIVERS drivers_list, int index, char *name);
 
 
 /**

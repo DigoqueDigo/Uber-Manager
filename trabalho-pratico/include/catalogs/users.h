@@ -134,19 +134,6 @@ int analyse_user(USERS users_list, char *username);
 
 
 /**
- * @brief Função que recolhe alguns dados dos utilizadores de forma especifica
- * 
- * @param list estrutura com a informação de todos os utilizadores
- * @param username utilizado que se pretende fazer a recolha de dados
- * @param name string onde será guardado o nome do utiliador
- * @param account_creation string onde será guardada a data de criação de conta do utiliador
- * @param gender string onde será guardado o genero do utiliador
- * @return 1 se os dados recolhido são válidos, 0 se não consegui recolher os dados os se são inválidos
- */
-int lookup_user(USERS list, char *username, char *name, char *account_creation, char *gender);
-
-
-/**
  * @brief Função que recolhe alguns dados dos utilizadores de forma sequencial
  * 
  * @param users_list estrutura com a informação de todos os utilizadores
