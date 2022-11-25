@@ -40,29 +40,26 @@ void print_sort_score(SORT_SCORE list, int N){
 
 int fill_sort_score(SORT_SCORE *sort_score_list, DRIVERS drivers_list, RIDES rides_list, int N_DRIVERS){
 
-    int N = 0, size = CAP_SORT_SCORE, *positions, sp, recente_date;
+    int N = 0, size = CAP_SORT_SCORE, *positions, sp, recente_date = -1;
     char name[50], *date;
     double score;
 
-    for (int p = 1; p < N_DRIVERS; p++, score = 0){
+    for (int p = 1; p < N_DRIVERS; p++, score = 0, recente_date = -1){
 
-        if (lookup_driver_accounts_status(drivers_list,p)){
+        if (analyse_driver(drivers_list,p) && lookup_driver_accounts_status(drivers_list,p)){
 
             positions = lookup_driver_positions(drivers_list,p,&sp);
 
-            if (positions != NULL && sp != 0){
-
-                date = lookup_rides_date(rides_list,positions[0]);
-                recente_date = convert_date_to_int(date);
+            if (sp != 0){
 
                 for (int i = 0; i < sp; i++){
+
+                    if (analyse_ride(rides_list,positions[i])){
                     
-                    score += lookup_rides_score_driver(rides_list,positions[i]);
-                    date = lookup_rides_date(rides_list,positions[i]);
+                        score += lookup_rides_score_driver(rides_list,positions[i]);
+                        date = lookup_rides_date(rides_list,positions[i]);
 
-                    if (recente_date < convert_date_to_int(date)){
-
-                        recente_date = convert_date_to_int(date);
+                        if (recente_date < convert_date_to_int(date)) recente_date = convert_date_to_int(date);
                     }
                 }
 
