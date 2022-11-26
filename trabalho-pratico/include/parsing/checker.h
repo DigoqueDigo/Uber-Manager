@@ -115,4 +115,13 @@ int check_username(char *string);
  */
 int check_tip(char *string);
 
+
+/**
+ * @brief Função que valida os dados referentes a uma distancia
+ * 
+ * @param string segmento de memória que contem 
+ * @return 1 se a distancia é válida, 0 caso não seja
+ */
+int check_distance(char *string);
+
 #endif

@@ -222,7 +222,7 @@ int set_ride_line(LINE linha, char *string, RIDES lista, USERS lista_users, DRIV
                 break;
 
             case 5:
-                if (check_id(token)) linha[p].data = strdup(token);
+                if (check_distance(token)) linha[p].data = strdup(token);
                 else return 0;
                 break;
 

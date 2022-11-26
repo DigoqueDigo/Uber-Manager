@@ -8,17 +8,17 @@
 
 void calculate_user(USERS users_list, DRIVERS drivers_list, RIDES rides_list, FILE *ficheiro, char *username){
     
-    int sp, *positions, id_driver, distance, age;
+    int sp, *positions, id_driver, distance, age, index = hash_func(username);
     char birth_date[100], gender[100], name[100], car_class[100];
     double average_score = 0,  money = 0, tip;
 
-    if (analyse_user(users_list,username) == 0 || lookup_user_account_status(users_list,username) == 0) return;
+    if (analyse_user(users_list,username,index) == 0 || lookup_user_account_status(users_list,username,index) == 0) return;
 
-    lookup_user_name(users_list,username,name);
-    lookup_user_gender(users_list,username,gender);
-    lookup_user_birth_date(users_list,username,birth_date);
+    lookup_user_name(users_list,username,name,index);
+    lookup_user_gender(users_list,username,gender,index);
+    lookup_user_birth_date(users_list,username,birth_date,index);
 
-    positions = lookup_user_positions(users_list,username,&sp);
+    positions = lookup_user_positions(users_list,username,&sp,index);
 
     for (int p = 0; p < sp; p++){
 
@@ -55,7 +55,7 @@ void calculate_user(USERS users_list, DRIVERS drivers_list, RIDES rides_list, FI
         }
     }
 
-    average_score /= sp;
+    if (sp > 0) average_score /= sp;
 
     age = calculate_idade(birth_date);
 
@@ -115,7 +115,8 @@ void calculate_driver(DRIVERS drivers_list, RIDES rides_list, FILE *ficheiro, in
         }
     }
 
-    average_score /= sp;
+    if (sp > 0) average_score /= sp;
+    
     age = calculate_idade(birth_date);
 
     fprintf(ficheiro, "%s;%s;%d;%.3f;%d;%.3f\n", name, gender, age, average_score, sp, money);

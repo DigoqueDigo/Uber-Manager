@@ -13,6 +13,7 @@ int check_id(char *string){
     return 1;
 }
 
+
 int check_name(char *string){
     if (string[0] == '\0') return 0;
     for (int p = 0; string[p] != '\0'; p++){
@@ -20,6 +21,7 @@ int check_name(char *string){
     }
     return 1;
 }
+
 
 int check_date(char *string){
     if (strlen(string) != 10) return 0;
@@ -100,4 +102,14 @@ int check_tip(char *string){
         if (!isdigit(string[p]) && string[p] != '.') return 0;
     }
     return 1;
+}
+
+
+int check_distance(char *string){
+    int p;
+    for (p = 0; string[p] != '\0'; p++){
+        if (!isdigit(string[p])) return 0;
+    }
+    if (p > 0 && string[0] != '0') return 1;
+    return 0;
 }

@@ -126,9 +126,8 @@ void free_hash_table(USERS users_list){
 // FUNÇÕES DE MANAGER
 
 
-int analyse_user(USERS users_list, char *username){
+int analyse_user(USERS users_list, char *username, int index){
 
-    int index = hash_func(username);
     USER aux = users_list[index];
 
     for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
@@ -163,62 +162,54 @@ USER lookup_positions_and_name(USERS users_list, USER start, int *bucket, char *
 }
 
 
-int* lookup_user_positions(USERS users_list, char *username, int *sp){
+int* lookup_user_positions(USERS users_list, char *username, int *sp, int index){
     
-    int index = hash_func(username);
     USER aux = users_list[index];
 
     for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
 
-    if (aux == NULL) return NULL;
+    if (aux == NULL){
+        *sp = 0;
+        return NULL;
+    }
 
     *sp = aux->sp;
     return (aux->positions);
 }
 
 
-void lookup_user_name(USERS users_list, char *username, char *name){
+void lookup_user_name(USERS users_list, char *username, char *name, int index){
     
-    int index = hash_func(username);
     USER aux = users_list[index];
 
     for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
-
-    if (aux == NULL) return;
 
     strcpy(name,aux->name);
 }
 
 
-void lookup_user_birth_date(USERS users_list, char *username, char *date){
+void lookup_user_birth_date(USERS users_list, char *username, char *date, int index){
 
-    int index = hash_func(username);
     USER aux = users_list[index];
 
     for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
-
-    if (aux == NULL) return;
 
     strcpy(date,aux->birth_date);
 }
 
 
-void lookup_user_gender(USERS users_list, char *username, char *gender){
+void lookup_user_gender(USERS users_list, char *username, char *gender, int index){
 
-    int index = hash_func(username);
     USER aux = users_list[index];
 
     for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
-
-    if (aux == NULL) return;
 
     strcpy(gender,aux->gender);
 }
 
 
-int lookup_user_account_status(USERS users_list, char *username){
+int lookup_user_account_status(USERS users_list, char *username, int index){
 
-    int index = hash_func(username);
     USER aux = users_list[index];
 
     for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
@@ -229,14 +220,11 @@ int lookup_user_account_status(USERS users_list, char *username){
 }
 
 
-char* lookup_user_account_creation(USERS users_list, char *username){
+char* lookup_user_account_creation(USERS users_list, char *username, int index){
 
-    int index = hash_func(username);
     USER aux = users_list[index];
 
     for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
-
-    if (aux == NULL) return NULL;
 
     return aux->account_creation;
 }

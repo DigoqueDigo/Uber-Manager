@@ -39,7 +39,7 @@ int fill_sort_gender(USERS users_list, DRIVERS drivers_list, RIDES rides_list, S
     
     char driver_name[500], driver_account_creation[500], driver_gender[30];
     char user_name[500], username[500], user_gender[30], *user_account_creation;
-    int *positions, sp, N = 0, temp, size = CAP_GENDER;
+    int *positions, sp, N = 0, temp, size = CAP_GENDER, index;
     
     for (int p = 1; p < N_DRIVERS; p++){
 
@@ -63,17 +63,18 @@ int fill_sort_gender(USERS users_list, DRIVERS drivers_list, RIDES rides_list, S
                     if (analyse_ride(rides_list,positions[i])){
 
                         lookup_rides_username(rides_list,positions[i],username);
+                        index = hash_func(username);
 
                         
-                        if (analyse_user(users_list,username)){
+                        if (analyse_user(users_list,username,index)){
                         
-                            lookup_user_gender(users_list,username,user_gender);
+                            lookup_user_gender(users_list,username,user_gender,index);
 
                             
-                            if (!strcmp(user_gender,gender) && lookup_user_account_status(users_list,username)){
+                            if (!strcmp(user_gender,gender) && lookup_user_account_status(users_list,username,index)){
 
-                                lookup_user_name(users_list,username,user_name);
-                                user_account_creation = lookup_user_account_creation(users_list,username);
+                                lookup_user_name(users_list,username,user_name,index);
+                                user_account_creation = lookup_user_account_creation(users_list,username,index);
 
                     
                                 if (calculate_idade(user_account_creation) >= age){

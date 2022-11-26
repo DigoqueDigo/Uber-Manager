@@ -130,7 +130,7 @@ void free_hash_table(USERS users_list);
 
 // MANAGER
 
-int analyse_user(USERS users_list, char *username);
+int analyse_user(USERS users_list, char *username, int index);
 
 
 /**
@@ -154,8 +154,9 @@ USER lookup_positions_and_name(USERS users_list, USER start, int *bucket, char *
  * @param users_list estrutura com a informação de todos os utilizadores 
  * @param username utilizador que se pretende analisar
  * @param sp endereço no qual será guardado o comprimento do array positions
+ * @param index indice do bucket fornecido pela função de hash
  */
-int* lookup_user_positions(USERS users_list, char *username, int *sp);
+int* lookup_user_positions(USERS users_list, char *username, int *sp, int index);
 
 
 /**
@@ -164,8 +165,9 @@ int* lookup_user_positions(USERS users_list, char *username, int *sp);
  * @param users_list estrutura com a informação de todos os utilizadores 
  * @param username utilizador que se pretende analisar
  * @param name string na qual será guardado o nome do utilizador
+ * @param index indice do bucket fornecido pela função de hash
  */
-void lookup_user_name(USERS users_list, char *username, char *name);
+void lookup_user_name(USERS users_list, char *username, char *name, int index);
 
 
 /**
@@ -174,8 +176,9 @@ void lookup_user_name(USERS users_list, char *username, char *name);
  * @param users_list estrutura com a informação de todos os utilizadores 
  * @param username utilizador que se pretende analisar
  * @param date string na qual será guardado a data de aniversário do utilizador
+ * @param index indice do bucket fornecido pela função de hash
  */
-void lookup_user_birth_date(USERS users_list, char *username, char *date);
+void lookup_user_birth_date(USERS users_list, char *username, char *date, int index);
 
 
 /**
@@ -184,8 +187,9 @@ void lookup_user_birth_date(USERS users_list, char *username, char *date);
  * @param users_list estrutura com a informação de todos os utilizadores 
  * @param username utilizador que se pretende analisar
  * @param gender string na qual será guardado o genero do utilizador
+ * @param index indice do bucket fornecido pela função de hash
  */
-void lookup_user_gender(USERS users_list, char *username, char *gender);
+void lookup_user_gender(USERS users_list, char *username, char *gender, int index);
 
 
 /**
@@ -193,11 +197,20 @@ void lookup_user_gender(USERS users_list, char *username, char *gender);
  * 
  * @param users_list estrutura com a informação de todos os utilizadores 
  * @param username utilizador que se pretende analisar
+ * @param index indice do bucket fornecido pela função de hash
  * @return 1 se a conta está ativa, 0 caso esteja inátiva
  */
-int lookup_user_account_status(USERS users_list, char *username);
+int lookup_user_account_status(USERS users_list, char *username, int index);
 
 
-char* lookup_user_account_creation(USERS users_list, char *username);
+/**
+ * @brief Função que recolhe a data de criação de conta de um utilizador
+ * 
+ * @param users_list estrutura com a informação de todos os utilizadores 
+ * @param username utilizador que se pretende analisar
+ * @param index indice do bucket fornecido pela função de hash
+ * @return data de criação de conta do utilizador
+ */
+char* lookup_user_account_creation(USERS users_list, char *username, int index);
 
 #endif
