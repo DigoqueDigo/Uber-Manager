@@ -25,31 +25,28 @@ void calculate_user(USERS users_list, DRIVERS drivers_list, RIDES rides_list, FI
         if (analyse_ride(rides_list,positions[p])){
 
             distance = lookup_rides_distance(rides_list,positions[p]);
+            average_score += lookup_rides_score_user(rides_list,positions[p]);
 
-            if (distance){
+            tip = lookup_rides_tip(rides_list,positions[p]);
+            id_driver = lookup_rides_id_driver(rides_list,positions[p]);
 
-                average_score += lookup_rides_score_user(rides_list,positions[p]);
-                tip = lookup_rides_tip(rides_list,positions[p]);
-                id_driver = lookup_rides_id_driver(rides_list,positions[p]);
+            if (analyse_driver(drivers_list,id_driver)){
 
-                if (analyse_driver(drivers_list,id_driver)){
+                lookup_car_class(drivers_list,id_driver,car_class);
 
-                    lookup_car_class(drivers_list,id_driver,car_class);
+                if (!strcasecmp(car_class,"basic")){
 
-                    if (!strcasecmp(car_class,"basic")){
+                    money += distance * TK_BASIC + T_BASIC + tip;
+                }
 
-                        money += distance * TK_BASIC + T_BASIC + tip;
-                    }
+                else if (!strcasecmp(car_class,"green")){
 
-                    else if (!strcasecmp(car_class,"green")){
+                    money += distance * TK_GREEN + T_GREEN + tip;
+                }
 
-                        money += distance * TK_GREEN + T_GREEN + tip;
-                    }
+                else if (!strcasecmp(car_class,"premium")){
 
-                    else if (!strcasecmp(car_class,"premium")){
-
-                        money += distance * TK_PREMIUM + T_PREMIUM + tip;
-                    }
+                    money += distance * TK_PREMIUM + T_PREMIUM + tip;
                 }
             }
         }
@@ -90,27 +87,22 @@ void calculate_driver(DRIVERS drivers_list, RIDES rides_list, FILE *ficheiro, in
         if (analyse_ride(rides_list,positions[p])){
 
             distance = lookup_rides_distance(rides_list,positions[p]);
+            tip = lookup_rides_tip(rides_list,positions[p]);
+            average_score += lookup_rides_score_driver(rides_list,positions[p]);
 
-            if (distance){
+            switch (class){
 
-                tip = lookup_rides_tip(rides_list,positions[p]);
-                average_score += lookup_rides_score_driver(rides_list,positions[p]);
+                case 0:
+                    money += distance * TK_BASIC + T_BASIC + tip;
+                    break;
 
-                switch (class){
+                case 1:
+                    money += distance * TK_GREEN + T_GREEN + tip;
+                    break;
 
-                    case 0:
-                        money += distance * TK_BASIC + T_BASIC + tip;
-                        break;
-
-                    case 1:
-                        money += distance * TK_GREEN + T_GREEN + tip;
-                        break;
-
-                    case 2:
-                        money += distance * TK_PREMIUM + T_PREMIUM + tip;
-                        break;
-                
-                }
+                case 2:
+                    money += distance * TK_PREMIUM + T_PREMIUM + tip;
+                    break;
             }
         }
     }
