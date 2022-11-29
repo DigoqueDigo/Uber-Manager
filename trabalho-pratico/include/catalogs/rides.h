@@ -78,9 +78,8 @@ struct ride* init_ride_list();
  * 
  * @param rides_list array das viagens que será realocado
  * @param new_size novo tamanho do array (x2)
- * @return estrutura de dados realodada
  */
-RIDES realloc_rides(RIDES rides_list, int new_size);
+void realloc_rides(RIDES *rides_list, int new_size);
 
 
 /**

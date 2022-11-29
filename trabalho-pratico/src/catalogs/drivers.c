@@ -25,9 +25,8 @@ DRIVERS init_drivers(){
     return new;
 }
 
-DRIVERS realloc_drivers(DRIVERS drivers_list, int new_size){
-    drivers_list = realloc(drivers_list,new_size*sizeof(struct driver));
-    return drivers_list;
+void realloc_drivers(DRIVERS *drivers_list, int new_size){
+    *drivers_list = realloc(*drivers_list,new_size*sizeof(struct driver));
 }
 
 

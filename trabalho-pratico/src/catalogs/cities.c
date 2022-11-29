@@ -48,9 +48,8 @@ void push_city(CITIES cities_list, char *city, int index, int *N_CITIES){
 }
 
 
-CITIES realloc_cities(CITIES cities_list, int new_size){
-    cities_list = realloc(cities_list,new_size*(sizeof(struct city)));
-    return cities_list;
+void realloc_cities(CITIES *cities_list, int new_size){
+    *cities_list = realloc(*cities_list,new_size*(sizeof(struct city)));
 }
 
 

@@ -54,9 +54,8 @@ void push_city(CITIES cities_list, char *city, int index, int *N_CITIES);
  * 
  * @param cities_list array das cidades que será realocado
  * @param new_size novo tamanho do array (x2)
- * @return estrutura de dados realodada
  */
-CITIES realloc_cities(CITIES cities_list, int new_size);
+void realloc_cities(CITIES *cities_list, int new_size);
 
 
 /**

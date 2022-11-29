@@ -24,9 +24,8 @@ struct ride* init_ride_list(){
 }
 
 
-RIDES realloc_rides(RIDES rides_list, int new_size){
-    rides_list = realloc(rides_list,new_size*sizeof(struct ride));
-    return rides_list;
+void realloc_rides(RIDES *rides_list, int new_size){
+    *rides_list = realloc(*rides_list,new_size*sizeof(struct ride));
 }
 
 

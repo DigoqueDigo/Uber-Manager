@@ -42,9 +42,8 @@ DRIVERS init_drivers();
  * 
  * @param drivers_list array dos condutores que será realocado
  * @param new_size novo tamanho do array (x2)
- * @return estrutura de dados realodada
  */
-DRIVERS realloc_drivers(DRIVERS drivers_list, int new_size);
+void realloc_drivers(DRIVERS *drivers_list, int new_size);
 
 
 /**
