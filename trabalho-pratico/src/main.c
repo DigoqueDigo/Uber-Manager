@@ -27,7 +27,7 @@ int main(int argc, char** argv){
 
         if (argc == 3){
 
-            resolve_queries(argv[2],users_list,drivers_list,rides_list,cities_list,N_DRIVERS,N_RIDES,N_CITIES);
+            resolve_queries_batch(argv[2],users_list,drivers_list,rides_list,cities_list,N_DRIVERS,N_RIDES,N_CITIES);
         }
     }
 

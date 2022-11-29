@@ -32,7 +32,8 @@
 /**
  * @brief Função que executa todos os comandos existentes num ficheiro de texto
  * 
- * @param path diretória do ficheiro com os comandos que têm de ser executados 
+ * @param command commando que se pretende executar 
+ * @param ncommand indice do comando a ser executado
  * @param users_list tabela de hash com toda a informação dos utilizadores
  * @param drivers_list array com toda a informação dos condutores
  * @param rides_list array com toda a informação correspondente às viagens
@@ -40,9 +41,22 @@
  * @param N_DRIVERS comprimento do array dos condutores
  * @param N_RIDES comprimento do array das viagens
  * @param N_CITIES comprimento do array das cidades
- * @return 0 se foi possivel aceder ao ficheiro com os comando e -1 caso não tenha sido possivel
  */
-int resolve_queries(
+void resolve_queries(
+    char *command,
+    char ncommand,
+    USERS users_list,
+    DRIVERS drivers_list,
+    RIDES rides_list,
+    CITIES cities_list,
+    int N_DRIVERS,
+    int N_RIDES,
+    int N_CITIES
+);
+
+
+
+int resolve_queries_batch(
     char *path,
     USERS users_list,
     DRIVERS drivers_list,
