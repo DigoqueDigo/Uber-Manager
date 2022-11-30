@@ -19,7 +19,7 @@ int fecth_users(char *path, USERS users_list){
     ficheiro = fopen(aux_path, "r");
 
     if (ficheiro == NULL){
-        perror("users.csv\n");
+        perror("users.csv");
         return -1;
     }
 

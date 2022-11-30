@@ -2,7 +2,7 @@
 #define TERMINAL_H
 
 
-int get_terminal_lines();
+// int get_terminal_lines();
 
 void print_empty_lines(int N);
 

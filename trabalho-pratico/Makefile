@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic-errors -O2 -Iinclude
-LIBS = -lm -ltermcap
-OBJS = src/main.o src/sort.o src/fixtures.o src/parsing/checker.o src/parsing/parser.o src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o src/fetch/collector.o src/queries/queries.o src/queries/querie1.o src/queries/querie2.o src/queries/querie3.o src/queries/querie4.o src/queries/querie5.o src/queries/querie6.o src/queries/querie7.o src/queries/querie8.o src/queries/querie9.o src/interactive/terminal.o src/interactive/pagination.o
+LIBS = -lm
+OBJS = src/main.o src/sort.o src/fixtures.o src/parsing/checker.o src/parsing/parser.o src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o src/fetch/collector.o src/queries/queries.o src/queries/querie1.o src/queries/querie2.o src/queries/querie3.o src/queries/querie4.o src/queries/querie5.o src/queries/querie6.o src/queries/querie7.o src/queries/querie8.o src/queries/querie9.o src/interactive/handle.o src/interactive/terminal.o src/interactive/pagination.o
 TARGET = programa-principal
 PATH_RESULTS = Resultados
 PATH_CSV_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/csv
