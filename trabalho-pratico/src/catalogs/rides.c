@@ -18,8 +18,8 @@ struct ride{
 };
 
 
-struct ride* init_ride_list(){
-    struct ride *new = malloc(CAP_RIDES*sizeof(struct ride));
+RIDES init_ride_list(){
+    RIDES new = malloc(CAP_RIDES*sizeof(struct ride));
     return new;
 }
 
@@ -45,7 +45,7 @@ void push_ride(RIDES lista, char *id, char *date, char *driver, char *user, char
 
 
 void free_rides(RIDES rides_list, int N_RIDES){
-    for (int p = 0; p < N_RIDES; p++){
+    for (int p = 1; p < N_RIDES; p++){
         if (rides_list[p].date != NULL){
             free(rides_list[p].date);
             free(rides_list[p].user);

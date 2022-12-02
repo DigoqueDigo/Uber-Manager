@@ -54,32 +54,59 @@ int main(int argc, char** argv){
                         if (!fecth_users(token,users_list)){
 
                             users_flag = 1;
-                            mensage_success(0);
+                            mensage_success(0,1);
                         }
                     }
 
                     if (!N_DRIVERS){
                     
-                        if (!fetch_drivers(token,&drivers_list,&N_DRIVERS,&SIZE_DRIVERS)) mensage_success(1);
+                        if (!fetch_drivers(token,&drivers_list,&N_DRIVERS,&SIZE_DRIVERS)) mensage_success(1,1);
                     }
 
                     if (!N_RIDES){
 
-                        if (!fetch_rides(token,users_list,drivers_list,&rides_list,&cities_list,&N_RIDES,&N_CITIES,&SIZE_RIDES,&SIZE_CITIES)) mensage_success(2);
+                        if (!fetch_rides(token,users_list,drivers_list,&rides_list,&cities_list,&N_RIDES,&N_CITIES,&SIZE_RIDES,&SIZE_CITIES)) mensage_success(2,1);
+                    }
+                }
+
+                else if (!strcmp(token,"remove")){
+
+                    for (token = strtok(NULL, " " "\n"); token; token = strtok(NULL, " " "\n")){
+
+                        
+                        if (!strcmp(token,"users") && users_flag) remove_users_catalog(&users_list,&users_flag);
+
+                        
+                        else if (!strcmp(token,"drivers") && N_DRIVERS){
+                            
+                            remove_drivers_catalog(&drivers_list,&N_DRIVERS);
+
+                            SIZE_DRIVERS = CAP_DRIVERS;
+                        }
+
+                        
+                        else if (!strcmp(token,"rides") && N_RIDES){
+                            
+                            remove_rides_catalog(&rides_list,&cities_list,&N_RIDES,&N_CITIES);
+                            
+                            SIZE_RIDES = CAP_RIDES;
+                            SIZE_CITIES = CAP_CITIES;
+                        }
                     }
                 }
                 
 
-                else if (!strcmp(token,"execute") && users_flag && N_DRIVERS && N_RIDES){
+                else if (!strcmp(token,"execute")){
 
-                    interactive_mode(users_list,drivers_list,rides_list,cities_list,N_DRIVERS,N_RIDES,N_CITIES);
+                    if (!users_flag || !N_DRIVERS || !N_RIDES) printf("Não é possivel executar sem os dados serem todos recolhidos\n");
+
+                    else interactive_mode(users_list,drivers_list,rides_list,cities_list,N_DRIVERS,N_RIDES,N_CITIES);
                 }
 
-                else if (strstr(string,"quit") == NULL && (!users_flag || !N_DRIVERS || !N_RIDES)) printf("Não é possivel avançar sem os dados serem recolhidos\n");
+                else if (strstr(string,"quit") == NULL) printf("Não foi possivel identificar o comando\n");
             }
         }
     }
-
 
     free_drivers(drivers_list,N_DRIVERS);
     free_rides(rides_list,N_RIDES);

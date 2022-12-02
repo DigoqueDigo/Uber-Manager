@@ -91,11 +91,19 @@ void page_browser(){
                 page = atoi(string);
                 print_page(ficheiro,page,pages,terminal_lines);
             }
+
+            else{
+
+                printf("Não foi possivel identificar o comando\n");
+                print_empty_lines(terminal_lines-1);
+            }
         }
     }
 
 
     fclose(ficheiro);
+
+    print_empty_lines(terminal_lines);
 
     remove("Resultados/command1_output.txt");
 }

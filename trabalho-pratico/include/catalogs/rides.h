@@ -70,7 +70,7 @@ typedef struct ride *RIDES;
  * 
  * @return estrutura de dados da viagens inicializada
  */
-struct ride* init_ride_list();
+RIDES init_ride_list();
 
 
 /**
