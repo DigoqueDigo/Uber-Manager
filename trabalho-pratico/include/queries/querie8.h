@@ -4,13 +4,18 @@
 #include <fixtures.h>
 #include <sort.h>
 
-#define CAP_GENDER 500
-
 
 /**
  \file querie8.h
  \brief Módulo para a resolução da querie 8
 */
+
+
+/*!
+ \def CAP_GENDER
+ \brief capacidade incial do array dos generos
+*/
+#define CAP_GENDER 500
 
 
 /*!

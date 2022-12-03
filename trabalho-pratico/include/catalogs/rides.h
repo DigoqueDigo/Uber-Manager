@@ -111,6 +111,15 @@ void push_ride(
 
 
 /**
+ * @brief Função que indica que uma viagem não está disponivel
+ * 
+ * @param rides_list array que será destuido e removido da memória
+ * @param index indice da viagem que não está disponivel
+ */
+void push_null_ride(RIDES rides_list, int index);
+
+
+/**
  * @brief Função liberta a memória utilizada pelo array das viagens
  * 
  * @param rides_list array que será destuido e removido da memória
@@ -121,7 +130,14 @@ void free_rides(RIDES rides_list, int N_RIDES);
 
 // MANAGER
 
+/**
+ * @brief Função que analisa se uma viagem está disponivel para consulta
+ * 
+ * @param rides_list array que será destuido e removido da memória
+ * @param index id da viagem que se pretende analisar
+ */
 int analyse_ride(RIDES rides_list, int index);
+
 
 /**
  * @brief Função que recolhe o id de um condutor

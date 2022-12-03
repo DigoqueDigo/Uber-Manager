@@ -44,6 +44,11 @@ void push_ride(RIDES lista, char *id, char *date, char *driver, char *user, char
 }
 
 
+void push_null_ride(RIDES rides_list, int index){
+    rides_list[index].date = NULL;
+}
+
+
 void free_rides(RIDES rides_list, int N_RIDES){
     for (int p = 1; p < N_RIDES; p++){
         if (rides_list[p].date != NULL){

@@ -60,6 +60,11 @@ void push_position_driver(DRIVERS lista, int position, char *driver_id){
 }
 
 
+void push_null_driver(DRIVERS drivers_list, int index){
+    drivers_list[index].name = NULL;
+}
+
+
 void free_drivers(DRIVERS drivers_list, int N_DRIVERS){
     for (int p = 1; p < N_DRIVERS; p++){
         if (drivers_list[p].name != NULL){

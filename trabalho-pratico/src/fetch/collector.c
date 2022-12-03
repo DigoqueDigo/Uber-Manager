@@ -68,6 +68,8 @@ int fetch_drivers(char *path, DRIVERS *drivers_list, int *N_DRIVERS, int *SIZE_D
         if (set_driver_line(linha,string,*drivers_list)){
             destroy_driver_line(linha);
         }
+
+        else push_null_driver(*drivers_list,*N_DRIVERS);
         
         ++*N_DRIVERS;
     }
@@ -114,6 +116,8 @@ int fetch_rides(char *path, USERS users_list, DRIVERS drivers_list, RIDES *rides
         if (set_ride_line(linha,string,*rides_list,users_list,drivers_list,*cities_list,N_CITIES)){
             destroy_driver_line(linha);
         }
+
+        else push_null_ride(*rides_list,*N_RIDES);
 
         ++*N_RIDES;
     }

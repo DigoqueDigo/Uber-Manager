@@ -43,7 +43,6 @@ void print_page(FILE *ficheiro, int page, int pages, int terminal_lines){
         p++;
     }
 
-
     print_empty_lines(terminal_lines-p);
 }
 

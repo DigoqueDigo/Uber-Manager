@@ -76,8 +76,6 @@ void search_mode(FILE *ficheiro, char *word, int terminal_lines){
     int pages, total_lines, page = 0, matches = 0;
     char string[1000] = "";
 
-    fseek(ficheiro,0,SEEK_SET);
-
     word += 2;
 
     total_lines = count_matches(ficheiro,word,&matches);
@@ -109,4 +107,3 @@ void search_mode(FILE *ficheiro, char *word, int terminal_lines){
 
     print_empty_lines(terminal_lines);
 }
-

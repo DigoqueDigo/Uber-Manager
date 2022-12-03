@@ -10,7 +10,13 @@
  \brief Módulo para a resolução da querie 3
 */
 
+
+/*!
+ \def CAP_DISTANCE
+ \brief capacidade incial do array das distancias
+*/
 #define CAP_DISTANCE 1000
+
 
 /*!
  * @brief Estrutura responsável pelo armazenamento temporario de dados e pela sua ordenação
@@ -40,7 +46,7 @@ void free_sort_distance(SORT_DISTANCE list, int N);
 /**
  * @brief Função que coloca as informações necessárias à ordenação dos utilizadores numa estrutura
  * 
- * @param users_list array com as informações dos utilizadores
+ * @param users_list tabela de hash com as informações dos utilizadores
  * @param rides_list array com as informações das viagens
  * @param list estrutura onde os utilizadores serão armazenados
  */
@@ -83,7 +89,7 @@ int compare_username(const void *a, const void *b);
  * @param command comando que será executado
  * @param ncommand número do comando a ser executado 
  * @param users_list tabela de hash com a informação dos utilizadores
- * @param rides_list array com as informações das cidades
+ * @param rides_list array com as informações das viagens
  * @param N_RIDES tamanho do array das viagens
  */
 void resolve_querie3(char *command, int ncommand, USERS users_list, RIDES rides_list);

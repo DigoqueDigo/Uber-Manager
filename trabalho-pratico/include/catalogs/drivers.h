@@ -85,6 +85,15 @@ void push_position_driver(DRIVERS lista, int position, char *driver_id);
 
 
 /**
+ * @brief Função que indica que um condutor é inválido
+ *
+ * @param drivers_list estrutura de dados dos condutores
+ * @param index id cujo o condutor é inválido
+ */ 
+void push_null_driver(DRIVERS drivers_list, int index);
+
+
+/**
  * @brief Função destroi a estrutura do condutores
  * 
  * @param drivers_list estrutura que será removida da memória
@@ -95,6 +104,12 @@ void free_drivers(DRIVERS drivers_list, int N_DRIVERS);
 
 // MANAGER
 
+/**
+ * @brief Função que analisa se um condutor está disponivel
+ * 
+ * @param drivers_list estrutura que será removida da memória
+ * @param index id do condutor que se pretende analisar
+ */
 int analyse_driver(DRIVERS drivers_list, int index);
 
 
