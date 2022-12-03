@@ -82,10 +82,6 @@ void search_mode(FILE *ficheiro, char *word, int terminal_lines){
 
     total_lines = count_matches(ficheiro,word,&matches);
     pages = get_total_pages(total_lines,terminal_lines);
-
-    /*printf("total_lines: %d\n", total_lines);
-    printf("pages: %d\n", pages);
-    printf("matches: %d\n", matches);*/
     
     print_search(ficheiro,word,0,pages,terminal_lines);
     
