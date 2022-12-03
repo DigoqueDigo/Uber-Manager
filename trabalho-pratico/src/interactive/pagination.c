@@ -21,7 +21,7 @@ void print_page(FILE *ficheiro, int page, int pages, int terminal_lines){
     int p = 0;
     char string[1000];
 
-    fseek(ficheiro, 0, SEEK_SET);
+    fseek(ficheiro,0,SEEK_SET);
 
     if (page < pages){
 
@@ -36,14 +36,8 @@ void print_page(FILE *ficheiro, int page, int pages, int terminal_lines){
             }
         }
     }
-
-    else if (!pages){
-        
-        printf("A querie não gerou qualquer output\n");
-        p++;
-    }
     
-    else if (page >= pages){
+    else{
         
         printf("Não foi possivel identificar a página %d\n", page);
         p++;
@@ -74,7 +68,13 @@ void page_browser(){
     //terminal_lines = get_terminal_lines();
     pages = get_total_pages(total_lines,terminal_lines);
 
-    print_page(ficheiro,0,pages,terminal_lines);            
+    if (!pages){
+        
+        printf("A querie não gerou qualquer resultado\n");
+        print_empty_lines(terminal_lines-1);
+    }
+
+    else print_page(ficheiro,0,pages,terminal_lines);            
     
 
     while (strstr(string,"quit") == NULL){
@@ -85,10 +85,21 @@ void page_browser(){
 
             string[strlen(string)-1] = '\0'; 
 
+            if (!pages){
+                
+                printf("A querie não gerou qualquer resultado\n");
+                print_empty_lines(terminal_lines-1);
+            }
 
-            if (check_id(string)){
+            else if (check_id(string)){
 
                 page = atoi(string);
+                print_page(ficheiro,page,pages,terminal_lines);
+            }
+
+            else if (string[0] == '/'){
+                
+                search_mode(ficheiro,string,terminal_lines);
                 print_page(ficheiro,page,pages,terminal_lines);
             }
 
