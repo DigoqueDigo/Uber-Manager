@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic-errors -O2 -Iinclude
-LIBS = -lm -ltermcap
+LIBS = -lm
 OBJS_INTERACTIVE = src/interactive/handle.o src/interactive/terminal.o src/interactive/pagination.o src/interactive/search.o
 OBJS_CATALOGS = src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o
 OBJS_FETCH = src/fetch/collector.o
