@@ -1,7 +1,12 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic-errors -O2 -Iinclude
-LIBS = -lm
-OBJS = src/main.o src/sort.o src/fixtures.o src/parsing/checker.o src/parsing/parser.o src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o src/fetch/collector.o src/queries/queries.o src/queries/querie1.o src/queries/querie2.o src/queries/querie3.o src/queries/querie4.o src/queries/querie5.o src/queries/querie6.o src/queries/querie7.o src/queries/querie8.o src/queries/querie9.o src/interactive/handle.o src/interactive/terminal.o src/interactive/pagination.o src/interactive/search.o
+LIBS = -lm -ltermcap
+OBJS_INTERACTIVE = src/interactive/handle.o src/interactive/terminal.o src/interactive/pagination.o src/interactive/search.o
+OBJS_CATALOGS = src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o
+OBJS_FETCH = src/fetch/collector.o
+OBJS_UTILS = src/main.o src/sort.o src/fixtures.o
+OBJS_PARSER = src/parsing/checker.o src/parsing/parser.o
+OBJS_QUERIES = src/queries/queries.o src/queries/querie1.o src/queries/querie2.o src/queries/querie3.o src/queries/querie4.o src/queries/querie5.o src/queries/querie6.o src/queries/querie7.o src/queries/querie8.o src/queries/querie9.o 
 TARGET = programa-principal
 PATH_RESULTS = Resultados
 PATH_CSV_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/csv
@@ -10,9 +15,33 @@ PATH_CSV_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/csv
 PATH_INPUT_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/inputs
 
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS_UTILS) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES) $(OBJS_INTERACTIVE)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 	@mkdir $(PATH_RESULTS)
+
+
+$(OBJS_UTILS): src/%.o : src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+$(OBJS_PARSER): src/parsing/%.o : src/parsing/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+$(OBJS_CATALOGS): src/catalogs/%.o : src/catalogs/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+$(OBJS_FETCH): src/fetch/%.o : src/fetch/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+$(OBJS_QUERIES): src/queries/%.o : src/queries/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+$(OBJS_INTERACTIVE): src/interactive/%.o : src/interactive/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 
 teste1:
@@ -96,6 +125,7 @@ teste2:
 
 clean_teste:
 	rm Resultados/*.txt
+
 
 clean:
 	rm src/*.o
