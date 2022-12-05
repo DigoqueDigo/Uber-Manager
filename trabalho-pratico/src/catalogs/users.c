@@ -60,14 +60,8 @@ int hash_func(char *str){
 
 
 void push_user_bucket(USER *lista, USER x){
-    if (*lista == NULL){
-        *lista = x;
-        x->prox = NULL;
-        }
-    else{
-        x->prox = *lista;
-        *lista = x;
-    }
+    x->prox = *lista;
+    *lista = x;
 }
 
 
