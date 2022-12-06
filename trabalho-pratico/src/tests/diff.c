@@ -5,20 +5,21 @@
 
 
 
-int compare_two_files(FILE *source, FILE *test){
+int compare_two_files(FILE *source, FILE *test, char *obtained, char *expected){
 
     char source_line[1000], test_line[1000];
 
     while (fgets(source_line, 1000, source) && fgets(test_line, 1000, test)){
 
-        if (strcmp(source_line,test_line)) return 0;
+        if (strcmp(source_line,test_line)) break;
     }
 
-    if (feof(source) && fgets(test_line, 1000, test)) return 0;
+    if (feof(source) && fgets(test_line, 1000, test) == NULL) return 1;
 
-    if (!feof(source) || !feof(test)) return 0;
+    strcpy(obtained,source_line);
+    strcpy(expected,test_line);
 
-    return 1;
+    return 0;
 }
 
 
@@ -27,6 +28,7 @@ void set_all_comparations(TESTS tests_list, int N_TESTS, char *test_path){
     FILE *source, *test;
 
     char source_name[500], test_name[500];
+    char expected[500], obtained[500];
     int checker;
 
 
@@ -49,9 +51,9 @@ void set_all_comparations(TESTS tests_list, int N_TESTS, char *test_path){
         }
 
         
-        checker = compare_two_files(source,test);
+        checker = compare_two_files(source,test,obtained,expected);
 
-        push_test_checker(tests_list,p,checker);
+        push_test_comparation(tests_list,p,checker,obtained,expected);
 
         fclose(source);
         fclose(test);

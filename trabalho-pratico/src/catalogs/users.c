@@ -136,7 +136,7 @@ USER lookup_positions_and_name(USERS users_list, USER start, int *bucket, char *
     
     if (start == NULL){
 
-        for (*bucket = *bucket+1; users_list[*bucket] == NULL && *bucket < BUCKET; ++*bucket);
+        for (*bucket = *bucket+1; *bucket < BUCKET && users_list[*bucket] == NULL; ++*bucket);
 
         if (*bucket == BUCKET) return NULL;
 

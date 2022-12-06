@@ -5,7 +5,7 @@
 #include <tests/test.h>
 
 
-int compare_two_files(FILE *source, FILE *test);
+int compare_two_files(FILE *source, FILE *test, char *obtained, char *expected);
 
 void set_all_comparations(TESTS tests_list, int N_TESTS, char *test_path);
 
