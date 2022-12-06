@@ -43,3 +43,13 @@ void set_command_name(char *command, int N){
     strcat(command,index_command);
     strcat(command,"_output.txt");
 }
+
+
+void set_outfile_name(char *file_path, int N, char *sub_path){
+    char index[20];
+    sprintf(index, "%d", N);
+    strcpy(file_path,sub_path);
+    strcat(file_path,"/command");
+    strcat(file_path,index);
+    strcat(file_path,"_output.txt");
+}

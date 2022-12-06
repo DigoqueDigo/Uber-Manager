@@ -48,4 +48,15 @@ int convert_date_to_int(char *string);
  */
 void set_command_name(char *command, int N);
 
+
+/**
+ * @brief Função que cria o nome do ficheiro de output conforme uma diretoria
+ * 
+ * @param file_path string na qual será guardado o nome do ficheiro de output
+ * @param N indixe do comando
+ * @param sub_path diretoria a partir da qual é criado no nome do ficheiro de output
+ 
+ */
+void set_outfile_name(char *file_path, int N, char *sub_path);
+
 #endif

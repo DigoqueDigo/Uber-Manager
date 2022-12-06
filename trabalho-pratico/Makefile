@@ -1,6 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic-errors -O2 -Iinclude
 LIBS = -lm
+OBJS_TESTS = src/tests/diff.o src/tests/test.o
 OBJS_INTERACTIVE = src/interactive/handle.o src/interactive/terminal.o src/interactive/pagination.o src/interactive/search.o
 OBJS_CATALOGS = src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o
 OBJS_FETCH = src/fetch/collector.o
@@ -15,12 +16,16 @@ PATH_CSV_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/csv
 PATH_INPUT_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/inputs
 
 
-$(TARGET): $(OBJS_UTILS) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES) $(OBJS_INTERACTIVE)
+$(TARGET): $(OBJS_UTILS) $(OBJS_TESTS) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES) $(OBJS_INTERACTIVE)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 	@mkdir $(PATH_RESULTS)
 
 
 $(OBJS_UTILS): src/%.o : src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+$(OBJS_TESTS): src/%.o : src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 
@@ -133,6 +138,7 @@ clean:
 	rm src/parsing/*.o
 	rm src/catalogs/*.o
 	rm src/fetch/*.o
+	rm src/tests/*.o
 	rm src/interactive/*.o
 	rm $(TARGET)
 	rm -r $(PATH_RESULTS)/
