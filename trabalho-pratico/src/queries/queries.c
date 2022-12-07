@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <queries/queries.h>
 #include <queries/querie1.h>
 #include <queries/querie2.h>
@@ -82,4 +83,42 @@ int resolve_queries_batch(char *path, USERS users_list, DRIVERS drivers_list, RI
     fclose(input);
 
     return 0;
+}
+
+
+int resolve_queries_test(char *path, USERS users_list, DRIVERS drivers_list, RIDES rides_list, CITIES cities_list, TESTS *tests_list, int N_DRIVERS, int N_RIDES, int N_CITIES, int *N_TESTS, int *SIZE_TESTS){
+
+    FILE *input;
+
+    char linha[1000], aux_linha[1000];
+    clock_t time;
+    double time_taken;
+
+    input = fopen(path, "r");
+
+    if (input == NULL){
+
+        perror(path);
+        return -1;
+    }
+
+    for (int p = 1; fgets(linha, 1000, input) != NULL; p++){
+
+        strcpy(aux_linha,linha);
+        aux_linha[strlen(linha)-1] = '\0';
+
+        time = clock();
+
+        resolve_queries(linha,p,users_list,drivers_list,rides_list,cities_list,N_DRIVERS,N_RIDES,N_CITIES);
+
+        time = clock() - time;
+        time_taken = ((double) time)/CLOCKS_PER_SEC;
+
+        push_test(tests_list,aux_linha,time_taken,N_TESTS,SIZE_TESTS);
+
+    }
+
+    fclose(input);
+
+    return 1;
 }

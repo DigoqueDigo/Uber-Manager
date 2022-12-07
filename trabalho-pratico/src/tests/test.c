@@ -54,10 +54,14 @@ void push_test_comparation(TESTS tests_list, int index, short int checker, char 
 void free_tests(TESTS tests_list, int N_TESTS){
 
     for (int p = 0; p < N_TESTS; p++){
-
+        
         free(tests_list[p].query);
-        free(tests_list[p].obtained);
-        free(tests_list[p].expected);
+        
+        if (!tests_list[p].checker){
+            
+            free(tests_list[p].obtained);
+            free(tests_list[p].expected);
+        }
     }
 
     free(tests_list);
@@ -66,24 +70,38 @@ void free_tests(TESTS tests_list, int N_TESTS){
 
 void print_tests(TESTS tests_list, int N_TESTS){
 
+    int correct = 0;
+
     for (int p = 0; p < N_TESTS; p++){
         
-        printf("\n-----------------------------------------\n\n");
+        printf("\n-----------------------------------------------------------------------\n\n");
 
-        printf("Query:\t%s\n", tests_list[p].query);
+        printf("%d\nQuery:\t\t\t%s\n", p+1, tests_list[p].query);
 
         if (tests_list[p].checker){
 
-            printf("Execução:\tVálida");
-            printf("Tempo:\t%f\n", tests_list[p].time);
+            printf("Execução:\t\tVálida\n");
+            printf("Tempo:\t\t\t%f segundos\n", tests_list[p].time);
+            
+            correct++;
         }
+
 
         else{
 
-            printf("Execução:\tInválida");
-            printf("Linha obtida:\t%s", tests_list[p].obtained);
-            printf("Linha esparada:\t%s", tests_list[p].expected);
+            printf("Execução:\t\tInválida\n");
+            printf("Tempo:\t\t\t%f segundos\n", tests_list[p].time);
+            printf("Linha obtida:\t\t%s\n", tests_list[p].obtained);
+            printf("Linha esparada:\t\t%s\n", tests_list[p].expected);
         }
     }
+
+    printf("\n-----------------------------------------------------------------------\n\n");
+
+    printf("SUMÁRIO FINAL\n\n");
+    printf("Queries válidas: %d/%d\n", correct, N_TESTS);
+    printf("Queries válidas: %d/%d\n", N_TESTS-correct, N_TESTS);
+
+    printf("\n-----------------------------------------------------------------------\n\n");
 }
 

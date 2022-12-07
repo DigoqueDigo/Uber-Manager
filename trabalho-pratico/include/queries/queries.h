@@ -2,6 +2,7 @@
 #define QUERIES_H
 
 #include <fixtures.h>
+#include <tests/test.h>
 
 
 /** \mainpage Projeto - Laboratórios de informática
@@ -65,6 +66,22 @@ int resolve_queries_batch(
     int N_DRIVERS,
     int N_RIDES,
     int N_CITIES
+);
+
+
+
+int resolve_queries_test(
+    char *path,
+    USERS users_list,
+    DRIVERS drivers_list,
+    RIDES rides_list,
+    CITIES cities_list,
+    TESTS *tests_list,
+    int N_DRIVERS,
+    int N_RIDES,
+    int N_CITIES,
+    int *N_TESTS,
+    int *SIZE_TESTS
 );
 
 #endif

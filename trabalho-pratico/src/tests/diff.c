@@ -18,6 +18,23 @@ int compare_two_files(FILE *source, FILE *test, char *obtained, char *expected){
 
     strcpy(obtained,source_line);
     strcpy(expected,test_line);
+    
+    if (feof(source)){
+        strcpy(obtained,"");
+        expected[strlen(expected)-1] = '\0';
+    }
+
+    else if (feof(test)){
+        
+        strcpy(expected,"");
+        obtained[strlen(obtained)-1] = '\0';
+    }
+
+    else{
+
+        obtained[strlen(obtained)-1] = '\0';
+        expected[strlen(expected)-1] = '\0';
+    }
 
     return 0;
 }

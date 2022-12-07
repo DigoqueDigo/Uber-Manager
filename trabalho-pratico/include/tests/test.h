@@ -2,7 +2,7 @@
 #define TEST_H
 
 
-#define CAP_TESTS 10
+#define CAP_TESTS 5
 
 typedef struct test *TESTS;
 

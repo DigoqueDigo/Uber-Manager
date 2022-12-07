@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic-errors -O2 -Iinclude
 LIBS = -lm
-OBJS_TESTS = src/tests/diff.o src/tests/test.o
+OBJS_TESTS = src/tests/diff.o src/tests/test.o src/tests/main.o
 OBJS_INTERACTIVE = src/interactive/handle.o src/interactive/terminal.o src/interactive/pagination.o src/interactive/search.o
 OBJS_CATALOGS = src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o
 OBJS_FETCH = src/fetch/collector.o
@@ -9,6 +9,7 @@ OBJS_UTILS = src/main.o src/sort.o src/fixtures.o
 OBJS_PARSER = src/parsing/checker.o src/parsing/parser.o
 OBJS_QUERIES = src/queries/queries.o src/queries/querie1.o src/queries/querie2.o src/queries/querie3.o src/queries/querie4.o src/queries/querie5.o src/queries/querie6.o src/queries/querie7.o src/queries/querie8.o src/queries/querie9.o 
 TARGET = programa-principal
+TARGET_TESTS = programa-testes
 PATH_RESULTS = Resultados
 PATH_CSV_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/csv
 PATH_INPUT_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/inputs
@@ -16,9 +17,16 @@ PATH_CSV_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/csv
 PATH_INPUT_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/inputs
 
 
-$(TARGET): $(OBJS_UTILS) $(OBJS_TESTS) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES) $(OBJS_INTERACTIVE)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+all: $(TARGET) $(TARGET_TESTS)
 	@mkdir $(PATH_RESULTS)
+
+
+$(TARGET): $(OBJS_UTILS) $(filter-out src/tests/main.o, $(OBJS_TESTS)) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES) $(OBJS_INTERACTIVE)
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+
+
+$(TARGET_TESTS): $(filter-out src/main.o, $(OBJS_UTILS)) $(OBJS_TESTS) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES)
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 
 $(OBJS_UTILS): src/%.o : src/%.c
@@ -141,4 +149,5 @@ clean:
 	rm src/tests/*.o
 	rm src/interactive/*.o
 	rm $(TARGET)
+	rm $(TARGET_TESTS)
 	rm -r $(PATH_RESULTS)/
