@@ -68,15 +68,30 @@ void free_tests(TESTS tests_list, int N_TESTS){
 }
 
 
+void print_separator_line(int N){
+
+    putchar('\n');
+
+    for (int p = 0; p < N; p++){
+
+        putchar('-');
+    }
+
+    printf("\n\n");
+}
+
+
 void print_tests(TESTS tests_list, int N_TESTS){
 
-    int correct = 0;
+    int correct = 0, columns = 205;
+
+//  columns = get_terminal_columns();
 
     for (int p = 0; p < N_TESTS; p++){
         
-        printf("\n-----------------------------------------------------------------------\n\n");
+        print_separator_line(columns);
 
-        printf("%d\nQuery:\t\t\t%s\n", p+1, tests_list[p].query);
+        printf("Teste:\t\t\t%d\nQuery:\t\t\t%s\n", p+1, tests_list[p].query);
 
         if (tests_list[p].checker){
 
@@ -92,16 +107,16 @@ void print_tests(TESTS tests_list, int N_TESTS){
             printf("Execução:\t\tInválida\n");
             printf("Tempo:\t\t\t%f segundos\n", tests_list[p].time);
             printf("Linha obtida:\t\t%s\n", tests_list[p].obtained);
-            printf("Linha esparada:\t\t%s\n", tests_list[p].expected);
+            printf("Linha esperada:\t\t%s\n", tests_list[p].expected);
         }
     }
 
-    printf("\n-----------------------------------------------------------------------\n\n");
+    print_separator_line(columns);
 
     printf("SUMÁRIO FINAL\n\n");
     printf("Queries válidas: %d/%d\n", correct, N_TESTS);
-    printf("Queries válidas: %d/%d\n", N_TESTS-correct, N_TESTS);
+    printf("Queries inválidas: %d/%d\n", N_TESTS-correct, N_TESTS);
 
-    printf("\n-----------------------------------------------------------------------\n\n");
+    print_separator_line(columns);
 }
 

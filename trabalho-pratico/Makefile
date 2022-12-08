@@ -25,7 +25,7 @@ $(TARGET): $(OBJS_UTILS) $(filter-out src/tests/main.o, $(OBJS_TESTS)) $(OBJS_PA
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 
-$(TARGET_TESTS): $(filter-out src/main.o, $(OBJS_UTILS)) $(OBJS_TESTS) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES)
+$(TARGET_TESTS): $(filter-out src/main.o, $(OBJS_UTILS)) $(OBJS_TESTS) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES) $(OBJS_INTERACTIVE)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 

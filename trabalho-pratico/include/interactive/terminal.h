@@ -8,7 +8,9 @@
 */
 
 
-// int get_terminal_lines();
+//int get_terminal_lines();
+
+//int get_terminal_columns();
 
 
 /**

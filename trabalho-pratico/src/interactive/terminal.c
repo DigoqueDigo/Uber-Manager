@@ -19,6 +19,22 @@ int get_terminal_lines(){
 
     return (tgetnum("li") - 1);
 }
+
+
+int get_terminal_columns(){
+    
+    static char termbuf[2048];
+
+    char *termtype = getenv("TERM");
+
+    if (tgetent(termbuf, termtype) < 0){
+        
+        printf("Não foi possivel extrair as colunas do terminal\n");
+        return -1;
+    }
+
+    return (tgetnum("co"));
+}
 */
 
 void print_empty_lines(int N){

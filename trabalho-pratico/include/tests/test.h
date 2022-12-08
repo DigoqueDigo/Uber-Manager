@@ -1,6 +1,7 @@
 #ifndef TEST_H
 #define TEST_H
 
+#include <interactive/terminal.h>
 
 #define CAP_TESTS 5
 
@@ -16,6 +17,8 @@ void push_test(TESTS *tests_list, char *query, double time, int *N_TESTS, int *S
 void push_test_comparation(TESTS tests_list, int index, short int checker, char *obtained, char *expected);
 
 void free_tests(TESTS tests_list, int N_TESTS);
+
+void print_separator_line(int N);
 
 void print_tests(TESTS tests_list, int N_TESTS);
 
