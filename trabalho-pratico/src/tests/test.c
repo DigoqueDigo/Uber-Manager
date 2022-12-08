@@ -72,10 +72,7 @@ void print_separator_line(int N){
 
     putchar('\n');
 
-    for (int p = 0; p < N; p++){
-
-        putchar('-');
-    }
+    for (int p = 0; p < N; putchar('-'), p++);
 
     printf("\n\n");
 }
@@ -101,7 +98,6 @@ void print_tests(TESTS tests_list, int N_TESTS){
             correct++;
         }
 
-
         else{
 
             printf("Execução:\t\tInválida\n");
@@ -119,4 +115,3 @@ void print_tests(TESTS tests_list, int N_TESTS){
 
     print_separator_line(columns);
 }
-
