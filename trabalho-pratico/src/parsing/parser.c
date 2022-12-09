@@ -128,7 +128,7 @@ int set_driver_line(char **linha, char *string, DRIVERS lista){
         }  
     }
 
-    if (p == 9 && token == NULL){
+    if (p == CAP_LINE && token == NULL){
         
         push_driver(lista,
             linha[0],
@@ -146,7 +146,7 @@ int set_driver_line(char **linha, char *string, DRIVERS lista){
 
     for (int i = 0; i < p; free(linha[i++]));
 
-    return valid;
+    return (p == CAP_LINE && valid);
 }
 
 
@@ -208,7 +208,7 @@ int set_ride_line(char **linha, char *string, RIDES lista, USERS lista_users, DR
         }
     }
 
-    if (p == 9){
+    if (p == CAP_LINE){
 
         int index = atoi(linha[0]);
 
@@ -234,5 +234,5 @@ int set_ride_line(char **linha, char *string, RIDES lista, USERS lista_users, DR
 
     for (int i = 0; i < p; free(linha[i++]));
 
-    return valid;
+    return (p == CAP_LINE && valid);
 }
