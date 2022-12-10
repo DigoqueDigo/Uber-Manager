@@ -53,18 +53,20 @@ void realloc_cities(CITIES *cities_list, int new_size){
 
 
 void free_cities_list(CITIES cities_list, int N_CITIES){
+    
     for (int p = 0; p < N_CITIES; p++){
-        if (cities_list[p].city != NULL){
-            free(cities_list[p].city);
-            free(cities_list[p].positions);
-        }
+        
+        free(cities_list[p].city);
+        free(cities_list[p].positions);
     }
+
     free(cities_list);
 }
 
 //MANAGER
 
 int analyse_city(CITIES cities_list, char *city, int N_CITIES){
+    
     int p;
 
     for (p = 0; p < N_CITIES && !strcmp(cities_list[p].city,city); p++);
