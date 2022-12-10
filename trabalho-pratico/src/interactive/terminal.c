@@ -46,6 +46,16 @@ void print_empty_lines(int N){
 }
 
 
+void print_separator_line(int N){
+
+    putchar('\n');
+
+    for (int p = 0; p < N; putchar('-'), p++);
+
+    printf("\n\n");
+}
+
+
 int get_file_lines(FILE *ficheiro){
 
     int p;

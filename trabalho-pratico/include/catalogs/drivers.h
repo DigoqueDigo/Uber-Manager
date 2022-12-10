@@ -109,6 +109,7 @@ void free_drivers(DRIVERS drivers_list, int N_DRIVERS);
  * 
  * @param drivers_list estrutura que será removida da memória
  * @param index id do condutor que se pretende analisar
+ * @return 1 se pode ser acedido, 0 caso contrário
  */
 int analyse_driver(DRIVERS drivers_list, int index);
 

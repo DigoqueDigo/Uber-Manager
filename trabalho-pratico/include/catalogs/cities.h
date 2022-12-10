@@ -67,6 +67,14 @@ void realloc_cities(CITIES *cities_list, int new_size);
 void free_cities_list(CITIES cities_list, int N_CITIES);
 
 
+/**
+ * @brief Função que indica se uma determinada cidade por ser acedida ou não
+ * 
+ * @param cities_list estrutura de dados das cidades
+ * @param city cidade que se pretende analisar
+ * @param N_CITIES comprimento do array das cidades
+ * @return 1 se pode ser acedida, 0 caso contrário
+ */
 int analyse_city(CITIES cities_list, char *city, int N_CITIES);
 
 

@@ -68,16 +68,6 @@ void free_tests(TESTS tests_list, int N_TESTS){
 }
 
 
-void print_separator_line(int N){
-
-    putchar('\n');
-
-    for (int p = 0; p < N; putchar('-'), p++);
-
-    printf("\n\n");
-}
-
-
 void print_tests(TESTS tests_list, int N_TESTS){
 
     int correct = 0, columns = 205;

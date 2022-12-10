@@ -31,7 +31,7 @@
 
 
 /**
- * @brief Função que executa todos os comandos existentes num ficheiro de texto
+ * @brief Função que executa um dados comando que recebe como argumento
  * 
  * @param command commando que se pretende executar 
  * @param ncommand indice do comando a ser executado
@@ -56,7 +56,18 @@ void resolve_queries(
 );
 
 
-
+/**
+ * @brief Função que executa todos os comandos presentes num ficheiro de texto
+ * 
+ * @param path diretoria do ficheiro de texto que contem os comandos a serem executados
+ * @param users_list tabela de hash com toda a informação dos utilizadores
+ * @param drivers_list array com toda a informação dos condutores
+ * @param rides_list array com toda a informação correspondente às viagens
+ * @param cities_list array com informação complementar das cidades 
+ * @param N_DRIVERS comprimento do array dos condutores
+ * @param N_RIDES comprimento do array das viagens
+ * @param N_CITIES comprimento do array das cidades
+ */
 int resolve_queries_batch(
     char *path,
     USERS users_list,
@@ -69,7 +80,22 @@ int resolve_queries_batch(
 );
 
 
-
+/**
+ * @brief Função que executa todos os comandos presentes num ficheiro de texto e adiciona
+ *        dados relativos à execução na estrutura dos testes
+ * 
+ * @param path diretoria do ficheiro de texto que contem os comandos a serem executados
+ * @param users_list tabela de hash com toda a informação dos utilizadores
+ * @param drivers_list array com toda a informação dos condutores
+ * @param rides_list array com toda a informação correspondente às viagens
+ * @param cities_list array com informação complementar das cidades 
+ * @param tests_list array no qual será inserida informação relativa à execução dos comandos
+ * @param N_DRIVERS comprimento do array dos condutores
+ * @param N_RIDES comprimento do array das viagens
+ * @param N_CITIES comprimento do array das cidades
+ * @param N_TESTS indice no qual se pretende inserir um dado teste
+ * @param SIZE_TESTS capacidade da estrtura de dados dos testes
+ */
 int resolve_queries_test(
     char *path,
     USERS users_list,

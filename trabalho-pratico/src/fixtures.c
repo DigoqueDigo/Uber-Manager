@@ -19,15 +19,6 @@ int calculate_idade(char *birth_date){
 }
 
 
-void creat_date(int age, char *string){
-    char aux[10];
-    age = 2022 - age; 
-    sprintf(aux, "%d", (unsigned short)age);
-    strcpy(string,"09/10/");
-    strcat(string,aux);
-}
-
-
 int convert_date_to_int(char *string){
     string[2] = string[5] = '\0';
     int a = atoi(string), b = atoi(string+3), c = atoi(string+6);

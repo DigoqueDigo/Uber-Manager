@@ -77,6 +77,7 @@ USER init_user(
  */
 int hash_func(char *str);
 
+
 /**
  * @brief Função que adiciona um utilizador no inicio de um lista ligada
  * 
@@ -130,6 +131,15 @@ void free_hash_table(USERS users_list);
 
 // MANAGER
 
+
+/**
+ * @brief Função que analise se um determinado utilizador pode ser acedido ou não
+ * 
+ * @param users_list estrutura de dados dos utilizadores (tabela de hash)
+ * @param username username do utilizador que pretendemos analisar
+ * @param index indice da tabela de hash onde o utilizador está contido 
+ * @return 1 se pode ser acedido, caso contrário 0
+ */
 int analyse_user(USERS users_list, char *username, int index);
 
 

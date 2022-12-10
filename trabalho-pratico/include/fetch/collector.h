@@ -47,16 +47,6 @@ int fetch_drivers(char *path, DRIVERS *drivers_list, int *N_DRIVERS, int *SIZE_D
  * @param SIZE_CITIES tamanho da estrututa das cidades
  * @return 0 se a operação foi bem sucedida, caso contrario -1
  */
-int fetch_rides(
-    char *path,
-    USERS users_list,
-    DRIVERS drivers_list,
-    RIDES *rides_list,
-    CITIES *cities_list,
-    int *N_RIDES,
-    int *N_CITIES,
-    int *SIZE_RIDES,
-    int *SIZE_CITIES
-);
+int fetch_rides(char *path, USERS users_list, DRIVERS drivers_list, RIDES *rides_list, CITIES *cities_list, int *N_RIDES, int *N_CITIES, int *SIZE_RIDES, int *SIZE_CITIES);
 
 #endif

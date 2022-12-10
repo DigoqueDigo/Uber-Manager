@@ -23,15 +23,6 @@ int calculate_idade(char *birth_date);
 
 
 /**
- * @brief Função que trasnforma uma string passa em argumento numa data
- * 
- * @param string zona de memória na qual será guardada a data criada
- * @param age idade a partir da qual será calculada a nova data
- */
-void creat_date(int age, char *string);
-
-
-/**
  * @brief Função que convert uma data num inteiro
  * 
  * @param string data a partir da qual será calculado um inteiro
@@ -55,7 +46,6 @@ void set_command_name(char *command, int N);
  * @param file_path string na qual será guardado o nome do ficheiro de output
  * @param N indixe do comando
  * @param sub_path diretoria a partir da qual é criado no nome do ficheiro de output
- 
  */
 void set_outfile_name(char *file_path, int N, char *sub_path);
 

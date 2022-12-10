@@ -22,6 +22,14 @@ void print_empty_lines(int N);
 
 
 /**
+ * @brief Função que imprime um determinado numero de caracteres '-'
+ * 
+ * @param N numero de caracteres que se pretende imprimir
+ */
+void print_separator_line(int N);
+
+
+/**
  * @brief Função que indica o numero de linhas que um ficheiro de texto possui
  * 
  * @param ficheiro ficheiro que se pretende analisar

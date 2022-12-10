@@ -135,6 +135,7 @@ void free_rides(RIDES rides_list, int N_RIDES);
  * 
  * @param rides_list array que será destuido e removido da memória
  * @param index id da viagem que se pretende analisar
+ * @return 1 se pode ser acedida, 0 caso contrário
  */
 int analyse_ride(RIDES rides_list, int index);
 

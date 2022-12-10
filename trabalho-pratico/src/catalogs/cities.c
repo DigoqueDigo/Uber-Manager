@@ -8,7 +8,7 @@ struct city{
     char *city;
     int sp;
     int size;
-    int *positions; // array dinamico com as posições de uma cidade nas rides
+    int *positions;
 };
 
 
@@ -16,7 +16,6 @@ CITIES init_cities(){
     CITIES new = malloc(CAP_CITIES*sizeof(struct city));
     return new;
 }
-
 
 
 void push_city(CITIES cities_list, char *city, int index, int *N_CITIES){
