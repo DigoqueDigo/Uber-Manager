@@ -14,7 +14,6 @@
 */
 
 #define CAP_LINE_USER 7
-#define POINTER_SIZE 8
 #define CAP_LINE 9
 
 

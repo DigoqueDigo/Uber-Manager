@@ -11,7 +11,7 @@ int fecth_users(char *path, USERS users_list){
     
     int path_size = strlen(path);
 
-    char string[1000], aux_path[2*path_size], *linha[CAP_LINE_USER*POINTER_SIZE];
+    char string[1000], aux_path[2*path_size], *linha[CAP_LINE_USER];
 
     strcpy(aux_path,path);
     strcat(aux_path,"/users.csv");
@@ -41,7 +41,7 @@ int fetch_drivers(char *path, DRIVERS *drivers_list, int *N_DRIVERS, int *SIZE_D
 
     int path_size = strlen(path);
 
-    char string[1000], aux_path[2*path_size], *linha[CAP_LINE*POINTER_SIZE];
+    char string[1000], aux_path[2*path_size], *linha[CAP_LINE];
 
     strcpy(aux_path,path);
     strcat(aux_path,"/drivers.csv");
@@ -83,7 +83,7 @@ int fetch_rides(char *path, USERS users_list, DRIVERS drivers_list, RIDES *rides
 
     int path_size = strlen(path);
 
-    char string[1000], aux_path[2*path_size], *linha[CAP_LINE*POINTER_SIZE];
+    char string[1000], aux_path[2*path_size], *linha[CAP_LINE];
 
     strcpy(aux_path,path);
     strcat(aux_path,"/rides.csv");
