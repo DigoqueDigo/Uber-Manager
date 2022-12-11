@@ -68,22 +68,26 @@ void free_tests(TESTS tests_list, int N_TESTS){
 }
 
 
-void print_tests(TESTS tests_list, int N_TESTS){
+void print_tests(TESTS tests_list, int N_TESTS, double *catalogs_time){
+
+    double total_time = 0.0;
 
     int correct = 0, columns = 205;
 
 //  columns = get_terminal_columns();
 
     for (int p = 0; p < N_TESTS; p++){
+
+        total_time += tests_list[p].time;
         
         print_separator_line(columns);
 
-        printf("Teste:\t\t\t%d\nQuery:\t\t\t%s\n", p+1, tests_list[p].query);
+        printf("\n\nTeste:\t\t\t%d\nQuery:\t\t\t%s\n", p+1, tests_list[p].query);
 
         if (tests_list[p].checker){
 
             printf("Execução:\t\tVálida\n");
-            printf("Tempo:\t\t\t%f segundos\n", tests_list[p].time);
+            printf("Tempo:\t\t\t%f segundos\n\n", tests_list[p].time);
             
             correct++;
         }
@@ -93,15 +97,26 @@ void print_tests(TESTS tests_list, int N_TESTS){
             printf("Execução:\t\tInválida\n");
             printf("Tempo:\t\t\t%f segundos\n", tests_list[p].time);
             printf("Linha obtida:\t\t%s\n", tests_list[p].obtained);
-            printf("Linha esperada:\t\t%s\n", tests_list[p].expected);
+            printf("Linha esperada:\t\t%s\n\n", tests_list[p].expected);
         }
     }
 
     print_separator_line(columns);
 
-    printf("SUMÁRIO FINAL\n\n");
-    printf("Queries válidas: %d/%d\n", correct, N_TESTS);
-    printf("Queries inválidas: %d/%d\n", N_TESTS-correct, N_TESTS);
+    printf("\n\nSUMÁRIO TEMPORAL\n\n");
+    printf("Recolha dos utilizadores:\t%f segundos\n", catalogs_time[0]);
+    printf("Recolha dos condutores:\t\t%f segundos\n", catalogs_time[1]);
+    printf("Recolha das viagens/cidades:\t%f segundos\n", catalogs_time[2]);
+    printf("Execução das queries:\t\t%f segundos\n", total_time);
+    printf("Validação dos resultados:\t%f segundos\n", catalogs_time[3]);
+    printf("Tempo total de execução:\t%f segundos\n\n", catalogs_time[4]);
+
+    print_separator_line(columns);
+
+    printf("\n\nSUMÁRIO FINAL\n\n");
+    printf("Queries corretas: %d/%d\n", correct, N_TESTS);
+    printf("Queries incorretas: %d/%d\n\n", N_TESTS-correct, N_TESTS);
+
 
     print_separator_line(columns);
 }

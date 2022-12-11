@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <tests/diff.h>
 #include <parsing/parser.h>
 #include <fetch/collector.h>
@@ -17,26 +18,54 @@ int main(int argc, char **argv){
     RIDES rides_list = init_ride_list();
     CITIES cities_list = init_cities();
     TESTS tests_list = init_tests();
-
+    
     int N_RIDES = 0, N_DRIVERS = 0, N_CITIES = 0, N_TESTS = 0;
     int SIZE_DRIVERS = CAP_DRIVERS, SIZE_RIDES = CAP_RIDES, SIZE_CITIES = CAP_CITIES, SIZE_TESTS = CAP_TESTS;
 
     if (argc == 4){
 
-        if (fecth_users(argv[1],users_list) == -1) return -1;
+        double catalogs_time[5];
+        clock_t comparation_time, total_time = clock();
 
-        if (fetch_drivers(argv[1],&drivers_list,&N_DRIVERS,&SIZE_DRIVERS) == -1) return -1;
+        for (int p = 0; p < 3; p++){
 
-        if (fetch_rides(argv[1],users_list,drivers_list,&rides_list,&cities_list,&N_RIDES,&N_CITIES,&SIZE_RIDES,&SIZE_CITIES) == -1) return -1;
+            clock_t time_taken = clock();
+
+            switch (p){
+
+                case 0:
+                    if (fecth_users(argv[1],users_list) == -1) return -1;
+                    break;
+
+                case 1:
+                    if (fetch_drivers(argv[1],&drivers_list,&N_DRIVERS,&SIZE_DRIVERS) == -1) return -1;
+                    break;
+                
+                case 2:
+                    if (fetch_rides(argv[1],users_list,drivers_list,&rides_list,&cities_list,&N_RIDES,&N_CITIES,&SIZE_RIDES,&SIZE_CITIES) == -1) return -1;
+                    break;
+            }
+
+            time_taken = clock() - time_taken;
+            catalogs_time[p] = ((double) time_taken)/CLOCKS_PER_SEC;
+        }
 
         if (argc > 3){
 
             resolve_queries_test(argv[2],users_list,drivers_list,rides_list,cities_list,&tests_list,N_DRIVERS,N_RIDES,N_CITIES,&N_TESTS,&SIZE_TESTS);
         }
 
+        comparation_time = clock();
+
         set_all_comparations(tests_list,N_TESTS,argv[3]);
 
-        print_tests(tests_list,N_TESTS);
+        comparation_time = clock() - comparation_time;
+        total_time = clock() - total_time;
+
+        catalogs_time[3] = ((double) comparation_time)/CLOCKS_PER_SEC;
+        catalogs_time[4] = ((double) total_time)/CLOCKS_PER_SEC;
+
+        print_tests(tests_list,N_TESTS,catalogs_time);
     }
 
     free_tests(tests_list,N_TESTS);

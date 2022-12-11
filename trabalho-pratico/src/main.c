@@ -10,6 +10,8 @@
 
 int main(int argc, char** argv){
 
+    if (argc == 1 && system("clear") == -1) return -1;
+
     RIDES rides_list = init_ride_list();
     USERS users_list = init_users();
     DRIVERS drivers_list = init_drivers();

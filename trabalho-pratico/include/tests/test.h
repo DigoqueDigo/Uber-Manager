@@ -80,7 +80,8 @@ void free_tests(TESTS tests_list, int N_TESTS);
  * 
  * @param tests_list estrutura de dados que se pretende remover da memória
  * @param N_TESTS numero de testes que estão na estrutura dos testes
+ * @param catalogs_time array com outros tempos de execução
  */
-void print_tests(TESTS tests_list, int N_TESTS);
+void print_tests(TESTS tests_list, int N_TESTS, double *catalogs_time);
 
 #endif

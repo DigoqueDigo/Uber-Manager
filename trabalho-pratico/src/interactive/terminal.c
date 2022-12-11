@@ -48,11 +48,10 @@ void print_empty_lines(int N){
 
 void print_separator_line(int N){
 
-    putchar('\n');
+    for (int p = 0; p < N; p++){
 
-    for (int p = 0; p < N; putchar('-'), p++);
-
-    printf("\n\n");
+        putchar('-');
+    }
 }
 
 
