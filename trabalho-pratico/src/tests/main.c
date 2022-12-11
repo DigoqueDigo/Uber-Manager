@@ -50,10 +50,8 @@ int main(int argc, char **argv){
             catalogs_time[p] = ((double) time_taken)/CLOCKS_PER_SEC;
         }
 
-        if (argc > 3){
-
-            resolve_queries_test(argv[2],users_list,drivers_list,rides_list,cities_list,&tests_list,N_DRIVERS,N_RIDES,N_CITIES,&N_TESTS,&SIZE_TESTS);
-        }
+        
+        resolve_queries_test(argv[2],users_list,drivers_list,rides_list,cities_list,&tests_list,N_DRIVERS,N_RIDES,N_CITIES,&N_TESTS,&SIZE_TESTS);
 
         comparation_time = clock();
 
