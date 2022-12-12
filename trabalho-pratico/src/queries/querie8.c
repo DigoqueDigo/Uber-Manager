@@ -147,7 +147,7 @@ void resolve_querie8(char *command, int ncommand, USERS users_list, DRIVERS driv
 
     age = atoi(token);
 
-    ficheiro = fopen(output_file, "a");
+    ficheiro = fopen(output_file, "w");
 
 
     N = fill_sort_gender(users_list,drivers_list,rides_list,&list,gender,N_DRIVERS,age);

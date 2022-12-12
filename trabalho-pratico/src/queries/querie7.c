@@ -158,7 +158,7 @@ void resolve_querie7(char *command, int ncommand, DRIVERS drivers_list,RIDES rid
     token = strtok(NULL, " " "\n"); // neste momento token == city
 
 
-    ficheiro = fopen(output_file,"a");
+    ficheiro = fopen(output_file,"w");
 
     DRIVER_CITY abin = fill_abin(rides_list,drivers_list,cities_list,token,N_CITIES);
 

@@ -116,7 +116,7 @@ void resolve_querie2(char *command,int ncommand, DRIVERS drivers_list, RIDES rid
     
     set_command_name(output_file,ncommand);
 
-    ficheiro = fopen(output_file,"a");
+    ficheiro = fopen(output_file,"w");
 
     token = strtok(command," " "\n");
     token = strtok(NULL, " " "\n");

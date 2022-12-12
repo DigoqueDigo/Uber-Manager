@@ -65,7 +65,7 @@ void resolve_querie5(char* command, int ncommand, DRIVERS drivers_list, RIDES ri
     token = strtok(NULL, " " "\n");
     date_2 = convert_date_to_int(token);
 
-    ficheiro = fopen(outfile, "a");
+    ficheiro = fopen(outfile, "w");
 
     fprintf(ficheiro, "%0.3f\n", average_price_date(drivers_list,rides_list,N_RIDES,date_1,date_2));
 

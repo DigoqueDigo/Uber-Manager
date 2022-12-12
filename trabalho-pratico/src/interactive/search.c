@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,11 +15,11 @@ int count_matches(FILE *ficheiro, char *word, int *matches){
 
     for (p = 0; fgets(string, 1000, ficheiro);){
 
-        if (strstr(string,word)){
+        if (strcasestr(string,word)){
             
-            char *token = strstr(string,word);
+            char *token = strcasestr(string,word);
 
-            for (; token; token += aux, token = strstr(token,word), ++*matches);
+            for (; token; token += aux, token = strcasestr(token,word), ++*matches);
 
             p++;
         }
@@ -41,7 +42,7 @@ void print_search(FILE *ficheiro, char *word, int page, int pages, int terminal_
         
         for (int i = 0; fgets(string, 1000, ficheiro); i++){
 
-            if (strstr(string,word)){
+            if (strcasestr(string,word)){
 
                 if (start <= p && p < end){
                     

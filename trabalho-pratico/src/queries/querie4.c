@@ -55,7 +55,7 @@ void resolve_querie4(char* command, int ncommand, DRIVERS drivers_list, RIDES ri
     token = strtok(command, " "  "\n");
     token = strtok(NULL, " ""\n");
     
-    ficheiro = fopen(outfile, "a");
+    ficheiro = fopen(outfile, "w");
 
     average_price = preco_medio_cidade(drivers_list, rides_list, cities_list, N_CITIES, token);
     

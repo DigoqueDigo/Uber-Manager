@@ -115,7 +115,7 @@ void resolve_querie9(char *command,int ncommand, RIDES rides_list, int N_RIDES){
 
     set_command_name(output_file,ncommand);
 
-    ficheiro = fopen(output_file, "a");
+    ficheiro = fopen(output_file, "w");
 
     token = strtok(command," " "\n");
     token = strtok(NULL," " "\n");

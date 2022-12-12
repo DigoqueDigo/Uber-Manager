@@ -130,7 +130,7 @@ void resolve_querie1(char *command, int ncommand, USERS users_list, DRIVERS driv
 
     valor = check_id(token);
     
-    ficheiro = fopen(output_file, "a");
+    ficheiro = fopen(output_file, "w");
 
     if (valor){
 

@@ -56,7 +56,7 @@ void resolve_querie6(char *command, int ncommand, RIDES rides_list, CITIES citie
     token = strtok(NULL, " " "\n");
     date2 = convert_date_to_int(token);
     
-    ficheiro = fopen(output_file,"a");
+    ficheiro = fopen(output_file,"w");
 
     result = calculate_average_distance(rides_list,cities_list,N_CITIES,date1,date2,city);
 

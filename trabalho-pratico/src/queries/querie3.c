@@ -109,7 +109,7 @@ void resolve_querie3(char *command, int ncommand, USERS users_list, RIDES rides_
 
     top = atoi(token);
 
-    ficheiro = fopen(output_file, "a");
+    ficheiro = fopen(output_file, "w");
 
     SORT_DISTANCE list = init_sort_distance();
 
