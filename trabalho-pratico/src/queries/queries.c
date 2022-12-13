@@ -15,7 +15,7 @@
 
 
 
-void resolve_queries(char *command, char ncommand, USERS users_list, DRIVERS drivers_list, RIDES rides_list, CITIES cities_list, int N_DRIVERS, int N_RIDES, int N_CITIES){
+void resolve_queries(char *command, int ncommand, USERS users_list, DRIVERS drivers_list, RIDES rides_list, CITIES cities_list, int N_DRIVERS, int N_RIDES, int N_CITIES){
 
     int index = command[0] - '0';
 

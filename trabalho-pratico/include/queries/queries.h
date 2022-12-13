@@ -45,7 +45,7 @@
  */
 void resolve_queries(
     char *command,
-    char ncommand,
+    int ncommand,
     USERS users_list,
     DRIVERS drivers_list,
     RIDES rides_list,

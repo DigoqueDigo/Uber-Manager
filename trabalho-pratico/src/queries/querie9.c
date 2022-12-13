@@ -104,7 +104,7 @@ int compare_date_sort_tip(const void *a, const void *b){
 
 
 
-void resolve_querie9(char *command,int ncommand, RIDES rides_list, int N_RIDES){
+void resolve_querie9(char *command, int ncommand, RIDES rides_list, int N_RIDES){
 
     FILE *ficheiro;
 

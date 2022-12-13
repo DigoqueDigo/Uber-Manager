@@ -105,7 +105,7 @@ int compare_score_id(const void *a, const void *b){
 
 
 
-void resolve_querie2(char *command,int ncommand, DRIVERS drivers_list, RIDES rides_list, int N_DRIVERS){
+void resolve_querie2(char *command, int ncommand, DRIVERS drivers_list, RIDES rides_list, int N_DRIVERS){
 
     FILE *ficheiro;
 
