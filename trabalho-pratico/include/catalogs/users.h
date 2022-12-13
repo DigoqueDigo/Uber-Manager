@@ -19,7 +19,7 @@
  \def BUCKET
  \brief Número de buckets que a tabela de hash possui
 */
-#define BUCKET 49999
+#define BUCKET 500057
 
 
 /*!
