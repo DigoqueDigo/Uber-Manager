@@ -1,0 +1,356 @@
+\documentclass[12pt,a4paper]{report}
+
+%--------------------------------------
+\usepackage[T1]{fontenc} %Not needed by LuaLaTeX or XeLaTeX
+%--------------------------------------
+
+%Portuguese-specific commands
+%--------------------------------------
+%\usepackage[portuguese]{babel}
+%--------------------------------------
+
+%Hyphenation rules
+%--------------------------------------
+\usepackage{hyphenat}
+\hyphenation{mate-mática recu-perar}
+%--------------------------------------
+
+%Espaçamento e outras cenas
+%--------------------------------------
+\usepackage{setspace}
+\usepackage{anyfontsize}
+\usepackage{indentfirst}
+\usepackage{parskip}
+\usepackage{titlesec} % Chapter
+\usepackage{geometry} % Margens
+\usepackage{amsmath} % Matemática
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xpatch}
+\usepackage{etoolbox}
+\usepackage{titletoc}
+\usepackage{times}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tabularx}
+\usepackage{array}
+%------------------------------
+
+%Margens
+\geometry{
+    a4paper,
+    right = 3cm,
+    left = 2.5cm,
+    top = 2.5cm,
+    bottom = 2.5cm,
+}
+
+\renewcommand{\contentsname}{Índice}
+\newcommand{\code}{\texttt\textbf}
+
+\setcounter{secnumdepth}{0} % Não enumerar secções
+
+\setstretch{1.5} % espaçamento
+
+\titleformat{\chapter}{\fontfamily{ptm}\selectfont\centering\huge\titlerule[1.5pt]\vspace{-9pt}}{}{0pt}{\Huge}[{\titlerule[1.5pt]}]
+
+\titleformat{\section}{\bfseries\fontfamily{ptm}\selectfont}{}{0pt}{\large}[{\titlerule[1pt]}\vspace{10pt}]
+
+\titleformat{\subsection}{\bfseries\fontfamily{ptm}\selectfont}{}{0pt}{\large}[\vspace{2pt}]
+
+\titlespacing{\chapter}{0pt}{-30pt}{30pt}
+
+\titlecontents{section}[40pt]{\vskip3pt\bfseries}{\thecontentslabel\quad}{}{~~\normalfont\dotfill\bfseries\contentspage}[]
+
+
+
+\begin{document}
+
+\chapter{Testes de Desempenho}
+
+O tempo é um dos parâmetros mais relevantes no que à execução de programas diz respeito, posto isto, decidimos analisar o tempo de execução do nosso projeto não só no global, mas também em diferentes etapas da execução em si, entre elas a recolha dos dados e o tempo que cada \textit{query} leva a ser analisada.
+
+Deste modo, para realizar uma análise da forma mais correta possível, executámos o dito programa em computadores distintos, pois assim, sempre podemos ter uma ideia de qual o \textit{hardware} que melhor responde/adequa ao código gerado.
+
+
+\normalsize\textbf{Tratamento estatístico}
+
+\begin{itemize}
+    
+    \item Realização de cinco execuções em cada um dos computadores (ligados à corrente).
+    
+    \item Eliminação de \textit{outliers} resultantes de execuções nas quais o sistema operativo estava livre/sobrelotado.
+
+    \item Cada um dos tempos resulta de uma média ponderada sem a consideração dos \textit{outliers}. 
+\end{itemize}
+
+
+\section{Ambientes de Execução}
+
+{
+\setlength\arrayrulewidth{1pt}
+
+\begin{center}
+    \begin{tabular}{ |p{4.73cm}|p{4.73cm}|p{4.73cm}|  }
+        \hline
+        \multicolumn{3}{|c|}{\textbf{\texttt{Computador A}}} \\
+        \hline
+        \centering\textbf{\texttt{Processador}} & \hfil \textbf{\texttt{Memória}} & \hfil \textbf{\texttt{Sistema Operativo}} \\
+        \hline
+        \centering\textbf{\texttt{Intel i5-10300H}} & \hfil \texttt{\textbf{8GB - 2600MHz}} & \hfil \texttt{\textbf{Ubuntu}}\\
+        \hline
+    \end{tabular}
+\end{center}
+
+
+\vspace{10pt}
+
+\begin{center}
+    \begin{tabular}{ |p{4.73cm}|p{4.73cm}|p{4.73cm}|  }
+        \hline
+        \multicolumn{3}{|c|}{\textbf{\texttt{Computador B}}} \\
+        \hline
+        \centering\textbf{\texttt{Processador}} & \hfil \textbf{\texttt{Memória}} & \hfil \textbf{\texttt{Sistema Operativo}} \\
+        \hline
+        \centering\textbf{\texttt{Intel i5-1135G7}} & \hfil \texttt{\textbf{16GB - 2700MHz}} & \hfil \texttt{\textbf{Ubuntu}}\\
+        \hline
+    \end{tabular}
+\end{center}
+}
+
+
+\newpage
+
+\section{Desempenho das Queries - Dataset Regular}
+
+{
+\setlength\arrayrulewidth{1pt}
+\begin{tabularx}{\textwidth} { 
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X | }
+ \hline
+ \texttt{\textbf{Query}} & \texttt{\textbf{Computador A (s)}} & \texttt{\textbf{Computador B (s)}}  \\
+ \hline
+ \texttt{\textbf{1 SaCruz110}} & \texttt{\textbf{0.000073}} & \texttt{\textbf{0.000072}}  \\
+ \hline
+ \texttt{\textbf{1 ClarPacheco48}} & \texttt{\textbf{0.000053}} & \texttt{\textbf{0.000021}} \\
+ \hline
+ \texttt{\textbf{1 GabriJesus}} & \texttt{\textbf{0.000013}} & \texttt{\textbf{0.000005}} \\
+ \hline
+ \texttt{\textbf{1 000000004780}} & \texttt{\textbf{0.000041}} & \texttt{\textbf{0.000018}} \\
+ \hline
+ \texttt{\textbf{1 000000007141}} & \texttt{\textbf{0.000027}} & \texttt{\textbf{0.000018}} \\
+ \hline
+ \texttt{\textbf{1 000000003123}} & \texttt{\textbf{0.000028}} & \texttt{\textbf{0.000005}} \\
+ \hline
+ \texttt{\textbf{2 10}} & \texttt{\textbf{0.177266}} & \texttt{\textbf{0.207539}} \\
+ \hline
+ \texttt{\textbf{2 50}} & \texttt{\textbf{0.180220}} & \texttt{\textbf{0.205983}} \\
+ \hline
+ \texttt{\textbf{3 10}} & \texttt{\textbf{0.236767}} & \texttt{\textbf{0.264780}} \\
+ \hline
+ \texttt{\textbf{4 Braga}} & \texttt{\textbf{0.013727}} & \texttt{\textbf{0.011439}} \\
+ \hline
+ \texttt{\textbf{4 Porto}} & \texttt{\textbf{0.011629}} & \texttt{\textbf{0.010332}} \\
+ \hline
+ \texttt{\textbf{4 Lisboa}} & \texttt{\textbf{0.011562}} & \texttt{\textbf{0.010240}} \\
+ \hline
+ \texttt{\textbf{5 01/01/2020 01/01/2021}} & \vspace{-5pt}\texttt{\textbf{0.054139}} & \vspace{-5pt}\texttt{\textbf{0.053338}} \\
+ \hline
+ \texttt{\textbf{5 01/01/2021 01/01/2022}} & \vspace{-5pt}\texttt{\textbf{0.058550}} & \vspace{-5pt}\texttt{\textbf{0.058892}} \\
+ \hline
+ \texttt{\textbf{6 Braga 01/01/2020 01/01/2021}} & \vspace{-5pt}\texttt{\textbf{0.017424}} & \vspace{-5pt}\texttt{\textbf{0.014922}} \\
+ \hline
+ \texttt{\textbf{6 Porto 01/01/2021 01/02/2021}} & \vspace{-5pt}\texttt{\textbf{0.017406}} & \vspace{-5pt}\texttt{\textbf{0.014893}} \\
+ \hline
+ \texttt{\textbf{7 10 Braga}} & \texttt{\textbf{0.038273}} & \texttt{\textbf{0.037780}} \\
+ \hline
+ \texttt{\textbf{8 M 12}} & \texttt{\textbf{0.013602}} & \texttt{\textbf{0.015746}} \\
+ \hline
+ \texttt{\textbf{8 F 12}} & \texttt{\textbf{0.014444}} & \texttt{\textbf{0.016966}} \\
+ \hline
+ \texttt{\textbf{9 24/12/2021 25/12/2021}} & \vspace{-5pt}\texttt{\textbf{0.042344}} & \vspace{-5pt}\texttt{\textbf{0.038273}} \\
+ \hline
+ \texttt{\textbf{9 9 01/01/2012 01/01/2013}} & \vspace{-5pt}\texttt{\textbf{0.041159}} & \vspace{-5pt}\texttt{\textbf{0.036926}} \\
+ \hline
+ \end{tabularx}
+}
+
+
+\newpage
+
+\section{Desempenho das Queries - Dataset Extendido}
+
+{
+\setlength\arrayrulewidth{1pt}
+\begin{tabularx}{\textwidth} { 
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X | }
+ \hline
+ \texttt{\textbf{Query}} & \texttt{\textbf{Computador A (s)}} & \texttt{\textbf{Computador B (s)}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \texttt{\textbf{}} & \texttt{\textbf{}} & \texttt{\textbf{}} \\
+ \hline
+ \end{tabularx}
+}
+
+
+
+
+\chapter{Análise de complexidade}
+
+Para melhor compreendermos o porquê de o tempo requerido em algumas \textit{queries} ser tão distinto do de outras, pensamos que a melhor forma de explicar tais valores seria recorrer a uma análise assimptótica, na qual verificamos a complexidade que cada umas das \textit{queries}.
+
+\section{Query 1}
+
+Esta \textit{query} possui uma complexidade de \( N \in \theta(N)\), sendo que \(N\) representa o número de viagens realizadas por um utilizador/condutor, deste modo, poderíamos pensar que a análise de um condutor levaria mais tempo, já que normalmente este possui mais viagens, contudo como os utilizadores estão contidos numa tabela de \textit{hash} (onde cada \textit{bucket} é na verdade uma lista ligada), daí resulta que o acesso a este é bastante custoso e mororso, uma vez que os utilizadores estão dispersos pela memória.
+
+Assim sendo, e tal como verificamos pelas múltiplas execuções desta \textit{query}, um condutor necessita de menos tempo que um utilizador para ser analisado.
+
+\section{Query 2}
+
+Nesta análise é pedida uma listagem dos \(N\) condutores com maior avaliação média, portanto, para resolver este problema, tivemos de identificar cada um dos condutores e analisar as suas respetivas viagens, pelo que se pode dizer que no fundo percorremos o \textit{array} das viagens de cima a baixo.
+
+Depois disso, foi ainda necessário ordenar a estrutura de dados resultante da recolha inicial, operação que foi feita a partir do famoso algoritmo de ordenação \textit{quick sort}.
+
+Posto isto, a complexidade desta \textit{query} corresponde a \(N + P\log P \in\theta(N)\), sendo que \(N\) corresponde ao número de viagens e \(P\) ao número de condutores, pelo que se percebe que o tempo de execução não depende do parâmetro \textit{top n} passado com argumento.
+
+\section{Query 3}
+
+Esta \textit{query} é muito semelhante à anterior, muda o facto de se pretender listar os \(N\) utilizadores com maior distância viajada, assim sendo, se na análise anterior foi necessário percorrer o \textit{array} dos condutores por completo, neste caso teremos de percorrer a tabela de \textit{hash} onde os utilizadores estão presentes, o que não é tão eficiente dado que esta estrutura não beneficia da mesma localidade espacial que os \textit{array}.
+
+Deste modo, a complexidade equivale a \(N + S\log S\in\theta(N)\), onde \(S\) corresponde ao número de utilizadores, o que é bastante credível, uma vez que o tempo de execução é bastante próximo do da análise feita anteriormente.
+
+\section{Query 4}
+
+Neste problema é pedido para calcular o preço médio das viagens numa determinada cidade, como tal, a melhor forma de abordar esta questão é tirar partido da estrutura de dados das viagens e das cidades, de modo a obter todos os índices cujas viagens foram realizadas na cidade em questão.
+
+Depois de obter todos os índices, basta percorrer essas mesmas posições e ir acumulado o preço de cada uma das viagens, de modo a fazer a média ponderada no final. Assim, a complexidade desta \textit{query} corresponde a \(N/C \in\theta(N)\), sendo que \(C\) representa o número de cidades existentes, isto assumindo que as viagens estão igualmente distribuídas pelas cidades.
+
+\section{Query 5}
+
+Esta \textit{query} é uma das poucas em que não fomos capazes que criar uma estrutura auxiliar de modo a obter uma execução mais rápida, como tal, fomos obrigados a percorrer o \textit{array} das viagens sem que no fundo houvesse essa necessidade, visto que tivemos de analisar viagens que nem sequer correspondiam aos parâmetros pedidos na \textit{query}.
+
+Assim, a complexidade desta \textit{query} equivale a \(N \in \theta(N)\), o que não reflete lá muito bem os tempos obtidos, dado que esta análise beneficia bastante da localidade espacial.
+
+\section{Query 6}
+
+A exemplo do problema anterior, também neste caso não fomos capazes de realizar qualquer otimização relativa às datas, portanto, apenas diminuímos o número de iterações realizadas graças ao parâmetro \textit{cidade}, dado que a partir do \textit{array} das cidades sabemos \textit{a priori} quais os índices das viagens em que a cidade em questão ocorre. 
+
+Deste modo, como temos de analisar todas as viagens realizadas numa determinada cidade, concluímos que a complexidade desta \textit{query} é idêntica à da \textit{query} 4, ou seja \(N/C \in \theta(N)\), o que faz sentido, umas vez que os resultados obtidos em ambas as análise são bastante idênticos.
+
+\section{Query 7}
+
+Mais uma vez o parâmetro \textit{cidade} é um dos pontos chave no que à execução de \textit{queries} diz respeito, assim sendo, apenas necessitamos de analisar determinadas posições da estrutura de dados das viagens e ir adicionando os condutores numa árvore binária de procura de modo a calcular a avaliação média de todos os condutores.
+
+Depois de calcular todos os valores necessários, basta copiar os elementos presentes na árvore binária para um \textit{array}, para que assim possamos fazer uma ordenação a fim de obter o \textit{top n} mais facilmente.
+
+Posto isto, a complexidade desta \textit{query} corresponde a \(\theta(N/C\log N/C)\), sendo que \(N\) equivale ao número de viagens e \(C\) ao número total de cidades identificadas, pelo que se percebe o porquê de o tempo de execução ser ligeiramente superior.
+
+\section{Query 8}
+
+Também neste problema foi necessário percorrer o \textit{array} das viagens, de modo a obter todos os dados necessários à realização de uma ordenação o mais correta possível, consequentemente obtemos uma complexidade de \(N + A\log A \in \theta(N)\), sendo que \(A\) equivale ao número de viagens que consideradas válidas pelos parâmetros apresentados na \textit{query}, e \(N\) ao número total de viagens realizadas.
+
+Assim, observamos que o tempo de execução desta \textit{query} é similar ao de outras \textit{queries} que executam em tempo linear, o que a princípio pode parecer um pouco estranho, todavia faz todo o sentido, uma vez que o fator \(N\) é, normalmente, muito maior que o fator \(A\), portanto como \(N\) é linear, consequentemente a execução aproxima-se do tempo linear.
+
+Não obstante, se o valor de \(A\) fosse próximo de \(N\) veríamos que o tempo se execução cresceria significativamente.
+
+\section{Query 9}
+
+Por fim, como esta análise possui parâmetros relativos a datas, tivemos de voltar a percorrer o \textit{array} das viagens e recolher todos os dados necessários a fim de fazer uma ordenação final, deste modo, a complexidade desta \textit{query} corresponde a \(N + N\log N \in \theta(N\log N)\). 
+
+
+
+
+\section{Complexidade das Queries}
+
+{
+\setlength\arrayrulewidth{1pt}
+\begin{tabularx}{\textwidth} { 
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X | }
+ \hline
+ Query & Melhor Caso & Caso Médio & Pior Caso  \\
+ \hline
+ 1 & \(\theta(1)\) & \(\theta(U)\) & \(\theta(U)\) \\
+ \hline
+ 2 & \(\theta(N)\) & \(\theta(N)\) & \(\theta(N\log N)\) \\
+ \hline
+ 3 & \(\theta(N)\) & \(\theta(N)\) & \(\theta(N\log N)\)  \\
+ \hline
+ 4 & \(\theta(1)\) & \(\theta(N/C)\) & \(\theta(N)\)  \\
+ \hline
+ 5 & \(\theta(N)\) & \(\theta(N)\) & \(\theta(N)\)  \\
+ \hline
+ 6 & \(\theta(1)\) & \(\theta(N/C)\) & \(\theta(N)\)  \\
+ \hline
+ 7 & \(\theta(N/C)\) & \(\theta(N/C\log N/C)\) & \(\theta(N/C\log N/C)\)  \\
+ \hline
+ 8 & \(\theta(N)\) & \(\theta(N)\) & \(\theta(N\log N)\)  \\
+ \hline
+ 9 & \(\theta(N)\) & \(\theta(N\log N)\) & \(\theta(N\log N)\)  \\
+ \hline
+ \end{tabularx}
+}
+
+\vspace{10pt}
+
+\normalsize\textbf{Lengenda}
+    \begin{enumerate}
+    \item \(U \rightarrow\) número de viagens realizadas por um utilizador/condutor.
+    \item \(N \rightarrow\) número de total de viagens consideradas válidas. 
+    \item \(C \rightarrow\) número total de cidades existentes
+\end{enumerate}
+
+
+
+\end{document}
