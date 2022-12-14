@@ -18,7 +18,7 @@ PATH_INPUT_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/inputs
 
 
 all: $(TARGET) $(TARGET_TESTS)
-	@mkdir $(PATH_RESULTS)
+	@mkdir -p $(PATH_RESULTS)
 
 
 $(TARGET): $(OBJS_UTILS) $(filter-out src/tests/main.o, $(OBJS_TESTS)) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES) $(OBJS_INTERACTIVE)

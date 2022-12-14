@@ -42,7 +42,8 @@ double average_price_date(DRIVERS drivers_list, RIDES rides_list, int N_RIDES, i
         }
     }
 
-
+    if (!count) return count;
+    
     return (acc/count);
 }
 
@@ -52,6 +53,7 @@ void resolve_querie5(char* command, int ncommand, DRIVERS drivers_list, RIDES ri
    
     FILE *ficheiro;
     
+    double result;
     int date_1, date_2;
     char outfile[500] = "", *token;
 
@@ -67,7 +69,9 @@ void resolve_querie5(char* command, int ncommand, DRIVERS drivers_list, RIDES ri
 
     ficheiro = fopen(outfile, "w");
 
-    fprintf(ficheiro, "%0.3f\n", average_price_date(drivers_list,rides_list,N_RIDES,date_1,date_2));
+    result = average_price_date(drivers_list,rides_list,N_RIDES,date_1,date_2);
+
+    if (result) fprintf(ficheiro, "%0.3f\n", result);
 
     fclose(ficheiro);
 }

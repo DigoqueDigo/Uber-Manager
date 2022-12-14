@@ -42,6 +42,8 @@ double preco_medio_cidade(DRIVERS drivers_list, RIDES rides_list, CITIES cities_
         }
     }
 
+    if (!count) return count;
+
     return (total/count);
 }
 
@@ -59,10 +61,7 @@ void resolve_querie4(char* command, int ncommand, DRIVERS drivers_list, RIDES ri
 
     average_price = preco_medio_cidade(drivers_list, rides_list, cities_list, N_CITIES, token);
     
-    if (average_price){
-
-        fprintf(ficheiro,"%.3f\n", average_price);    
-    }
+    if (average_price) fprintf(ficheiro,"%.3f\n", average_price);    
 
     fclose(ficheiro);
 }

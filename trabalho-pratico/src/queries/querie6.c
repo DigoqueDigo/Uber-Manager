@@ -30,6 +30,8 @@ double calculate_average_distance(RIDES rides_list, CITIES cities_list, int N_CI
         }
     }
 
+    if (!count) return count;
+
     return (acc/count);
 }
 
@@ -60,7 +62,7 @@ void resolve_querie6(char *command, int ncommand, RIDES rides_list, CITIES citie
 
     result = calculate_average_distance(rides_list,cities_list,N_CITIES,date1,date2,city);
 
-    if (result != 0) fprintf(ficheiro, "%.3f\n", result);
+    if (result) fprintf(ficheiro, "%.3f\n", result);
 
     fclose(ficheiro);
 }
