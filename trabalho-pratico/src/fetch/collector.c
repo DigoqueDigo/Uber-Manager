@@ -39,7 +39,7 @@ int fetch_drivers(char *path, DRIVERS *drivers_list, int *N_DRIVERS, int *SIZE_D
 
     FILE *ficheiro;
 
-    int path_size = strlen(path);
+    int path_size = strlen(path), index;
 
     char string[1000], aux_path[2*path_size], *linha[CAP_LINE];
 
@@ -62,13 +62,12 @@ int fetch_drivers(char *path, DRIVERS *drivers_list, int *N_DRIVERS, int *SIZE_D
             realloc_drivers(drivers_list,*SIZE_DRIVERS);
         }
         
-        if (!set_driver_line(linha,string,*drivers_list)){
+        index = set_driver_line(linha,string,drivers_list,SIZE_DRIVERS);
 
-            push_null_driver(*drivers_list,*N_DRIVERS);
-        }
-        
-        ++*N_DRIVERS;
+        if (index > *N_DRIVERS) *N_DRIVERS = index;
     }
+
+    ++*N_DRIVERS;
 
     fclose(ficheiro);
 
@@ -81,7 +80,7 @@ int fetch_rides(char *path, USERS users_list, DRIVERS drivers_list, RIDES *rides
 
     FILE *ficheiro;
 
-    int path_size = strlen(path);
+    int path_size = strlen(path), index;
 
     char string[1000], aux_path[2*path_size], *linha[CAP_LINE];
 
@@ -97,25 +96,18 @@ int fetch_rides(char *path, USERS users_list, DRIVERS drivers_list, RIDES *rides
 
     while (fgets(string, 1000, ficheiro)){
 
-        if (*N_RIDES >= *SIZE_RIDES){
-            
-            *SIZE_RIDES *= 2;
-            realloc_rides(rides_list,*SIZE_RIDES);
-        }
-
         if (*N_CITIES >= *SIZE_CITIES){
             
             *SIZE_CITIES *= 2;
             realloc_cities(cities_list,*SIZE_CITIES);
         }
 
-        if (!set_ride_line(linha,string,*rides_list,users_list,drivers_list,*cities_list,N_CITIES)){
+        index = set_ride_line(linha,string,rides_list,users_list,drivers_list,*cities_list,SIZE_RIDES,N_CITIES);
 
-            push_null_ride(*rides_list,*N_RIDES);
-        }
-
-        ++*N_RIDES;
+        if (index > *N_RIDES) *N_RIDES = index;
     }
+
+    ++*N_RIDES;
 
     fclose(ficheiro);
 

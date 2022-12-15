@@ -44,9 +44,10 @@ void set_user_line(char  **linha, char *string, USERS lista);
  * @param linha estrutura na qual os dados estão separados e organizados
  * @param string linha da qual serão recolhidos os dados para tratamento
  * @param lista array do condutores no qual serão colocados os dados recolhidos
+ * @param SIZE_DRIVERS tamanho da estrtutra dos condutores
  * @return 1 se os dados obtidos são válidos e 0 caso não sejam 
  */
-int set_driver_line(char **linha, char *string, DRIVERS lista);
+int set_driver_line(char **linha, char *string, DRIVERS *lista, int *SIZE_DRIVERS);
 
 
 /**
@@ -58,9 +59,10 @@ int set_driver_line(char **linha, char *string, DRIVERS lista);
  * @param lista_users tabale de hash na qual os dados referentes a utilizadores serão colocados
  * @param lista_drivers array do condutores no qual serão colocados os dados recolhidos
  * @param cities_list array no qual dados referentes a cidades serão colocados
+ * @param SIZE_RIDES tamanho da estrutura das viagens
  * @param N_CITIES comprimento array das cidades
- * @return 1 se os dados obtidos são válidos e 0 caso não sejam 
+ * @return 1 se os dados obtidos são válidos e 0 caso não sejam
  */
-int set_ride_line(char **linha, char *string, RIDES lista, USERS lista_users, DRIVERS lista_drivers, CITIES cities_list, int *N_CITIES);
+int set_ride_line(char **linha, char *string, RIDES *lista, USERS lista_users, DRIVERS lista_drivers, CITIES cities_list, int *SIZE_RIDES, int *N_CITIES);
 
 #endif

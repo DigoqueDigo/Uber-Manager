@@ -71,9 +71,9 @@ void set_user_line(char **linha, char *string, USERS lista){
 
 
 
-int set_driver_line(char **linha, char *string, DRIVERS lista){
+int set_driver_line(char **linha, char *string, DRIVERS *lista, int *SIZE_DRIVERS){
     
-    int p = 0, valid = 1;
+    int p = 0, valid = 1, index = 0;
 
     char *token = strtok(string, ";" "\n");
 
@@ -129,8 +129,16 @@ int set_driver_line(char **linha, char *string, DRIVERS lista){
     }
 
     if (p == CAP_LINE && token == NULL){
+
+        index = atoi(linha[0]);
+
+        while (index >= *SIZE_DRIVERS){
+
+            *SIZE_DRIVERS *= 2;
+            realloc_drivers(lista,*SIZE_DRIVERS);
+        }
         
-        push_driver(lista,
+        push_driver(*lista,
             linha[0],
             linha[1],
             linha[2],
@@ -146,14 +154,14 @@ int set_driver_line(char **linha, char *string, DRIVERS lista){
 
     for (int i = 0; i < p; free(linha[i++]));
 
-    return (p == CAP_LINE && valid);
+    return index;
 }
 
 
 
-int set_ride_line(char **linha, char *string, RIDES lista, USERS lista_users, DRIVERS lista_drivers, CITIES cities_list, int *N_CITIES){
+int set_ride_line(char **linha, char *string, RIDES *lista, USERS lista_users, DRIVERS lista_drivers, CITIES cities_list, int *SIZE_RIDES, int *N_CITIES){
     
-    int p = 0, valid = 1;
+    int p = 0, valid = 1, index = 0;
 
     char *token = strtok(string, ";" "\n");
 
@@ -210,7 +218,13 @@ int set_ride_line(char **linha, char *string, RIDES lista, USERS lista_users, DR
 
     if (p == CAP_LINE){
 
-        int index = atoi(linha[0]);
+        index = atoi(linha[0]);
+
+        while (index >= *SIZE_RIDES){
+
+            *SIZE_RIDES *= 2;
+            realloc_rides(lista,*SIZE_RIDES);
+        }
 
         push_position(lista_users,index,linha[3]);
 
@@ -218,7 +232,7 @@ int set_ride_line(char **linha, char *string, RIDES lista, USERS lista_users, DR
 
         push_city(cities_list,linha[4],index,N_CITIES);
 
-        push_ride(lista,
+        push_ride(*lista,
             linha[0],
             linha[1],
             linha[2],
@@ -234,5 +248,5 @@ int set_ride_line(char **linha, char *string, RIDES lista, USERS lista_users, DR
 
     for (int i = 0; i < p; free(linha[i++]));
 
-    return (p == CAP_LINE && valid);
+    return index;
 }
