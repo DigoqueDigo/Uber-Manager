@@ -39,7 +39,7 @@ int fetch_drivers(char *path, DRIVERS *drivers_list, int *N_DRIVERS, int *SIZE_D
 
     FILE *ficheiro;
 
-    int path_size = strlen(path), index, acc = 0;
+    int path_size = strlen(path), index;
 
     char string[1000], aux_path[2*path_size], *linha[CAP_LINE];
 
@@ -64,11 +64,9 @@ int fetch_drivers(char *path, DRIVERS *drivers_list, int *N_DRIVERS, int *SIZE_D
         
         index = set_driver_line(linha,string,drivers_list,SIZE_DRIVERS);
 
-        if (!index) acc++;
+        if (index){
 
-        else{
-            
-            for (; acc > 0; acc--, ++*N_DRIVERS){
+            for (; index - *N_DRIVERS; ++*N_DRIVERS){
 
                 push_null_driver(*drivers_list,*N_DRIVERS);
             }
@@ -88,7 +86,7 @@ int fetch_rides(char *path, USERS users_list, DRIVERS drivers_list, RIDES *rides
 
     FILE *ficheiro;
 
-    int path_size = strlen(path), index, acc = 0;
+    int path_size = strlen(path), index;
 
     char string[1000], aux_path[2*path_size], *linha[CAP_LINE];
 
@@ -112,11 +110,9 @@ int fetch_rides(char *path, USERS users_list, DRIVERS drivers_list, RIDES *rides
 
         index = set_ride_line(linha,string,rides_list,users_list,drivers_list,*cities_list,SIZE_RIDES,N_CITIES);
 
-        if (!index) acc++;
+        if (index){
 
-        else{
-            
-            for (; acc > 0; acc--, ++*N_RIDES){
+            for (; index - *N_RIDES; ++*N_RIDES){
 
                 push_null_ride(*rides_list,*N_RIDES);
             }
