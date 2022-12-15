@@ -110,7 +110,7 @@ int check_username(char *string);
 /**
  * @brief Função que valida os dados referentes a uma gorjeta
  * 
- * @param string segmento de memória que contem 
+ * @param string segmento de memória que contem um grojeta
  * @return 1 se a gorjeta é válida, 0 caso não seja
  */
 int check_tip(char *string);
@@ -119,7 +119,7 @@ int check_tip(char *string);
 /**
  * @brief Função que valida os dados referentes a uma distancia
  * 
- * @param string segmento de memória que contem 
+ * @param string segmento de memória que contem uma distancia
  * @return 1 se a distancia é válida, 0 caso não seja
  */
 int check_distance(char *string);

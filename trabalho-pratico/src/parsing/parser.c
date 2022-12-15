@@ -52,7 +52,7 @@ void set_user_line(char **linha, char *string, USERS lista){
         }
     }
 
-    if (p == 7 && token == NULL){
+    if (p == 7 && token == NULL && valid){
         
         push_user(lista,
             linha[0],
@@ -128,7 +128,7 @@ int set_driver_line(char **linha, char *string, DRIVERS *lista, int *SIZE_DRIVER
         }  
     }
 
-    if (p == CAP_LINE && token == NULL){
+    if (p == CAP_LINE && token == NULL && valid){
 
         index = atoi(linha[0]);
 
@@ -216,7 +216,7 @@ int set_ride_line(char **linha, char *string, RIDES *lista, USERS lista_users, D
         }
     }
 
-    if (p == CAP_LINE){
+    if (p == CAP_LINE && valid){
 
         index = atoi(linha[0]);
 

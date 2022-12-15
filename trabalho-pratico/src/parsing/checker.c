@@ -10,7 +10,7 @@ int check_id(char *string){
     for (int p = 0; string[p] != '\0'; p++){
         if (isdigit(string[p]) == 0) return 0;
     }
-    return 1;
+    return (atoi(string) > 0);
 }
 
 
@@ -98,18 +98,21 @@ int check_username(char *string){
 
 
 int check_tip(char *string){
+    int count = 0;
+    if (string[0] == '\0') return 0;
     for (int p = 0; string[p] != '\0'; p++){
+        if (string[p] == '.') count++;
         if (!isdigit(string[p]) && string[p] != '.') return 0;
     }
-    return 1;
+    return (count == 1);
 }
 
 
 int check_distance(char *string){
-    int p;
-    for (p = 0; string[p] != '\0'; p++){
+    int p = 0;
+    if (string[p] == '\0' || string[p] == '0') return 0;
+    for (; string[p] != '\0'; p++){
         if (!isdigit(string[p])) return 0;
     }
-    if (p > 0 && string[0] != '0') return 1;
-    return 0;
+    return 1;
 }
