@@ -208,7 +208,7 @@ int lookup_user_account_status(USERS users_list, char *username, int index){
 
     for (; aux != NULL && strcmp(aux->username,username) != 0; aux = aux->prox);
 
-    if (aux == NULL || !strcmp(aux->account_status,"inactive")) return 0;
+    if (aux == NULL || !strcasecmp(aux->account_status,"inactive")) return 0;
 
     return 1;
 }

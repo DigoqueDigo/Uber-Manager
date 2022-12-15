@@ -91,6 +91,7 @@ int analyse_driver(DRIVERS drivers_list, int index){
     return 1;
 }
 
+
 void lookup_car_class(DRIVERS drivers_list, int index, char *car_class){
     strcpy(car_class,drivers_list[index].car_class);
 }
@@ -119,7 +120,7 @@ void lookup_driver_gender(DRIVERS drivers_list, int index, char *gender){
 
 
 int lookup_driver_accounts_status(DRIVERS drivers_list, int index){
-    if (!strcmp(drivers_list[index].account_status,"inactive")) return 0;
+    if (!strcasecmp(drivers_list[index].account_status,"inactive")) return 0;
     return 1;
 }
 
