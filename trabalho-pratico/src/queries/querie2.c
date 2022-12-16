@@ -12,6 +12,10 @@ struct sort_score{
 };
 
 
+static SORT_SCORE list;
+static int SIZE_TOP_DRIVERS = 0;
+
+
 SORT_SCORE init_sort_score(){
     SORT_SCORE new = malloc(CAP_SORT_SCORE*sizeof(struct sort_score));
     return new;
@@ -29,12 +33,9 @@ void free_sort_score(SORT_SCORE sort_score_list, int N){
 }
 
 
-void print_sort_score(SORT_SCORE list, int N){
+void call_free_score_drivers(){
 
-    for (int p = 0; p < N; p++){
-
-        printf("%012d;%s;%0.3f\n", list[p].id_driver, list[p].name, list[p].average_score);
-    }
+    free_sort_score(list,SIZE_TOP_DRIVERS);
 }
 
 
@@ -104,15 +105,12 @@ int compare_score_id(const void *a, const void *b){
 }
 
 
-
 void resolve_querie2(char *command, int ncommand, DRIVERS drivers_list, RIDES rides_list, int N_DRIVERS){
 
     FILE *ficheiro;
 
-    int N, top;
+    int top;
     char output_file[500] = "", *token;
-    
-    SORT_SCORE list = init_sort_score();
     
     set_command_name(output_file,ncommand);
 
@@ -123,17 +121,19 @@ void resolve_querie2(char *command, int ncommand, DRIVERS drivers_list, RIDES ri
 
     top = atoi(token);
 
+    if (!SIZE_TOP_DRIVERS){
+        
+        list = init_sort_score();
+        
+        SIZE_TOP_DRIVERS = fill_sort_score(&list,drivers_list,rides_list,N_DRIVERS);
 
-    N = fill_sort_score(&list,drivers_list,rides_list,N_DRIVERS);
+        sort_three_compare(list,SIZE_TOP_DRIVERS,sizeof(struct sort_score),compare_score,compare_score_recent_ride,compare_score_id);
+    }
 
-    sort_three_compare(list,N,sizeof(struct sort_score),compare_score,compare_score_recent_ride,compare_score_id);
-
-    for (int p = 0; p < top && p < N; p++){
+    for (int p = 0; p < top && p < SIZE_TOP_DRIVERS; p++){
 
         fprintf(ficheiro, "%012d;%s;%0.3f\n", list[p].id_driver, list[p].name, list[p].average_score);
     }
-
-    free_sort_score(list,N);
 
     fclose(ficheiro);
 }

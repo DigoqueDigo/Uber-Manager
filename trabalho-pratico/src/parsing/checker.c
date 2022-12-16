@@ -116,3 +116,11 @@ int check_distance(char *string){
     }
     return 1;
 }
+
+
+int check_page(char *string){
+    for (int p = 0; string[p] != '\0'; p++){
+        if (!isdigit(string[p])) return 0;
+    }
+    return 1;
+}

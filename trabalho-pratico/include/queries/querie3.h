@@ -44,6 +44,13 @@ void free_sort_distance(SORT_DISTANCE list, int N);
 
 
 /**
+ * @brief Função que chama outra função de remoção de memória
+ *
+ */
+void call_free_distance_users();
+
+
+/**
  * @brief Função que coloca as informações necessárias à ordenação dos utilizadores numa estrutura
  * 
  * @param users_list tabela de hash com as informações dos utilizadores

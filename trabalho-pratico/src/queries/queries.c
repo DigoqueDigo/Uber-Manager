@@ -3,16 +3,6 @@
 #include <string.h>
 #include <time.h>
 #include <queries/queries.h>
-#include <queries/querie1.h>
-#include <queries/querie2.h>
-#include <queries/querie3.h>
-#include <queries/querie4.h>
-#include <queries/querie5.h>
-#include <queries/querie6.h>
-#include <queries/querie7.h>
-#include <queries/querie8.h>
-#include <queries/querie9.h>
-
 
 
 void resolve_queries(char *command, int ncommand, USERS users_list, DRIVERS drivers_list, RIDES rides_list, CITIES cities_list, int N_DRIVERS, int N_RIDES, int N_CITIES){
@@ -80,6 +70,9 @@ int resolve_queries_batch(char *path, USERS users_list, DRIVERS drivers_list, RI
         resolve_queries(linha,p,users_list,drivers_list,rides_list,cities_list,N_DRIVERS,N_RIDES,N_CITIES);
     }
 
+    call_free_distance_users();
+    call_free_score_drivers();
+
     fclose(input);
 
     return 0;
@@ -117,6 +110,9 @@ int resolve_queries_test(char *path, USERS users_list, DRIVERS drivers_list, RID
         push_test(tests_list,aux_linha,time_taken,N_TESTS,SIZE_TESTS);
 
     }
+
+    call_free_score_drivers();
+    call_free_distance_users();
 
     fclose(input);
 

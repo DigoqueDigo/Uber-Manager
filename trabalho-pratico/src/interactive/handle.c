@@ -80,4 +80,7 @@ void interactive_mode(USERS users_list, DRIVERS drivers_list, RIDES rides_list, 
             }
         }
     }
+
+    call_free_score_drivers();
+    call_free_distance_users();
 }

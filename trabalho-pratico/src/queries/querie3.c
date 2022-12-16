@@ -12,6 +12,10 @@ struct sort_distance{
 };
 
 
+static SORT_DISTANCE list;
+static int SIZE_TOP_USERS = 0;
+
+
 SORT_DISTANCE init_sort_distance(){
     SORT_DISTANCE new = malloc(CAP_DISTANCE*sizeof(struct sort_distance));
     return new;
@@ -26,6 +30,12 @@ void free_sort_distance(SORT_DISTANCE list, int N){
         }
     }
     free(list);
+}
+
+
+void call_free_distance_users(){
+
+    free_sort_distance(list,SIZE_TOP_USERS);
 }
 
 
@@ -98,7 +108,7 @@ void resolve_querie3(char *command, int ncommand, USERS users_list, RIDES rides_
 
     FILE *ficheiro;
 
-    int N, top;
+    int top;
 
     char output_file[500] = "", *token;
 
@@ -111,18 +121,19 @@ void resolve_querie3(char *command, int ncommand, USERS users_list, RIDES rides_
 
     ficheiro = fopen(output_file, "w");
 
-    SORT_DISTANCE list = init_sort_distance();
+    if (!SIZE_TOP_USERS){
 
-    N = fill_sort_distance(users_list,rides_list,&list);
+        list = init_sort_distance();
 
-    sort_three_compare(list,N,sizeof(struct sort_distance),compare_distance_ride,compare_recente_ride,compare_username);
+        SIZE_TOP_USERS = fill_sort_distance(users_list,rides_list,&list);
 
-    for (int p = 0; p < top; p++){
+        sort_three_compare(list,SIZE_TOP_USERS,sizeof(struct sort_distance),compare_distance_ride,compare_recente_ride,compare_username);
+    }
+
+    for (int p = 0; p < top && p < SIZE_TOP_USERS; p++){
 
         fprintf(ficheiro, "%s;%s;%d\n", list[p].username, list[p].name, list[p].distance);
     }
-
-    free_sort_distance(list,N);
 
     fclose(ficheiro);
 }

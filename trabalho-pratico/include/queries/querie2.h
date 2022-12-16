@@ -44,6 +44,13 @@ void free_sort_score(SORT_SCORE sort_score_list, int N);
 
 
 /**
+ * @brief Função que chama outra função de remoção de memória
+ *
+ */
+void call_free_score_drivers();
+
+
+/**
  * @brief Função que preenche a estrutura das avaliações médias dos condutores
  * 
  * @param sort_score_list estrutura de dados que se pretende preencher

@@ -90,9 +90,10 @@ void page_browser(){
                 print_empty_lines(terminal_lines-1);
             }
 
-            else if (check_id(string)){
+            else if (check_page(string)){
 
-                page = atoi(string);
+                if (string[0] != '\0') page = atoi(string);
+
                 print_page(ficheiro,page,pages,terminal_lines);
             }
 

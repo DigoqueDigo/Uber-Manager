@@ -124,4 +124,13 @@ int check_tip(char *string);
  */
 int check_distance(char *string);
 
+
+/**
+ * @brief Função que valida se uma pagina é válida
+ * 
+ * @param string segmento de memória que contem uma pagina
+ * @return 1 se a distancia é válida, 0 caso não seja
+ */
+int check_page(char *string);
+
 #endif
