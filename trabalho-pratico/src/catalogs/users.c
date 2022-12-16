@@ -143,7 +143,7 @@ USER lookup_positions_and_name(USERS users_list, USER start, int *bucket, char *
         start = users_list[*bucket];
     }
 
-    if (!strcmp(start->account_status,"inactive")) strcpy(name,"inactive");
+    if (!strcasecmp(start->account_status,"inactive")) strcpy(name,"inactive");
     
     else{
         strcpy(name,start->name);

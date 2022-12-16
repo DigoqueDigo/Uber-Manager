@@ -92,7 +92,7 @@ void search_mode(FILE *ficheiro, char *word, int terminal_lines){
 
             string[strlen(string)-1] = '\0';
 
-            if (check_page(string)){
+            if (string[0] == '\0' || check_id(string)){
 
                 if (string[0] != '\0') page = atoi(string);
 

@@ -90,7 +90,7 @@ void page_browser(){
                 print_empty_lines(terminal_lines-1);
             }
 
-            else if (check_page(string)){
+            else if (string[0] == '\0' || check_id(string)){
 
                 if (string[0] != '\0') page = atoi(string);
 

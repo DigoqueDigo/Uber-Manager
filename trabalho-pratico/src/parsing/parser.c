@@ -200,12 +200,12 @@ int set_ride_line(char **linha, char *string, RIDES *lista, USERS lista_users, D
                 break;
 
             case 6:
-                if (check_id(token)) linha[p] = strdup(token);
+                if (check_score(token)) linha[p] = strdup(token);
                 else valid = 0;
                 break;
 
             case 7:
-                if (check_id(token)) linha[p] = strdup(token);
+                if (check_score(token)) linha[p] = strdup(token);
                 else valid = 0;
                 break;
 

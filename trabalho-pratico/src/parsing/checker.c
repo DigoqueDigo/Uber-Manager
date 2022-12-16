@@ -10,7 +10,7 @@ int check_id(char *string){
     for (int p = 0; string[p] != '\0'; p++){
         if (isdigit(string[p]) == 0) return 0;
     }
-    return (atoi(string) > 0);
+    return 1;
 }
 
 
@@ -118,9 +118,12 @@ int check_distance(char *string){
 }
 
 
-int check_page(char *string){
-    for (int p = 0; string[p] != '\0'; p++){
+int check_score(char *string){
+    int p = 0;
+    if (string[p] == '\0') return 0;
+    for (; string[p] != '\0'; p++){
         if (!isdigit(string[p])) return 0;
     }
-    return 1;
+    p = atoi(string);
+    return (p > 0 && p < 6);
 }
