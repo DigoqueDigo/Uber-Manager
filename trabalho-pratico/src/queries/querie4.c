@@ -9,7 +9,11 @@ double preco_medio_cidade(DRIVERS drivers_list, RIDES rides_list, CITIES cities_
     int sp, dist, id, count = 0, *positions;
     double total = 0;
 
-    if (!analyse_city(cities_list,city,N_CITIES)) return 0;
+    total = lookup_cities_average_price(cities_list,city,N_CITIES);
+
+    if (total == -1) return 0;
+
+    if (total > 0.0) return total;
 
     positions = lookup_cities_positions(cities_list,city,&sp,N_CITIES);
 
@@ -42,9 +46,11 @@ double preco_medio_cidade(DRIVERS drivers_list, RIDES rides_list, CITIES cities_
         }
     }
 
-    if (!count) return count;
+    total /= count;
 
-    return (total/count);
+    push_city_average_price(cities_list,city,total,N_CITIES);
+
+    return total;
 }
 
 

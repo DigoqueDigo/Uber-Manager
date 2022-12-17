@@ -9,6 +9,7 @@ struct city{
     int sp;
     int size;
     int *positions;
+    double average_price;
 };
 
 
@@ -31,6 +32,7 @@ void push_city(CITIES cities_list, char *city, int index, int *N_CITIES){
         cities_list[*N_CITIES].sp = 1;
         cities_list[*N_CITIES].positions = malloc(CAP_CITY*sizeof(int));
         cities_list[*N_CITIES].positions[0] = index;
+        cities_list[*N_CITIES].average_price = 0;
         ++*N_CITIES;
     }
 
@@ -44,6 +46,16 @@ void push_city(CITIES cities_list, char *city, int index, int *N_CITIES){
 
         cities_list[p].positions[cities_list[p].sp++] = index;
     }
+}
+
+
+void push_city_average_price(CITIES cities_list, char *city, double average_price, int N_CITIES){
+
+    int p;
+
+    for (p = 0; p < N_CITIES && strcmp(cities_list[p].city,city); p++);
+
+    if (p != N_CITIES) cities_list[p].average_price = average_price;
 }
 
 
@@ -88,4 +100,14 @@ int* lookup_cities_positions(CITIES cities_list, char *city, int *sp, int N_CITI
 
     *sp = cities_list[p].sp;
     return cities_list[p].positions;
+}
+
+
+double lookup_cities_average_price(CITIES cities_list, char *city, int N_CITIES){
+    int p;
+    for (p = 0; p < N_CITIES && strcmp(cities_list[p].city,city); p++);
+
+    if (p != N_CITIES) return cities_list[p].average_price;
+
+    return -1;
 }

@@ -50,6 +50,17 @@ void push_city(CITIES cities_list, char *city, int index, int *N_CITIES);
 
 
 /**
+ * @brief Função que insere o preço médio das viagens numa cidade na estrutura das cidades
+ * 
+ * @param cities_list estrutura de dados das cidades
+ * @param city cidades na qual se pretende colocar o indice
+ * @param average_price preço média das viagens numa dada cidade
+ * @param N_CITIES comprimento do array das cidades
+ */
+void push_city_average_price(CITIES cities_list, char *city, double average_price, int N_CITIES);
+
+
+/**
  * @brief Função que estande a capacidade da estrutura das cidades
  * 
  * @param cities_list array das cidades que será realocado
@@ -88,5 +99,16 @@ int analyse_city(CITIES cities_list, char *city, int N_CITIES);
  * @return posição inicial do array com todos os indices da cidade passada como argumento
  */
 int* lookup_cities_positions(CITIES cities_list, char *city, int *sp, int N_CITIES);
+
+
+/**
+ * @brief Função recolhe a informação do preço médio das viagens numa dada cidade
+ * 
+ * @param cities_list estrutura de dados das cidades
+ * @param city cidade que pretendemos saber o preço médio das viagens
+ * @param N_CITIES comprimento do array das cidades
+ * @return preço médio das viagens na cidade em questão
+ */
+double lookup_cities_average_price(CITIES cities_list, char *city, int N_CITIES);
 
 #endif

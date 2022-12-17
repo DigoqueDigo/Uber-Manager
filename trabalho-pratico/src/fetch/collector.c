@@ -56,12 +56,6 @@ int fetch_drivers(char *path, DRIVERS *drivers_list, int *N_DRIVERS, int *SIZE_D
 
     while (fgets(string, 1000, ficheiro)){
         
-        if (*N_DRIVERS >= *SIZE_DRIVERS){
-            
-            *SIZE_DRIVERS *= 2;
-            realloc_drivers(drivers_list,*SIZE_DRIVERS);
-        }
-        
         index = set_driver_line(linha,string,drivers_list,SIZE_DRIVERS);
 
         if (index){
