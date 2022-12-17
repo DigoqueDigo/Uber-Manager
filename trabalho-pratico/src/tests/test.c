@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 #include <tests/test.h>
 
 
@@ -68,7 +69,47 @@ void free_tests(TESTS tests_list, int N_TESTS){
 }
 
 
-void print_tests(TESTS tests_list, int N_TESTS, double *catalogs_time){
+void print(char *sintax, FILE *ficheiro, ...){
+
+    char aux_sintax[20], *token;
+
+    strcpy(aux_sintax,sintax);
+    token = strtok(aux_sintax, ",");
+
+    va_list arguments;
+    va_start(arguments,ficheiro); 
+
+    if (ficheiro == NULL){
+
+        for (int p = 0; token; token = strtok(NULL, ","), p++){
+
+            if (token[0] == 's') printf("%s", va_arg(arguments,char*));
+
+            else if (token[0] == 'd') printf("%d", va_arg(arguments,int));
+
+            else if (token[0] == 'f') printf("%f", va_arg(arguments,double));
+        }
+    }
+        
+    else{
+
+        for (int p = 0; token; token = strtok(NULL, ","), p++){
+
+            if (token[0] == 's') fprintf(ficheiro, "%s", va_arg(arguments,char*));
+
+            else if (token[0] == 'd') fprintf(ficheiro, "%d", va_arg(arguments,int));
+
+            else if (token[0] == 'f') fprintf(ficheiro, "%f", va_arg(arguments,double));
+        }
+    }
+
+    va_end(arguments);
+}
+
+
+void print_tests(TESTS tests_list, int N_TESTS, double *catalogs_time, char *test_file){
+
+    FILE *ficheiro = NULL;
 
     double total_time = 0.0;
 
@@ -76,47 +117,59 @@ void print_tests(TESTS tests_list, int N_TESTS, double *catalogs_time){
 
 //  columns = get_terminal_columns();
 
+    if (test_file != NULL){
+
+        ficheiro = fopen(test_file,"w");
+
+        if (ficheiro == NULL){
+
+            perror(test_file);
+            return;
+        }
+    }
+
     for (int p = 0; p < N_TESTS; p++){
 
         total_time += tests_list[p].time;
         
-        print_separator_line(columns);
+        print_separator_line(columns,ficheiro);
 
-        printf("\n\nTeste:\t\t\t%d\nQuery:\t\t\t%s\n", p+1, tests_list[p].query);
+        print("s,d,s,s,s", ficheiro, "\n\nTeste:\t\t\t", p+1, "\nQuery:\t\t\t", tests_list[p].query, "\n");
 
         if (tests_list[p].checker){
 
-            printf("Execução:\t\tVálida\n");
-            printf("Tempo:\t\t\t%f segundos\n\n", tests_list[p].time);
+            print("s", ficheiro, "Execução:\t\tVálida\n");
+            print("s,f,s", ficheiro, "Tempo:\t\t\t", tests_list[p].time, " segundos\n\n");
             
             correct++;
         }
 
         else{
 
-            printf("Execução:\t\tInválida\n");
-            printf("Tempo:\t\t\t%f segundos\n", tests_list[p].time);
-            printf("Linha obtida:\t\t%s\n", tests_list[p].obtained);
-            printf("Linha esperada:\t\t%s\n\n", tests_list[p].expected);
+            print("s", ficheiro, "Execução:\t\tInválida\n");
+            print("s,f,s", ficheiro, "Tempo:\t\t\t", tests_list[p].time, " segundos\n");
+            print("s,s,s", ficheiro, "Linha obtida:\t\t", tests_list[p].obtained, "\n");
+            print("s,s,s", ficheiro, "Linha esperada:\t\t", tests_list[p].expected, "\n\n");
         }
     }
 
-    print_separator_line(columns);
+    print_separator_line(columns,ficheiro);
 
-    printf("\n\nSUMÁRIO TEMPORAL\n\n");
-    printf("Recolha dos utilizadores:\t%f segundos\n", catalogs_time[0]);
-    printf("Recolha dos condutores:\t\t%f segundos\n", catalogs_time[1]);
-    printf("Recolha das viagens/cidades:\t%f segundos\n", catalogs_time[2]);
-    printf("Execução das queries:\t\t%f segundos\n", total_time);
-    printf("Validação dos resultados:\t%f segundos\n", catalogs_time[3]);
-    printf("Tempo total de execução:\t%f segundos\n\n", catalogs_time[4]);
+    print("s", ficheiro, "\n\nSUMÁRIO TEMPORAL\n\n");
+    print("s,f,s", ficheiro, "Recolha dos utilizadores:\t", catalogs_time[0], " segundos\n");
+    print("s,f,s", ficheiro, "Recolha dos condutores:\t\t", catalogs_time[1], " segundos\n");
+    print("s,f,s", ficheiro, "Recolha das viagens/cidades:\t", catalogs_time[2], " segundos\n");
+    print("s,f,s", ficheiro, "Execução das queries:\t\t", total_time, " segundos\n");
+    print("s,f,s", ficheiro, "Validação dos resultados:\t", catalogs_time[3], " segundos\n");
+    print("s,f,s", ficheiro, "Tempo total de execução:\t", catalogs_time[4], " segundos\n\n");
 
-    print_separator_line(columns);
+    print_separator_line(columns,ficheiro);
 
-    printf("\n\nSUMÁRIO FINAL\n\n");
-    printf("Queries corretas: %d/%d\n", correct, N_TESTS);
-    printf("Queries incorretas: %d/%d\n\n", N_TESTS-correct, N_TESTS);
+    print("s", ficheiro, "\n\nSUMÁRIO FINAL\n\n");
+    print("s,d,s,d,s", ficheiro, "Queries corretas: ", correct, "/", N_TESTS, "\n");
+    print("s,d,s,d,s", ficheiro, "Queries incorretas: ", N_TESTS-correct, "/", N_TESTS, "\n\n");
 
+    print_separator_line(columns,ficheiro);
 
-    print_separator_line(columns);
+    if (ficheiro != NULL) fclose(ficheiro);
 }

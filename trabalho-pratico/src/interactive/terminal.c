@@ -46,12 +46,11 @@ void print_empty_lines(int N){
 }
 
 
-void print_separator_line(int N){
+void print_separator_line(int N, FILE *ficheiro){
 
-    for (int p = 0; p < N; p++){
+    if (ficheiro != NULL) for (int p = 0; p < N; fprintf(ficheiro, "-"), p++);
 
-        putchar('-');
-    }
+    else for (int p = 0; p < N; putchar('-'), p++);
 }
 
 

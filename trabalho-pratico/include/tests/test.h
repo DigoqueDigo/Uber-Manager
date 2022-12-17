@@ -76,12 +76,21 @@ void free_tests(TESTS tests_list, int N_TESTS);
 
 
 /**
+ * @brief Função que imprime palavras no terminal ou numm ficheiro
+ * 
+ * @param sintax parametro que indica com as palavras serão impressas
+ * @param ficheiro ficheiro no qual serão escritas as palavras
+ */
+void print(char *sintax, FILE *ficheiro, ...);
+
+/**
  * @brief Função que imprime o conteudo da estrutura de dados dos testes
  * 
  * @param tests_list estrutura de dados que se pretende remover da memória
  * @param N_TESTS numero de testes que estão na estrutura dos testes
  * @param catalogs_time array com outros tempos de execução
+ * @param test_file ficheiro no qual serão escritos os resultados do teste
  */
-void print_tests(TESTS tests_list, int N_TESTS, double *catalogs_time);
+void print_tests(TESTS tests_list, int N_TESTS, double *catalogs_time, char *test_file);
 
 #endif

@@ -13,6 +13,7 @@ TARGET_TESTS = programa-testes
 PATH_RESULTS = Resultados
 CSV_REGULAR = csv/data-regular
 CSV_REGULAR_ERRORS = csv/data-regular-errors
+CSV_LARGE = csv/data-large
 
 
 
@@ -201,6 +202,9 @@ teste5:
 
 teste6:
 	./$(TARGET_TESTS) $(CSV_REGULAR_ERRORS) inputs/input3.txt exemplos_de_queries/tests_3
+
+teste7:
+	./$(TARGET_TESTS) $(CSV_LARGE) inputs/input4.txt exemplos_de_queries/tests_4
 
 
 clean:

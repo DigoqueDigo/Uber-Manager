@@ -11,7 +11,7 @@
 
 int main(int argc, char **argv){
 
-    if (system("clear") == -1) return -1;
+    if (argc == 4 && system("clear") == -1) return -1;
 
     USERS users_list = init_users();
     DRIVERS drivers_list = init_drivers();
@@ -22,7 +22,7 @@ int main(int argc, char **argv){
     int N_RIDES = 0, N_DRIVERS = 0, N_CITIES = 0, N_TESTS = 0;
     int SIZE_DRIVERS = CAP_DRIVERS, SIZE_RIDES = CAP_RIDES, SIZE_CITIES = CAP_CITIES, SIZE_TESTS = CAP_TESTS;
 
-    if (argc == 4){
+    if (argc > 3){
 
         double catalogs_time[5];
         clock_t comparation_time, total_time = clock();
@@ -63,7 +63,9 @@ int main(int argc, char **argv){
         catalogs_time[3] = ((double) comparation_time)/CLOCKS_PER_SEC;
         catalogs_time[4] = ((double) total_time)/CLOCKS_PER_SEC;
 
-        print_tests(tests_list,N_TESTS,catalogs_time);
+        if (argc == 5) print_tests(tests_list,N_TESTS,catalogs_time,argv[4]);
+
+        else print_tests(tests_list,N_TESTS,catalogs_time,NULL);
     }
 
     free_tests(tests_list,N_TESTS);
