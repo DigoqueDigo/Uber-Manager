@@ -11,10 +11,9 @@ OBJS_QUERIES = src/queries/queries.o src/queries/querie1.o src/queries/querie2.o
 TARGET = programa-principal
 TARGET_TESTS = programa-testes
 PATH_RESULTS = Resultados
-PATH_CSV_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/csv/data-regular
-PATH_INPUT_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/inputs
-PATH_CSV_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/csv/data-regular
-PATH_INPUT_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/inputs
+CSV_REGULAR = csv/data-regular
+CSV_REGULAR_ERRORS = csv/data-regular-errors
+
 
 
 all: $(TARGET) $(TARGET_TESTS)
@@ -58,8 +57,7 @@ $(OBJS_INTERACTIVE): src/interactive/%.o : src/interactive/%.c
 
 
 teste1:
-	./$(TARGET) $(PATH_CSV_DIOGO) $(PATH_INPUT_DIOGO)/input.txt
-#	./$(TARGET) $(PATH_CSV_JOAO) $(PATH_INPUT_JOAO)/input.txt
+	./$(TARGET) $(CSV_REGULAR) inputs/input.txt
 	diff Resultados/command1_output.txt exemplos_de_queries/tests_1/command1_output.txt
 	diff Resultados/command2_output.txt exemplos_de_queries/tests_1/command2_output.txt
 	diff Resultados/command3_output.txt exemplos_de_queries/tests_1/command3_output.txt
@@ -68,9 +66,9 @@ teste1:
 	diff Resultados/command6_output.txt exemplos_de_queries/tests_1/command6_output.txt
 	diff Resultados/command7_output.txt exemplos_de_queries/tests_1/command7_output.txt
 	diff Resultados/command8_output.txt exemplos_de_queries/tests_1/command8_output.txt
-	diff Resultados/command9_output.txt exemplos_de_queries/tests_1/command9_output.txt	
-	diff Resultados/command10_output.txt exemplos_de_queries/tests_1/command10_output.txt	
-	diff Resultados/command11_output.txt exemplos_de_queries/tests_1/command11_output.txt	
+	diff Resultados/command9_output.txt exemplos_de_queries/tests_1/command9_output.txt
+	diff Resultados/command10_output.txt exemplos_de_queries/tests_1/command10_output.txt
+	diff Resultados/command11_output.txt exemplos_de_queries/tests_1/command11_output.txt
 	diff Resultados/command12_output.txt exemplos_de_queries/tests_1/command12_output.txt
 	diff Resultados/command13_output.txt exemplos_de_queries/tests_1/command13_output.txt
 	diff Resultados/command14_output.txt exemplos_de_queries/tests_1/command14_output.txt
@@ -82,8 +80,7 @@ teste1:
 
 
 teste2:
-	./$(TARGET) $(PATH_CSV_DIOGO) $(PATH_INPUT_DIOGO)/input2.txt
-#	./$(TARGET) $(PATH_CSV_JOAO) $(PATH_INPUT_JOAO)/input2.txt
+	./$(TARGET) $(CSV_REGULAR) inputs/input2.txt
 	diff Resultados/command1_output.txt exemplos_de_queries/tests_2/command1_output.txt
 	diff Resultados/command2_output.txt exemplos_de_queries/tests_2/command2_output.txt
 	diff Resultados/command3_output.txt exemplos_de_queries/tests_2/command3_output.txt
@@ -137,8 +134,7 @@ teste2:
 
 
 teste3:
-	./$(TARGET) csv/data-regular-errors $(PATH_INPUT_DIOGO)/input3.txt
-#	./$(TARGET) $(PATH_CSV_JOAO) $(PATH_INPUT_JOAO)/input2.txt
+	./$(TARGET) $(CSV_REGULAR_ERRORS) inputs/input3.txt
 	diff Resultados/command1_output.txt exemplos_de_queries/tests_3/command1_output.txt
 	diff Resultados/command2_output.txt exemplos_de_queries/tests_3/command2_output.txt
 	diff Resultados/command3_output.txt exemplos_de_queries/tests_3/command3_output.txt
@@ -195,8 +191,16 @@ teste3:
 	diff Resultados/command54_output.txt exemplos_de_queries/tests_3/command54_output.txt
 
 
-clean_teste:
-	rm Resultados/*.txt
+teste4:
+	./$(TARGET_TESTS) $(CSV_REGULAR) inputs/input.txt exemplos_de_queries/tests_1
+
+
+teste5:
+	./$(TARGET_TESTS) $(CSV_REGULAR) inputs/input2.txt exemplos_de_queries/tests_2
+
+
+teste6:
+	./$(TARGET_TESTS) $(CSV_REGULAR_ERRORS) inputs/input3.txt exemplos_de_queries/tests_3
 
 
 clean:
