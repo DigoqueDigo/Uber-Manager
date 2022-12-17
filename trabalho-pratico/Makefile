@@ -11,9 +11,9 @@ OBJS_QUERIES = src/queries/queries.o src/queries/querie1.o src/queries/querie2.o
 TARGET = programa-principal
 TARGET_TESTS = programa-testes
 PATH_RESULTS = Resultados
-PATH_CSV_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/csv/data-regular-valid
+PATH_CSV_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/csv/data-regular
 PATH_INPUT_DIOGO = /home/diogo/Desktop/grupo-19/trabalho-pratico/inputs
-PATH_CSV_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/csv/data-regular-valid
+PATH_CSV_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/csv/data-regular
 PATH_INPUT_JOAO = /home/joao/Desktop/grupo-19/trabalho-pratico/inputs
 
 
