@@ -47,7 +47,7 @@ int main(int argc, char** argv){
 
                 token = strtok(string, " " "\n");
 
-                if (!strcmp(token,"load")){
+                if (token && !strcmp(token,"load")){
 
                     token = strtok(NULL, " " "\n");
             
@@ -71,7 +71,7 @@ int main(int argc, char** argv){
                     }
                 }
 
-                else if (!strcmp(token,"remove")){
+                else if (token && !strcmp(token,"remove")){
 
                     for (token = strtok(NULL, " " "\n"); token; token = strtok(NULL, " " "\n")){
 
@@ -98,14 +98,14 @@ int main(int argc, char** argv){
                 }
                 
 
-                else if (!strcmp(token,"execute")){
+                else if (token && !strcmp(token,"execute")){
 
                     if (!users_flag || !N_DRIVERS || !N_RIDES) printf("Não é possivel executar sem os dados serem todos recolhidos\n");
 
                     else interactive_mode(users_list,drivers_list,rides_list,cities_list,N_DRIVERS,N_RIDES,N_CITIES);
                 }
 
-                else if (strstr(string,"quit") == NULL) printf("Não foi possivel identificar o comando\n");
+                else if (token && strstr(string,"quit") == NULL) printf("Não foi possivel identificar o comando\n");
             }
         }
     }
