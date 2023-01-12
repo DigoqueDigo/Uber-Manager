@@ -113,9 +113,7 @@ void print_tests(TESTS tests_list, int N_TESTS, double *catalogs_time, char *tes
 
     double total_time = 0.0;
 
-    int correct = 0, columns = 205;
-
-//  columns = get_terminal_columns();
+    int correct = 0, columns = get_terminal_columns();
 
     if (test_file != NULL){
 

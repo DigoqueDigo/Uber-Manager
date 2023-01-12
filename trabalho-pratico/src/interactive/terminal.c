@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include <termcap.h>
+#include <termcap.h>
 #include <error.h>
 #include <interactive/terminal.h>
 
-/*
+
 int get_terminal_lines(){
 
     static char termbuf[2048];
@@ -35,7 +35,7 @@ int get_terminal_columns(){
 
     return (tgetnum("co"));
 }
-*/
+
 
 void print_empty_lines(int N){
 

@@ -72,17 +72,18 @@ void print_search(FILE *ficheiro, char *word, int page, int pages, int terminal_
 
 
 
-void search_mode(FILE *ficheiro, char *word, int terminal_lines){
+void search_mode(FILE *ficheiro, char *word, int *terminal_lines){
 
     int pages, total_lines, page = 0, matches = 0;
     char string[1000] = "";
 
     word += 2;
 
+    *terminal_lines = get_terminal_lines();
     total_lines = count_matches(ficheiro,word,&matches);
-    pages = get_total_pages(total_lines,terminal_lines);
+    pages = get_total_pages(total_lines,*terminal_lines);
     
-    print_search(ficheiro,word,0,pages,terminal_lines);
+    print_search(ficheiro,word,0,pages,*terminal_lines);
     
     while (strstr(string,"quit") == NULL){
 
@@ -90,22 +91,25 @@ void search_mode(FILE *ficheiro, char *word, int terminal_lines){
 
         if (fgets(string, 1000, stdin)){
 
+            *terminal_lines = get_terminal_lines();
+            pages = get_total_pages(total_lines,*terminal_lines);
+
             string[strlen(string)-1] = '\0';
 
             if (string[0] == '\0' || check_id(string)){
 
                 if (string[0] != '\0') page = atoi(string);
 
-                print_search(ficheiro,word,page,pages,terminal_lines);
+                print_search(ficheiro,word,page,pages,*terminal_lines);
             }
 
             else{
 
                 printf("Não foi possivel identificar o comando\n");
-                print_empty_lines(terminal_lines-1);
+                print_empty_lines(*terminal_lines-1);
             }
         }
     }
 
-    print_empty_lines(terminal_lines);
+    print_empty_lines(*terminal_lines);
 }

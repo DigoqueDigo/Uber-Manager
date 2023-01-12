@@ -8,9 +8,20 @@
 */
 
 
-//int get_terminal_lines();
+/**
+ * @brief Função que indica o numero de linhas do terminal
+ * 
+ * @return numero de linhas do terminal
+ */
+int get_terminal_lines();
 
-//int get_terminal_columns();
+
+/**
+ * @brief Função que indica o numero de colunas do terminal
+ * 
+ * @return numero de linhas do terminal
+ */
+int get_terminal_columns();
 
 
 /**

@@ -61,12 +61,10 @@ void page_browser(){
         return;
     }
 
-    
     total_lines = get_file_lines(ficheiro);
-    terminal_lines = 55;
-    //terminal_lines = get_terminal_lines();
+    terminal_lines = get_terminal_lines();
     pages = get_total_pages(total_lines,terminal_lines);
-
+    
     if (!pages){
         
         printf("A querie não gerou qualquer resultado\n");
@@ -81,6 +79,9 @@ void page_browser(){
         printf("Nagevador de páginas [%d...%d] (%d) >>> ", 0, pages-1, page);
 
         if (fgets(string, 1000, stdin)){
+
+            terminal_lines = get_terminal_lines();
+            pages = get_total_pages(total_lines,terminal_lines);
 
             string[strlen(string)-1] = '\0'; 
 
@@ -99,7 +100,9 @@ void page_browser(){
 
             else if (string[0] == '/'){
                 
-                search_mode(ficheiro,string,terminal_lines);
+                search_mode(ficheiro,string,&terminal_lines);
+
+                pages = get_total_pages(total_lines,terminal_lines);
                 print_page(ficheiro,page,pages,terminal_lines);
             }
 

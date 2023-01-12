@@ -41,6 +41,6 @@ void print_search(FILE *ficheiro, char *word, int page, int pages, int terminal_
  * @param word palavra que se pretende pesquisar
  * @param terminal_lines numero de linhas que podem ser usadas pelo terminal
  */
-void search_mode(FILE *ficheiro, char *word, int terminal_lines);
+void search_mode(FILE *ficheiro, char *word, int *terminal_lines);
 
 #endif
