@@ -1,31 +1,31 @@
 # COMPILER
 
-CC 					:= gcc
-CFLAGS 				:= -Wall -Wextra -pedantic-errors -O2 -Iinclude
-LIBS 				:= -ltermcap
+CC := gcc
+LIBS := -ltermcap
+CFLAGS := -Wall -Wextra -pedantic-errors -O2 -Iinclude
 
 # OBJECT CODE
 
-OBJS_UTILS 			:= $(patsubst %.c, %.o, $(wildcard src/*.c))
-OBJS_TESTS 			:= $(patsubst %.c, %.o, $(wildcard src/tests/*.c))
-OBJS_FETCH 			:= $(patsubst %.c, %.o, $(wildcard src/fetch/*.c))
-OBJS_PARSER 		:= $(patsubst %.c, %.o, $(wildcard src/parsing/*.c))
-OBJS_QUERIES 		:= $(patsubst %.c, %.o, $(wildcard src/queries/*.c))
-OBJS_CATALOGS 		:= $(patsubst %.c, %.o, $(wildcard src/catalogs/*.c))
-OBJS_INTERACTIVE 	:= $(patsubst %.c, %.o, $(wildcard src/interactive/*.c))
-OBJS_ALL			:= $(OBJS_UTILS) $(OBJS_TESTS) $(OBJS_FETCH) $(OBJS_PARSER) $(OBJS_QUERIES) $(OBJS_CATALOGS) $(OBJS_INTERACTIVE)
+OBJS_UTILS := $(patsubst %.c, %.o, $(wildcard src/*.c))
+OBJS_TESTS := $(patsubst %.c, %.o, $(wildcard src/tests/*.c))
+OBJS_FETCH := $(patsubst %.c, %.o, $(wildcard src/fetch/*.c))
+OBJS_PARSER := $(patsubst %.c, %.o, $(wildcard src/parsing/*.c))
+OBJS_QUERIES := $(patsubst %.c, %.o, $(wildcard src/queries/*.c))
+OBJS_CATALOGS := $(patsubst %.c, %.o, $(wildcard src/catalogs/*.c))
+OBJS_INTERACTIVE := $(patsubst %.c, %.o, $(wildcard src/interactive/*.c))
+OBJS_ALL := $(OBJS_UTILS) $(OBJS_TESTS) $(OBJS_FETCH) $(OBJS_PARSER) $(OBJS_QUERIES) $(OBJS_CATALOGS) $(OBJS_INTERACTIVE)
 
 # TARGETS
 
-TARGET 				:= programa-principal
-TARGET_TESTS		:= programa-testes
+TARGET := programa-principal
+TARGET_TESTS := programa-testes
 
 # Folders
 
-PATH_RESULTS		:= Resultados
-CSV_REGULAR			:= csv/data-regular
-CSV_REGULAR_ERRORS 	:= csv/data-regular-errors
-CSV_LARGE 			:= csv/data-large
+PATH_RESULTS := Resultados
+CSV_LARGE := csv/data-large
+CSV_REGULAR := csv/data-regular
+CSV_REGULAR_ERRORS := csv/data-regular-errors
 
 
 # BUILDING
