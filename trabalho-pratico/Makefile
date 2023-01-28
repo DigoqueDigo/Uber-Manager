@@ -1,33 +1,50 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -pedantic-errors -O2 -Iinclude
-LIBS = -lm -ltermcap
-OBJS_TESTS = src/tests/diff.o src/tests/test.o src/tests/main.o
-OBJS_INTERACTIVE = src/interactive/handle.o src/interactive/terminal.o src/interactive/pagination.o src/interactive/search.o
-OBJS_CATALOGS = src/catalogs/cities.o src/catalogs/rides.o src/catalogs/users.o src/catalogs/drivers.o
-OBJS_FETCH = src/fetch/collector.o
-OBJS_UTILS = src/main.o src/sort.o src/fixtures.o
-OBJS_PARSER = src/parsing/checker.o src/parsing/parser.o
-OBJS_QUERIES = src/queries/queries.o src/queries/querie1.o src/queries/querie2.o src/queries/querie3.o src/queries/querie4.o src/queries/querie5.o src/queries/querie6.o src/queries/querie7.o src/queries/querie8.o src/queries/querie9.o 
-TARGET = programa-principal
-TARGET_TESTS = programa-testes
-PATH_RESULTS = Resultados
-CSV_REGULAR = csv/data-regular
-CSV_REGULAR_ERRORS = csv/data-regular-errors
-CSV_LARGE = csv/data-large
+# COMPILER
+
+CC 					:= gcc
+CFLAGS 				:= -Wall -Wextra -pedantic-errors -O2 -Iinclude
+LIBS 				:= -ltermcap
+
+# OBJECT CODE
+
+OBJS_UTILS 			:= $(patsubst %.c, %.o, $(wildcard src/*.c))
+OBJS_TESTS 			:= $(patsubst %.c, %.o, $(wildcard src/tests/*.c))
+OBJS_FETCH 			:= $(patsubst %.c, %.o, $(wildcard src/fetch/*.c))
+OBJS_PARSER 		:= $(patsubst %.c, %.o, $(wildcard src/parsing/*.c))
+OBJS_QUERIES 		:= $(patsubst %.c, %.o, $(wildcard src/queries/*.c))
+OBJS_CATALOGS 		:= $(patsubst %.c, %.o, $(wildcard src/catalogs/*.c))
+OBJS_INTERACTIVE 	:= $(patsubst %.c, %.o, $(wildcard src/interactive/*.c))
+OBJS_ALL			:= $(OBJS_UTILS) $(OBJS_TESTS) $(OBJS_FETCH) $(OBJS_PARSER) $(OBJS_QUERIES) $(OBJS_CATALOGS) $(OBJS_INTERACTIVE)
+
+# TARGETS
+
+TARGET 				:= programa-principal
+TARGET_TESTS		:= programa-testes
+
+# Folders
+
+PATH_RESULTS		:= Resultados
+CSV_REGULAR			:= csv/data-regular
+CSV_REGULAR_ERRORS 	:= csv/data-regular-errors
+CSV_LARGE 			:= csv/data-large
 
 
+# BUILDING
 
 all: $(TARGET) $(TARGET_TESTS)
 	@mkdir -p $(PATH_RESULTS)
 
 
-$(TARGET): $(OBJS_UTILS) $(filter-out src/tests/main.o, $(OBJS_TESTS)) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES) $(OBJS_INTERACTIVE)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+# LINKING
+
+$(TARGET): $(filter-out src/tests/main.o, $(OBJS_ALL))
+	$(CC) -o $@ $^ $(LIBS)
 
 
-$(TARGET_TESTS): $(filter-out src/main.o, $(OBJS_UTILS)) $(OBJS_TESTS) $(OBJS_PARSER) $(OBJS_CATALOGS) $(OBJS_FETCH) $(OBJS_QUERIES) $(OBJS_INTERACTIVE)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+$(TARGET_TESTS): $(filter-out src/main.o, $(OBJS_ALL))
+	$(CC) -o $@ $^ $(LIBS)
 
+
+# COMPILING
 
 $(OBJS_UTILS): src/%.o : src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -57,6 +74,8 @@ $(OBJS_INTERACTIVE): src/interactive/%.o : src/interactive/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 
+# TESTS
+
 test_1:
 	./$(TARGET_TESTS) $(CSV_REGULAR) inputs/input.txt exemplos_de_queries/tests_1
 
@@ -73,14 +92,10 @@ test_4:
 	./$(TARGET_TESTS) $(CSV_LARGE) inputs/input4.txt exemplos_de_queries/tests_4
 
 
+# REMOVE FILES
+
 clean:
-	rm src/*.o
-	rm src/queries/*.o
-	rm src/parsing/*.o
-	rm src/catalogs/*.o
-	rm src/fetch/*.o
-	rm src/tests/*.o
-	rm src/interactive/*.o
+	rm $(OBJS_ALL)
 	rm $(TARGET)
 	rm $(TARGET_TESTS)
 	rm -r $(PATH_RESULTS)/
